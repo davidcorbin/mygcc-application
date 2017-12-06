@@ -14,6 +14,7 @@
 - Auto updating GUI application and API
 - Check and notify when data has changed on myGCC
 - Anonymous error logging and reporting
+   - Use a Slack channel to receive feedback and logged errors
 - Glance integration
 - Save encrypted string, initvect, enc key to disk
 - Customize what APIs are on the front page
