@@ -1,11 +1,13 @@
-#include "mainwindow.h"
+Copyright 2018 <David Corbin, Mitchell Harvey>
+
 #include <QApplication>
 #include <QCommandLineParser>
 #include <QCommandLineOption>
 
+#include "include/mainwindow.h"
 
-int main(int argc, char *argv[])
-{
+
+int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
     QCoreApplication::setOrganizationName("QtProject");
     QCoreApplication::setApplicationName("Application Example");
