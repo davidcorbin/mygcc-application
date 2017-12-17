@@ -57,3 +57,8 @@
 1. **The update breaks the application** (assume worst-case the application will not open), there is no way to update through the application.
 1. An emergency release is created.
 1. An email containing a link to update will be sent out to users who have used the application recently (i.e. last month).
+
+## Future Plans
+### Features
+- Interactive tiles on home screen. (That can display more information about the thing)
+- Download file to location by clicking on tile, remember where file is saved, so if tile is clicked again open the file rather than download again.
