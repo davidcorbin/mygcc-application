@@ -1,4 +1,6 @@
-Copyright 2018 <David Corbin, Mitchell Harvey>
+/**
+ * Copyright 2018 <David Corbin, Mitchell Harvey>
+ */
 
 #include <QApplication>
 #include <QCommandLineParser>

@@ -33,3 +33,6 @@ HEADERS += \
 INCLUDEPATH += \
         ../ext/cpr/include \
         ../ext/json/src
+
+LIBS += \
+        -L"../ext/cpr/lib" -lcpr

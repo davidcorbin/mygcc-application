@@ -1,4 +1,6 @@
-Copyright 2018 <David Corbin, Mitchell Harvey>
+/**
+ * Copyright 2018 <David Corbin, Mitchell Harvey>
+ */
 
 #include <cpr/cpr.h>
 #include <json.hpp>
@@ -13,12 +15,13 @@ Copyright 2018 <David Corbin, Mitchell Harvey>
 #include "include/mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent) {
-       setLocale(QLocale(QLocale::English, QLocale::UnitedStates));
+    : QMainWindow(parent)
+{
+        setLocale(QLocale(QLocale::English, QLocale::UnitedStates));
 
-       // auto response = cpr::Get(cpr::Url{"https://httpbin.org/get"});
-       // auto json = nlohmann::json::parse(response.text);
-       // std::cout << json.dump(4) << std::endl;
+        auto response = cpr::Get(cpr::Url{"https://httpbin.org/get"});
+        auto json = nlohmann::json::parse(response.text);
+        std::cout << json.dump(4) << std::endl;
 
        // setCentralWidget(this);
 
