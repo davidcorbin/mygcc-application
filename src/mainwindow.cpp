@@ -12,16 +12,11 @@
 
 #include <iostream>
 
-#include "include/mainwindow.h"
+#include "include/mainwindow.hpp"
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-{
+    : QMainWindow(parent) {
         setLocale(QLocale(QLocale::English, QLocale::UnitedStates));
-
-        auto response = cpr::Get(cpr::Url{"https://httpbin.org/get"});
-        auto json = nlohmann::json::parse(response.text);
-        std::cout << json.dump(4) << std::endl;
 
        // setCentralWidget(this);
 

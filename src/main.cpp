@@ -6,7 +6,7 @@
 #include <QCommandLineParser>
 #include <QCommandLineOption>
 
-#include "include/mainwindow.h"
+#include "include/mainwindow.hpp"
 
 
 int main(int argc, char *argv[]) {
