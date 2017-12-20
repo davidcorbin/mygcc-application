@@ -18,9 +18,12 @@ add_subdirectory(include)
 add_subdirectory(src)
 add_subdirectory(ext)
 
-#qt5_wrap_cpp(hello-world_SRC ${CMAKE_CURRENT_SOURCE_DIR}/include/mainwindow.h)
-
 add_executable(facade MACOSX_BUNDLE src/main.cpp src/mainwindow.cpp src/slack_feedback.cpp)
+
+# Use custom Info.plist file on macOS
+if (APPLE)
+    set_target_properties(facade PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/res/Info.plist.in)
+endif ()
 
 # Add CPR Libraries
 target_link_libraries(facade ${CPR_LIBRARIES})
