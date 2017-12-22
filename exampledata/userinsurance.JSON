@@ -1,0 +1,39 @@
+{
+    "insurance": {
+        "secondary": {
+            "address": "",
+            "subscriber": {
+                "name": "",
+                "employer": {
+                    "address": "",
+                    "name": ""
+                },
+                "relationship": ""
+            },
+            "phone": "",
+            "companyName": "",
+            "policy": "",
+            "group": ""
+        },
+        "primary": {
+            "address": "3535 Blue Cross Road\nEagan, MN 55122",
+            "subscriber": {
+                "name": "Amelia Earhart",
+                "employer": {
+                    "address": "3535 Blue Cross Road\nEagan, MN 55122",
+                    "name": "Blue Cross Blue Shield"
+                },
+                "relationship": "Guardian"
+            },
+            "phone": "8005555309",
+            "companyName": "Blue Cross Blue Shield",
+            "policy": "ABC12378945612",
+            "group": "12378945"
+        }
+    },
+    "usesCollegeInsurance": false,
+    "physician": {
+        "phone": "7249875309",
+        "name": "Dr. Richard Big"
+    }
+}

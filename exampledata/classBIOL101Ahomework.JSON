@@ -1,0 +1,94 @@
+[
+    {
+        "BIOL 101 Lab Grades This unit ended on 12/19": [
+            {
+                "due": "",
+                "grade": {
+                    "letter": "B",
+                    "received": "169.25",
+                    "percent": "84.62",
+                    "points": "200"
+                },
+                "description": "",
+                "title": "BIOL 101 Lab Grade",
+                "open": false
+            }
+        ],
+        "BIOL 101 Exam Grades This unit ended on 12/19": [
+            {
+                "due": "",
+                "grade": {
+                    "letter": "B+",
+                    "received": "44",
+                    "percent": "88",
+                    "points": "50"
+                },
+                "description": "",
+                "title": "EXAM I GRADE",
+                "open": false
+            },
+            {
+                "due": "",
+                "grade": {
+                    "letter": "B-",
+                    "received": "40.5",
+                    "percent": "81",
+                    "points": "50"
+                },
+                "description": "",
+                "title": "EXAM II GRADE",
+                "open": false
+            },
+            {
+                "due": "",
+                "grade": {
+                    "letter": "B+",
+                    "received": "43.5",
+                    "percent": "87",
+                    "points": "50"
+                },
+                "description": "",
+                "title": "EXAM III GRADE",
+                "open": false
+            },
+            {
+                "due": "",
+                "grade": {
+                    "letter": "A",
+                    "received": "47",
+                    "percent": "94",
+                    "points": "50"
+                },
+                "description": "",
+                "title": "EXAM IV GRADE",
+                "open": false
+            },
+            {
+                "due": "",
+                "grade": {
+                    "letter": "B",
+                    "received": "84",
+                    "percent": "84",
+                    "points": "100"
+                },
+                "description": "",
+                "title": "FINAL EXAM GRADE",
+                "open": false
+            }
+        ],
+        "Extra Credit This unit ended on 12/19": [
+            {
+                "due": "",
+                "grade": {
+                    "received": "3",
+                    "percent": "100",
+                    "points": "3"
+                },
+                "description": "",
+                "title": "Extra Credit (Psych Study)",
+                "open": false
+            }
+        ],
+        "Unit 1 This unit ended on 12/19": []
+    }
+]

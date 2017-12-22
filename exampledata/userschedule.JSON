@@ -1,0 +1,169 @@
+[
+    {
+        "professor": [
+            "Stauff, Dr. Devin Lee"
+        ],
+        "times": [
+            {
+                "start": "9:00",
+                "end": "9:50",
+                "day": "M"
+            },
+            {
+                "start": "9:00",
+                "end": "9:50",
+                "day": "W"
+            },
+            {
+                "start": "9:00",
+                "end": "9:50",
+                "day": "F"
+            }
+        ],
+        "code": "BIOL101A",
+        "credits": "4.00",
+        "course": "BIOL 101 A",
+        "location": [
+            "MAIN - HAL - 108"
+        ],
+        "title": "GENERAL BIOLOGY I"
+    },
+    {
+        "professor": [
+            "Lytle, Mrs. Laurie S.",
+            "Pazehoski, Dr. Kristina O."
+        ],
+        "times": [
+            {
+                "start": "10:05",
+                "end": "12:59",
+                "day": "R"
+            }
+        ],
+        "code": "BIOL101PL",
+        "credits": "0.00",
+        "course": "BIOL 101 P L",
+        "location": [
+            "MAIN - STEM - 145"
+        ],
+        "title": "LABORATORY"
+    },
+    {
+        "professor": [
+            "Wolfe, Dr. Britton D."
+        ],
+        "times": [
+            {
+                "start": "10:00",
+                "end": "10:50",
+                "day": "M"
+            },
+            {
+                "start": "10:00",
+                "end": "10:50",
+                "day": "W"
+            },
+            {
+                "start": "10:00",
+                "end": "10:50",
+                "day": "F"
+            }
+        ],
+        "code": "COMP220A",
+        "credits": "3.00",
+        "course": "COMP 220 A",
+        "location": [
+            "MAIN - STEM - 376"
+        ],
+        "title": "COMP PROGRAMMING II"
+    },
+    {
+        "professor": [
+            "Bancroft, Dr. Eric D."
+        ],
+        "times": [
+            {
+                "start": "2:00",
+                "end": "2:50",
+                "day": "M"
+            },
+            {
+                "start": "2:00",
+                "end": "2:50",
+                "day": "W"
+            },
+            {
+                "start": "2:00",
+                "end": "2:50",
+                "day": "F"
+            }
+        ],
+        "code": "MATH213B",
+        "credits": "3.00",
+        "course": "MATH 213 B",
+        "location": [
+            "MAIN - HAL - 204"
+        ],
+        "title": "DISCRETE MATH/COMP SCI"
+    },
+    {
+        "professor": [
+            "McIntyre, Dr. Dale L."
+        ],
+        "times": [
+            {
+                "start": "11:00",
+                "end": "11:50",
+                "day": "M"
+            },
+            {
+                "start": "11:00",
+                "end": "11:50",
+                "day": "W"
+            },
+            {
+                "start": "11:00",
+                "end": "11:50",
+                "day": "F"
+            },
+            {
+                "start": "11:30",
+                "end": "12:20",
+                "day": "T"
+            }
+        ],
+        "code": "MATH261C",
+        "credits": "4.00",
+        "course": "MATH 261 C",
+        "location": [
+            "MAIN - HAL - 204",
+            "MAIN - HAL - 204"
+        ],
+        "title": "CALCULUS III"
+    },
+    {
+        "professor": [
+            "Pisano, Dr. Joseph M.",
+            "MUFA Staff, -"
+        ],
+        "times": [
+            {
+                "start": "4:00",
+                "end": "5:20",
+                "day": "T"
+            },
+            {
+                "start": "4:00",
+                "end": "5:20",
+                "day": "R"
+            }
+        ],
+        "code": "MUSI100B",
+        "credits": "1.00",
+        "course": "MUSI 100 B",
+        "location": [
+            "MAIN - PFAC - 25"
+        ],
+        "title": "MARCHING BAND for CREDIT"
+    }
+]

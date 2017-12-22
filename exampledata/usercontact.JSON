@@ -1,0 +1,47 @@
+{
+    "secondary": {
+        "address": {
+            "zipcode": "11111",
+            "country": "UNITED STATES",
+            "city": "jjj",
+            "street": "jjj",
+            "street2": "",
+            "state": "AA"
+        },
+        "phone": "5555555555",
+        "name": "jjj"
+    },
+    "mother": {
+        "occupation": "Teacher",
+        "phone": {
+            "work": "",
+            "mobile": "4434163088"
+        },
+        "name": "Lisa Lynch",
+        "email": "redwingbb@comcast.net"
+    },
+    "student": {
+        "address": {
+            "zipcode": "17402-7945",
+            "country": "UNITED STATES",
+            "city": "York",
+            "street": "1280 Cranberry Ln W",
+            "street2": "",
+            "state": "PA"
+        },
+        "phone": {
+            "mobile": "",
+            "home": "7172441189"
+        },
+        "email": ""
+    },
+    "father": {
+        "occupation": "DOJ",
+        "phone": {
+            "work": "",
+            "mobile": ""
+        },
+        "name": "Brad Lynch",
+        "email": ""
+    }
+}
