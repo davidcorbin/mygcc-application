@@ -11,8 +11,10 @@ set(CMAKE_AUTOMOC ON)
 
 set(RESOURCE_FILES res/img/default_profile.jpg)
 
-# Find the QtWidgets library
+# Find the Qt5 library
 find_package(Qt5Widgets REQUIRED)
+find_package(Qt5Core REQUIRED)
+find_package(Qt5Gui REQUIRED)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
