@@ -23,6 +23,6 @@
     <key>CFBundleExecutable</key>
     <string>@EXECUTABLE@</string>
     <key>CFBundleIdentifier</key>
-    <string>com.facade.application</string>
+    <string>com.facade.Facade</string>
 </dict>
 </plist>

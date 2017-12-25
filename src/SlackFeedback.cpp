@@ -16,7 +16,6 @@
 #define SLACK_MSG_COLOR     "#95a5a6"
 
 #define HTTP_CONTENT_TYPE   "application/json"
-#define OS_TITLE            "Operating System"
 
 // Sends an HTTP POST request to the Slack webhook API to send feedback.
 // Example:

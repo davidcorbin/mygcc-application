@@ -9,6 +9,8 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Instruct CMake to run moc automatically when needed.
 set(CMAKE_AUTOMOC ON)
 
+set(RESOURCE_FILES res/img/default_profile.jpg)
+
 # Find the QtWidgets library
 find_package(Qt5Widgets REQUIRED)
 
@@ -18,11 +20,29 @@ add_subdirectory(include)
 add_subdirectory(src)
 add_subdirectory(ext)
 
-add_executable(facade MACOSX_BUNDLE src/main.cpp src/mainwindow.cpp src/slack_feedback.cpp)
+add_executable(facade MACOSX_BUNDLE
+        src/main.cpp
+        src/MainWindow.cpp
+        src/SlackFeedback.cpp
+        src/ProfileImage.cpp
+        include/ProfileImage.hpp
+        src/OS.cpp
+        include/OS.hpp
+        include/Color.hpp
+        src/Color.cpp
+        src/FileManager.cpp
+        include/FileManager.hpp
+        include/FileNotFound.hpp
+        "${RESOURCE_FILES}")
 
-# Use custom Info.plist file on macOS
+# Use custom macOS settings
 if (APPLE)
-    set_target_properties(facade PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/res/Info.plist.in)
+    set_target_properties(facade PROPERTIES
+            MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/res/Info.plist.in
+            MACOSX_BUNDLE TRUE
+            MACOSX_FRAMEWORK_IDENTIFIER com.facade.Facade
+            RESOURCE "${RESOURCE_FILES}"
+    )
 endif ()
 
 # Add CPR Libraries
