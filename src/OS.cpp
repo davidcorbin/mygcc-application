@@ -2,7 +2,7 @@
  * Copyright 2018 <David Corbin, Mitchell Harvey>
  */
 
-#include <OS.hpp>
+#include <include/OS.hpp>
 
 #include <string>
 

@@ -2,7 +2,7 @@
  * Copyright 2018 <David Corbin, Mitchell Harvey>
  */
 
-#include <FileManager.hpp>
+#include <include/FileManager.hpp>
 
 #include <sys/stat.h>
 #include <dirent.h>
@@ -17,6 +17,11 @@
 #define MACOS_DATA_DIR      "/Library/Application Support/Facade"
 #define WIN_DATA_DIR        "\\AppData\\Roaming\\Facade"
 #define LINUX_DATA_DIR      "./facade"
+
+// MinGW mkdir only has one parameter (the directory path)
+#if (defined(_WIN32) || defined(__WIN32__) || defined(_WIN64))
+#define mkdir(A, B) mkdir(A)
+#endif
 
 std::string FileManager::getDataDir() {
   std::string osname = OS::getOSName();
@@ -55,7 +60,15 @@ std::string FileManager::getResourcePath(std::string file = "") {
     std::string full = abs + "/../Resources/" + file;
     // Check if file exists
     if (!file.empty() && !fileExists(full)) {
-      throw FileNotFound(&full);
+      qFatal(("Resource not found: " + full).c_str());
+    }
+    return full;
+  } else if (osname == "Windows 32-bit" || osname == "Windows 64-bit") {
+    std::string abs = QCoreApplication::applicationDirPath().toStdString();
+    std::string full = abs + "/Resources/" + file;
+    // Check if file exists
+    if (!file.empty() && !fileExists(full)) {
+      qFatal(("Resource not found: " + full).c_str());
     }
     return full;
   } else {

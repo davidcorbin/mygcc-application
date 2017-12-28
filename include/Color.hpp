@@ -12,6 +12,7 @@ class Color {
 public:
   static QPalette bg_primary();
   static QPalette text_primary();
+  static QPalette text_secondary();
 };
 
 

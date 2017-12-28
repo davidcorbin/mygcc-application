@@ -9,7 +9,8 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Instruct CMake to run moc automatically when needed.
 set(CMAKE_AUTOMOC ON)
 
-set(RESOURCE_FILES res/img/default_profile.jpg)
+set(RESOURCE_FILES res/img/default_profile.jpg
+        res/font/Lato-Light.ttf)
 
 # Find the Qt5 library
 find_package(Qt5Widgets REQUIRED)
@@ -17,6 +18,8 @@ find_package(Qt5Core REQUIRED)
 find_package(Qt5Gui REQUIRED)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ext/cpr/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ext/json/src)
 
 add_subdirectory(include)
 add_subdirectory(src)
@@ -35,6 +38,8 @@ add_executable(facade MACOSX_BUNDLE
         src/FileManager.cpp
         include/FileManager.hpp
         include/FileNotFound.hpp
+        src/Font.cpp
+        include/Font.hpp
         "${RESOURCE_FILES}")
 
 # Use custom macOS settings
