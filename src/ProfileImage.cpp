@@ -12,7 +12,8 @@
 #include <string>
 #include <iostream>
 
-#define DEF_PROF_IMG   "default_profile.jpg"
+#define DEF_PROF_IMG          "default_profile.jpg"
+#define PROFILE_IMG_DIAMETER  40
 
 ProfileImage::ProfileImage(const std::string profileImage) {
   loadImage(profileImage);
@@ -21,6 +22,7 @@ ProfileImage::ProfileImage(const std::string profileImage) {
 QPixmap ProfileImage::setUp() {
   cropImage();
   maskImage();
+  scaleImage();
   return image;
 }
 
@@ -30,13 +32,22 @@ void ProfileImage::loadImage(std::string profileImage) {
   // Try to get custom user image; if not found, use default image
   std::string path;
   try {
+    // If no image given, throw exception and use default image
+    if (profileImage.empty()) {
+      throw FileNotFound(new std::string("No profile image given"));
+    }
+
+    // Get path to data directory image
     path = fm->getDataPath(profileImage);
   } catch (FileNotFound &exception) {
+    // Get path to resource directory image
     path = fm->getResourcePath(DEF_PROF_IMG);
   }
   QPixmap original(path.c_str());
+
+  // Check that image was loaded; this case should never occur but check anyway
   if (original.isNull()) {
-    throw FileNotFound(&profileImage);
+    qFatal(path.c_str());
   }
   this->image = original;
 }
@@ -70,4 +81,11 @@ void ProfileImage::maskImage() {
       image.width()/2,
       image.height()/2);
   image.setMask(mask);
+}
+
+void ProfileImage::scaleImage() {
+  image = image.scaled(PROFILE_IMG_DIAMETER,
+                       PROFILE_IMG_DIAMETER,
+                       Qt::KeepAspectRatio,
+                       Qt::SmoothTransformation);
 }

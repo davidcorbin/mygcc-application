@@ -5,66 +5,25 @@
 #include <include/MainWindow.hpp>
 
 #include <include/Color.hpp>
-#include <include/ProfileImage.hpp>
+#include <include/Font.hpp>
+#include <include/ProfilePanel.hpp>
 
 #include <QLocale>
 #include <QPushButton>
-#include <QStackedLayout>
 #include <QGraphicsDropShadowEffect>
 #include <QBitmap>
 #include <QPainter>
-#include <QLabel>
 #include <QCoreApplication>
-#include <include/Font.hpp>
 
-#define PROFILE_IMG_DIM   40
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   setLocale(QLocale(QLocale::English, QLocale::UnitedStates));
   setWindowTitle("Facade");
 
-  // Profile box
-  auto *profileImage = new ProfileImage("GCCshield.jpg");
-  QPixmap scal = profileImage->setUp();
-
-  auto *profImg = new QLabel;
-  profImg->setPixmap(scal.scaled(PROFILE_IMG_DIM,
-                                 PROFILE_IMG_DIM,
-                                 Qt::KeepAspectRatio,
-                                 Qt::SmoothTransformation));
-  profImg->setStyleSheet("border-bottom: none;");
-  profImg->setMaximumWidth(60);
-  profImg->setContentsMargins(10, 0, 10, 0);
-
-  auto *nameLabel = new QLabel("John Smith");
-  nameLabel->setPalette(Color::text_primary());
-  nameLabel->setStyleSheet("border-bottom: none;");
-  nameLabel->setFont(Font::profileName());
-
-  auto *majorLabel = new QLabel("Computer Science");
-  majorLabel->setPalette(Color::text_primary());
-  majorLabel->setStyleSheet("border-bottom: none;");
-  majorLabel->setFont(Font::profileMajor());
-
-  auto *profTextLayout = new QVBoxLayout;
-  profTextLayout->addWidget(nameLabel);
-  profTextLayout->addWidget(majorLabel);
-  profTextLayout->setContentsMargins(0, 0, 0, 0);
-  profTextLayout->setSpacing(0);
-
-  auto *profTextWidget = new QWidget;
-  profTextWidget->setLayout(profTextLayout);
-  profTextWidget->setStyleSheet("border-bottom: none;");
-
-  auto *profileLayout = new QGridLayout;
-  profileLayout->addWidget(profImg, 0, 0);
-  profileLayout->addWidget(profTextWidget, 0, 1);
-
-  auto *profileCont = new QWidget;
-  profileCont->setLayout(profileLayout);
-  profileCont->setMaximumHeight(65);
-  profileCont->setMinimumHeight(65);
-  profileCont->setStyleSheet("border-bottom:1px solid rgb(40, 40, 45);");
+  auto *pp = new ProfilePanel(new std::string("John Smith"),
+                             new std::string("Computer Science"),
+                             new std::string("custom_user_image.jpg"));
+  pp->setup();
 
   // Sidebar
   auto *class1 = new QLabel("Home");
@@ -81,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   tabCont->setLayout(sidebarItemLayout);
 
   auto *sidebarLayout = new QGridLayout;
-  sidebarLayout->addWidget(profileCont, 0, 0);
+  sidebarLayout->addWidget(pp, 0, 0);
   sidebarLayout->addWidget(tabCont, 1, 0);
   sidebarLayout->setContentsMargins(0, 0, 0, 0);
   sidebarLayout->setSpacing(0);

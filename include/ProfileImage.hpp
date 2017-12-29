@@ -19,6 +19,7 @@ private:
   void cropImage();
   void loadImage(std::string profileImage);
   void maskImage();
+  void scaleImage();
 };
 
 

@@ -40,6 +40,8 @@ add_executable(facade MACOSX_BUNDLE
         include/FileNotFound.hpp
         src/Font.cpp
         include/Font.hpp
+        src/ProfilePanel.cpp
+        include/ProfilePanel.hpp
         "${RESOURCE_FILES}")
 
 # Use custom macOS settings
