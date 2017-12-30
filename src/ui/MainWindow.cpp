@@ -2,11 +2,9 @@
  * Copyright 2018 <David Corbin, Mitchell Harvey>
  */
 
-#include <include/MainWindow.hpp>
-
-#include <include/Color.hpp>
-#include <include/Font.hpp>
-#include <include/ProfilePanel.hpp>
+#include <include/ui/MainWindow.hpp>
+#include <include/ui/ProfilePanel.hpp>
+#include <include/ui/SidebarPanel.hpp>
 
 #include <QLocale>
 #include <QPushButton>
@@ -15,33 +13,34 @@
 #include <QPainter>
 #include <QCoreApplication>
 
+#include <vector>
+#include <string>
+#include <include/types/Course.hpp>
+#include <iostream>
+
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   setLocale(QLocale(QLocale::English, QLocale::UnitedStates));
   setWindowTitle("Facade");
 
-  auto *pp = new ProfilePanel(new std::string("John Smith"),
-                             new std::string("Computer Science"),
-                             new std::string("custom_user_image.jpg"));
-  pp->setup();
+  auto *profPanel = new ProfilePanel(new std::string("John Smith"),
+                                     new std::string("Computer Science"),
+                                     new std::string("custom_user_image.jpg"));
+  profPanel->setup();
 
-  // Sidebar
-  auto *class1 = new QLabel("Home");
-  class1->setContentsMargins(20, 3, 5, 3);
-  class1->setPalette(Color::text_secondary());
-  class1->setFont(Font::sidebarItem());
+  auto *bio = new Course("Biology 1", "BIOL101");
+  auto *calc = new Course("Calculus 3", "MATH261");
+  auto *dis = new Course("Discrete Math", "MATH213");
+  auto *writ = new Course("Writing", "WRIT101");
+  auto *prog = new Course("Programming 2", "COMP220");
+  std::vector<Course *> classes = {bio, calc, dis, writ, prog};
 
-  auto *sidebarItemLayout = new QVBoxLayout;
-  sidebarItemLayout->addWidget(class1);
-  sidebarItemLayout->addStretch();
-
-  auto *tabCont = new QWidget;
-  tabCont->setPalette(Color::bg_primary());
-  tabCont->setLayout(sidebarItemLayout);
+  auto *sidebarPanel = new SidebarPanel(&classes);
+  sidebarPanel->setup();
 
   auto *sidebarLayout = new QGridLayout;
-  sidebarLayout->addWidget(pp, 0, 0);
-  sidebarLayout->addWidget(tabCont, 1, 0);
+  sidebarLayout->addWidget(profPanel, 0, 0);
+  sidebarLayout->addWidget(sidebarPanel, 1, 0);
   sidebarLayout->setContentsMargins(0, 0, 0, 0);
   sidebarLayout->setSpacing(0);
 

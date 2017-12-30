@@ -4,7 +4,7 @@
 
 #include <QApplication>
 
-#include <include/MainWindow.hpp>
+#include <include/ui/MainWindow.hpp>
 
 
 int main(int argc, char *argv[]) {

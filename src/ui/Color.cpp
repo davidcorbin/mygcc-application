@@ -2,7 +2,7 @@
  * Copyright 2018 <David Corbin, Mitchell Harvey>
  */
 
-#include <include/Color.hpp>
+#include <include/ui/Color.hpp>
 #include <QPalette>
 
 QPalette Color::bg_primary() {

@@ -2,10 +2,10 @@
  * Copyright 2018 <David Corbin, Mitchell Harvey>
  */
 
-#include <include/ProfilePanel.hpp>
+#include <include/ui/ProfilePanel.hpp>
 
-#include <include/Font.hpp>
-#include <include/Color.hpp>
+#include <include/ui/Font.hpp>
+#include <include/ui/Color.hpp>
 
 #include <string>
 #include <iostream>

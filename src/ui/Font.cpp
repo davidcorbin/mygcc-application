@@ -2,7 +2,7 @@
  * Copyright 2018 <David Corbin, Mitchell Harvey>
  */
 
-#include <include/Font.hpp>
+#include <include/ui/Font.hpp>
 #include <QFontDatabase>
 #include <QStringList>
 #include <include/FileManager.hpp>

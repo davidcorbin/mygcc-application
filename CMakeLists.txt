@@ -9,9 +9,6 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Instruct CMake to run moc automatically when needed.
 set(CMAKE_AUTOMOC ON)
 
-set(RESOURCE_FILES res/img/default_profile.jpg
-        res/font/Lato-Light.ttf)
-
 # Find the Qt5 library
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Core REQUIRED)
@@ -25,24 +22,32 @@ add_subdirectory(include)
 add_subdirectory(src)
 add_subdirectory(ext)
 
-add_executable(facade MACOSX_BUNDLE
-        src/main.cpp
-        src/MainWindow.cpp
-        src/SlackFeedback.cpp
-        src/ProfileImage.cpp
-        include/ProfileImage.hpp
-        src/OS.cpp
-        include/OS.hpp
-        include/Color.hpp
-        src/Color.cpp
+set(SOURCE_FILES src/main.cpp
         src/FileManager.cpp
+        src/OS.cpp
+        src/SlackFeedback.cpp
+        src/types/Course.cpp
+        src/ui/MainWindow.cpp
+        src/ui/ProfileImage.cpp
+        src/ui/Color.cpp
+        src/ui/Font.cpp
+        src/ui/SidebarPanel.cpp
+        src/ui/ProfilePanel.cpp)
+
+set(HEADER_FILES include/OS.hpp
         include/FileManager.hpp
         include/FileNotFound.hpp
-        src/Font.cpp
-        include/Font.hpp
-        src/ProfilePanel.cpp
-        include/ProfilePanel.hpp
-        "${RESOURCE_FILES}")
+        include/types/Course.hpp
+        include/ui/Color.hpp
+        include/ui/Font.hpp
+        include/ui/ProfileImage.hpp
+        include/ui/ProfilePanel.hpp
+        include/ui/SidebarPanel.hpp)
+
+set(RESOURCE_FILES res/img/default_profile.jpg
+        res/font/Lato-Light.ttf)
+
+add_executable(facade "${SOURCE_FILES}" "${HEADER_FILES}" "${RESOURCE_FILES}")
 
 # Use custom macOS settings
 if (APPLE)

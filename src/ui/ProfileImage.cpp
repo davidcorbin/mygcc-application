@@ -2,7 +2,7 @@
  * Copyright 2018 <David Corbin, Mitchell Harvey>
  */
 
-#include <include/ProfileImage.hpp>
+#include <include/ui/ProfileImage.hpp>
 #include <include/FileManager.hpp>
 #include <include/FileNotFound.hpp>
 
