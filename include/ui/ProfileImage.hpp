@@ -2,20 +2,21 @@
  * Copyright 2018 <David Corbin, Mitchell Harvey>
  */
 
-#ifndef FACADE_APPLICATION_PROFILE_IMAGE_H
-#define FACADE_APPLICATION_PROFILE_IMAGE_H
-
+#ifndef INCLUDE_UI_PROFILEIMAGE_HPP_
+#define INCLUDE_UI_PROFILEIMAGE_HPP_
 
 #include <QPixmap>
+
+#include <string>
 
 class ProfileImage {
   QPixmap image;
 
-public:
+ public:
   explicit ProfileImage(std::string profileImage = "");
   QPixmap setUp();
 
-private:
+ private:
   void cropImage();
   void loadImage(std::string profileImage);
   void maskImage();
@@ -23,4 +24,4 @@ private:
 };
 
 
-#endif //FACADE_APPLICATION_PROFILE_IMAGE_H
+#endif  // INCLUDE_UI_PROFILEIMAGE_HPP_

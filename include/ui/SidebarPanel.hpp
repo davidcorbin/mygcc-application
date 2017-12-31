@@ -2,8 +2,8 @@
  * Copyright 2018 <David Corbin, Mitchell Harvey>
  */
 
-#ifndef FACADE_APPLICATION_SIDEBARPANEL_HPP
-#define FACADE_APPLICATION_SIDEBARPANEL_HPP
+#ifndef INCLUDE_UI_SIDEBARPANEL_HPP_
+#define INCLUDE_UI_SIDEBARPANEL_HPP_
 
 #include <include/types/Course.hpp>
 
@@ -11,16 +11,17 @@
 #include <QLabel>
 #include <QVBoxLayout>
 
+#include <vector>
+
 class SidebarPanel : public QWidget {
-public:
+ public:
   explicit SidebarPanel(std::vector<Course *> *courses);
   void setup();
 
-private:
+ private:
   QVBoxLayout *sidebarItemLayout;
-
   std::vector<Course *> courses;
 };
 
 
-#endif //FACADE_APPLICATION_SIDEBARPANEL_HPP
+#endif  // INCLUDE_UI_SIDEBARPANEL_HPP_

@@ -47,7 +47,7 @@ void ProfileImage::loadImage(std::string profileImage) {
 
   // Check that image was loaded; this case should never occur but check anyway
   if (original.isNull()) {
-    qFatal(path.c_str());
+    qFatal("Image could not be loaded: %s\n", path.c_str());
   }
   this->image = original;
 }

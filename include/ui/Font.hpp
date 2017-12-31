@@ -2,20 +2,22 @@
  * Copyright 2018 <David Corbin, Mitchell Harvey>
  */
 
-#ifndef FACADE_APPLICATION_FONT_HPP
-#define FACADE_APPLICATION_FONT_HPP
+#ifndef INCLUDE_UI_FONT_HPP_
+#define INCLUDE_UI_FONT_HPP_
 
 #include <QFont>
 
+#include <string>
+
 class Font {
-public:
+ public:
   static QFont profileName();
   static QFont profileMajor();
   static QFont sidebarItem();
 
-private:
+ private:
   static QString loadFont(std::string font);
 };
 
 
-#endif //FACADE_APPLICATION_FONT_HPP
+#endif  // INCLUDE_UI_FONT_HPP_

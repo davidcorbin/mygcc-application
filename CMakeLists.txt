@@ -38,6 +38,7 @@ set(HEADER_FILES include/OS.hpp
         include/FileManager.hpp
         include/FileNotFound.hpp
         include/types/Course.hpp
+        include/ui/MainWindow.hpp
         include/ui/Color.hpp
         include/ui/Font.hpp
         include/ui/ProfileImage.hpp

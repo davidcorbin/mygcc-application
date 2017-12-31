@@ -15,9 +15,6 @@
 
 #include <vector>
 #include <string>
-#include <include/types/Course.hpp>
-#include <iostream>
-
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   setLocale(QLocale(QLocale::English, QLocale::UnitedStates));

@@ -60,7 +60,7 @@ std::string FileManager::getResourcePath(std::string file = "") {
     std::string full = abs + "/../Resources/" + file;
     // Check if file exists
     if (!file.empty() && !fileExists(full)) {
-      qFatal(("Resource not found: " + full).c_str());
+      qFatal("Resource not found: %s\n", full.c_str());
     }
     return full;
   } else if (osname == "Windows 32-bit" || osname == "Windows 64-bit") {
@@ -68,7 +68,7 @@ std::string FileManager::getResourcePath(std::string file = "") {
     std::string full = abs + "/Resources/" + file;
     // Check if file exists
     if (!file.empty() && !fileExists(full)) {
-      qFatal(("Resource not found: " + full).c_str());
+      qFatal("Resource not found: %s\n", full.c_str());
     }
     return full;
   } else {

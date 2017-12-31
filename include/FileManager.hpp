@@ -2,14 +2,14 @@
  * Copyright 2018 <David Corbin, Mitchell Harvey>
  */
 
-#ifndef FACADE_APPLICATION_FILEMANAGER_HPP
-#define FACADE_APPLICATION_FILEMANAGER_HPP
+#ifndef INCLUDE_FILEMANAGER_HPP_
+#define INCLUDE_FILEMANAGER_HPP_
 
 
 #include <string>
 
 class FileManager {
-public:
+ public:
   static std::string getDataDir();
   static bool dirExists(std::string directory);
   static std::string getResourcePath(std::string file);
@@ -17,5 +17,4 @@ public:
   static inline bool fileExists(const std::string& name);
 };
 
-
-#endif //FACADE_APPLICATION_FILEMANAGER_HPP
+#endif  // INCLUDE_FILEMANAGER_HPP_

@@ -2,15 +2,15 @@
  * Copyright 2018 <David Corbin, Mitchell Harvey>
  */
 
-#ifndef FACADE_APPLICATION_OS_HPP
-#define FACADE_APPLICATION_OS_HPP
+#ifndef INCLUDE_OS_HPP_
+#define INCLUDE_OS_HPP_
 
 
 #include <string>
 
 class OS {
-public:
+ public:
   static std::string getOSName();
 };
 
-#endif //FACADE_APPLICATION_OS_HPP
+#endif  // INCLUDE_OS_HPP_

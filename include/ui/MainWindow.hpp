@@ -1,18 +1,16 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+/**
+ * Copyright 2018 <David Corbin, Mitchell Harvey>
+ */
+
+#ifndef INCLUDE_UI_MAINWINDOW_HPP_
+#define INCLUDE_UI_MAINWINDOW_HPP_
 
 #include <QMainWindow>
 
-class MainWindow : public QMainWindow
-{
-    //Q_OBJECT
-
-public:
-    MainWindow(QWidget *parent = 0);
-    ~MainWindow();
-
-private:
-    //void createActions();
+class MainWindow : public QMainWindow {
+ public:
+  explicit MainWindow(QWidget *parent = 0);
+  ~MainWindow();
 };
 
-#endif // MAINWINDOW_H
+#endif  // INCLUDE_UI_MAINWINDOW_HPP_

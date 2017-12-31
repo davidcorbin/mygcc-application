@@ -2,22 +2,21 @@
  * Copyright 2018 <David Corbin, Mitchell Harvey>
  */
 
-#ifndef FACADE_APPLICATION_CLASS_HPP
-#define FACADE_APPLICATION_CLASS_HPP
+#ifndef INCLUDE_TYPES_COURSE_HPP_
+#define INCLUDE_TYPES_COURSE_HPP_
 
 
 #include <string>
 
 class Course {
-public:
+ public:
   Course(const std::string &name, const std::string &code);
   const std::string &getName() const;
   const std::string &getCode() const;
 
-private:
+ private:
   std::string name;
   std::string code;
 };
 
-
-#endif //FACADE_APPLICATION_CLASS_HPP
+#endif  // INCLUDE_TYPES_COURSE_HPP_

@@ -5,15 +5,15 @@
 #include <QColor>
 #include <QPalette>
 
-#ifndef FACADE_APPLICATION_COLOR_HPP
-#define FACADE_APPLICATION_COLOR_HPP
+#ifndef INCLUDE_UI_COLOR_HPP_
+#define INCLUDE_UI_COLOR_HPP_
 
 class Color {
-public:
+ public:
   static QPalette bg_primary();
   static QPalette text_primary();
   static QPalette text_secondary();
 };
 
 
-#endif //FACADE_APPLICATION_COLOR_HPP
+#endif  // INCLUDE_UI_COLOR_HPP_
