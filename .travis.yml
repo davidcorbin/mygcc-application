@@ -1,4 +1,6 @@
 language: cpp
 sudo: required
-script:
+script: 
  - python scripts/cpplint.py --headers=hpp src/*.cpp src/*/*.cpp include/*.hpp include/*/*.hpp
+ - ./scripts/build_ubuntu.sh
+
