@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 
   auto *profPanel = new ProfilePanel(new std::string("John Smith"),
                                      new std::string("Computer Science"),
-                                     new std::string("custom_user_image.jpg"));
+                                     new std::string("GCCshield.jpg"));
   profPanel->setup();
 
   auto *bio = new Course("Biology 1", "BIOL101");

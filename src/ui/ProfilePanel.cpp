@@ -12,29 +12,23 @@
 
 ProfilePanel::ProfilePanel(std::string *nameStr,
                            std::string *majorStr,
-                           std::string *filename) {
+                           std::string *filename) : name(nameStr),
+                                                    major(majorStr),
+                                                    imageFile(filename) {
   profImg = new QLabel;
   nameLabel = new QLabel(QString::fromStdString(*nameStr));
   majorLabel = new QLabel(QString::fromStdString(*majorStr));
   profTextLayout = new QVBoxLayout;
   profTextWidget = new QWidget;
   profileLayout = new QGridLayout;
-
-  setName(nameStr);
-  setMajor(majorStr);
-  setProfileImage(filename);
 }
 
 void ProfilePanel::setup() {
   setFixedHeight(65);
   setStyleSheet("border-bottom:1px solid rgb(40, 40, 45);");
 
-  if (imageFile) {
-    profileImage = new ProfileImage(imageFile->c_str());
-  } else {
-    profileImage = new ProfileImage();
-  }
-  QPixmap scal = profileImage->setUp();
+  profileImage = new ProfileImage(imageFile);
+  QPixmap scal = profileImage->setup();
 
   profImg->setPixmap(scal);
   profImg->setStyleSheet("border-bottom: none;");

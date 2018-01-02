@@ -12,6 +12,7 @@ int main(int argc, char *argv[]) {
     QCoreApplication::setOrganizationName("facade");
     QCoreApplication::setApplicationName("Facade");
     QCoreApplication::setApplicationVersion(QT_VERSION_STR);
+    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);  // DPI support
 
     MainWindow w;
     w.show();

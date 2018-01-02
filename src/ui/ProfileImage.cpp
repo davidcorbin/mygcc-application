@@ -3,53 +3,18 @@
  */
 
 #include <include/ui/ProfileImage.hpp>
-#include <include/FileManager.hpp>
-#include <include/FileNotFound.hpp>
 
 #include <QBitmap>
 #include <QPainter>
-
-#include <string>
 #include <iostream>
 
-#define DEF_PROF_IMG          "default_profile.jpg"
 #define PROFILE_IMG_DIAMETER  40
 
-ProfileImage::ProfileImage(const std::string profileImage) {
-  loadImage(profileImage);
-}
-
-QPixmap ProfileImage::setUp() {
+QPixmap ProfileImage::setup() {
   cropImage();
   maskImage();
   scaleImage();
   return image;
-}
-
-void ProfileImage::loadImage(std::string profileImage) {
-  auto *fm = new FileManager();
-
-  // Try to get custom user image; if not found, use default image
-  std::string path;
-  try {
-    // If no image given, throw exception and use default image
-    if (profileImage.empty()) {
-      throw FileNotFound(new std::string("No profile image given"));
-    }
-
-    // Get path to data directory image
-    path = fm->getDataPath(profileImage);
-  } catch (FileNotFound &exception) {
-    // Get path to resource directory image
-    path = fm->getResourcePath(DEF_PROF_IMG);
-  }
-  QPixmap original(path.c_str());
-
-  // Check that image was loaded; this case should never occur but check anyway
-  if (original.isNull()) {
-    qFatal("Image could not be loaded: %s\n", path.c_str());
-  }
-  this->image = original;
 }
 
 void ProfileImage::cropImage() {

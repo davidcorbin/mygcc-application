@@ -5,20 +5,18 @@
 #ifndef INCLUDE_UI_PROFILEIMAGE_HPP_
 #define INCLUDE_UI_PROFILEIMAGE_HPP_
 
+#include <include/ui/Image.hpp>
 #include <QPixmap>
-
 #include <string>
 
-class ProfileImage {
-  QPixmap image;
-
+class ProfileImage : public Image {
  public:
-  explicit ProfileImage(std::string profileImage = "");
-  QPixmap setUp();
+  explicit ProfileImage(std::string *profileImage) : Image(profileImage, new
+      std::string("default_profile.jpg")) {}
+  QPixmap setup() override;
 
  private:
   void cropImage();
-  void loadImage(std::string profileImage);
   void maskImage();
   void scaleImage();
 };
