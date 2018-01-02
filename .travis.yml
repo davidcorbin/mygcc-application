@@ -1,4 +1,7 @@
-language: cpp
+language: c++
+cache:
+    directories:
+        - Qt
 sudo: required
 script: 
  - python scripts/cpplint.py --headers=hpp src/*.cpp src/*/*.cpp include/*.hpp include/*/*.hpp
