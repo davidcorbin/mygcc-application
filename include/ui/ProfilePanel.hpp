@@ -24,7 +24,7 @@ class ProfilePanel : public QWidget {
 
  private:
   std::string *name;
-  std::string *major;
+  std::string *givenmajor;
   std::string *imageFile;
   QGridLayout *profileLayout;
   QWidget *profTextWidget;

@@ -13,7 +13,7 @@
 ProfilePanel::ProfilePanel(std::string *nameStr,
                            std::string *majorStr,
                            std::string *filename) : name(nameStr),
-                                                    major(majorStr),
+                                                    givenmajor(majorStr),
                                                     imageFile(filename) {
   profImg = new QLabel;
   nameLabel = new QLabel(QString::fromStdString(*nameStr));
@@ -65,7 +65,7 @@ void ProfilePanel::setName(std::string *nameStr) {
 }
 
 void ProfilePanel::setMajor(std::string *majorStr) {
-  major = majorStr;
+  givenmajor = majorStr;
 
   // Update GUI
   majorLabel->setText(majorStr->c_str());
