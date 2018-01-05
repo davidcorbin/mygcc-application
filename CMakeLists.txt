@@ -62,11 +62,9 @@ set(HEADER_FILES include/OS.hpp
         include/ui/SidebarListItem.hpp
         include/ui/Image.hpp)
 
-set(RESOURCE_FILES res/img/default_profile.jpg
-        res/font/Lato-Light.ttf
-        res/icon/home_normal.svg
-        res/icon/home_active.svg
-        res/icon/home_selected.svg)
+file(GLOB_RECURSE RESOURCE_FILES "res/*/*.svg"
+        "res/*/*.jpg"
+        "res/*/*.ttf")
 
 add_executable(facade "${SOURCE_FILES}" "${HEADER_FILES}" "${RESOURCE_FILES}")
 
