@@ -4,24 +4,23 @@
 
 #include <include/FileManager.hpp>
 
+#include <sys/types.h>
 #include <sys/stat.h>
+#if (defined(_WIN32) || defined(__WIN32__) || defined(_WIN64))
+#include <include/dirent.h>
+#elif
 #include <dirent.h>
+#endif
 
 #include <include/OS.hpp>
 #include <include/FileNotFound.hpp>
 #include <QCoreApplication>
-
+#include <QDir>
 #include <string>
-#include <iostream>
 
 #define MACOS_DATA_DIR      "/Library/Application Support/Facade"
 #define WIN_DATA_DIR        "\\AppData\\Roaming\\Facade"
 #define LINUX_DATA_DIR      "./facade"
-
-// MinGW mkdir only has one parameter (the directory path)
-#if (defined(_WIN32) || defined(__WIN32__) || defined(_WIN64))
-#define mkdir(A, B) mkdir(A)
-#endif
 
 std::string FileManager::getDataDir() {
   std::string osname = OS::getOSName();
@@ -85,14 +84,15 @@ std::string FileManager::getResourcePath(std::string file = "") {
 }
 
 std::string FileManager::getDataPath(std::string file = "") {
-  auto dir = getDataDir();
+  auto path = getDataDir();
 
   // Make directory if not found
-  if (!dirExists(dir)) {
-    mkdir(dir.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+  QDir dir(path.c_str());
+  if (!dir.exists()){
+    dir.mkdir(".");
   }
 
-  auto full = dir + "/" + file;
+  auto full = dir.absolutePath().toStdString() + "/" + file;
 
   // Check if file exists
   if (!file.empty() && !fileExists(full)) {
