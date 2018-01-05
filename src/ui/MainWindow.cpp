@@ -7,9 +7,7 @@
 #include <include/ui/SidebarPanel.hpp>
 
 #include <QLocale>
-#include <QPushButton>
 #include <QGraphicsDropShadowEffect>
-#include <QBitmap>
 #include <QPainter>
 #include <QCoreApplication>
 
@@ -57,7 +55,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   // Sidebar height constraints
   sidebar->setMinimumHeight(450);
 
-  auto *mainBody = new QWidget;
+  qhblayout = new QHBoxLayout;
+  testlabel = new QLabel();
+  testlabel->setText("Home");
+  testlabel->setAlignment(Qt::AlignCenter);
+  testlabel->setStyleSheet("color: white");
+  qhblayout->addWidget(testlabel);
+  mainBody = new QWidget;
+  mainBody->setLayout(qhblayout);
 
   // Body width constraints
   mainBody->setMinimumWidth(500);
@@ -65,18 +70,19 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   // Body height constraints
   mainBody->setMinimumHeight(450);
 
-  auto *centralLayout = new QGridLayout;
+  centralLayout = new QGridLayout;
   centralLayout->addWidget(sidebar, 0, 0);
   centralLayout->addWidget(mainBody, 0, 1);
   centralLayout->setSpacing(3);
   centralLayout->setContentsMargins(0, 0, 0, 0);
 
-  auto *centralWidget = new QWidget;
+  centralWidget = new QWidget;
   centralWidget->setLayout(centralLayout);
   centralWidget->setStyleSheet("background-color: rgb(46, 46, 50)");
 
   setCentralWidget(centralWidget);
 }
 
-MainWindow::~MainWindow() {
+void MainWindow::setTestText(std::string text) {
+  testlabel->setText(text.c_str());
 }

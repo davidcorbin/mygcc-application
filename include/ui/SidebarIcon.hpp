@@ -6,12 +6,13 @@
 #define INCLUDE_UI_SIDEBARICON_HPP_
 
 #include <include/ui/Image.hpp>
+#include <include/types/Course.hpp>
 #include <QPixmap>
 #include <string>
 
 class SidebarIcon {
  public:
-  explicit SidebarIcon(const std::string *filename) : svgFilename(filename) {}
+  explicit SidebarIcon(const Course *course);
 
   QPixmap setup();
   QPixmap normal;
@@ -22,8 +23,8 @@ class SidebarIcon {
   std::string loadIcon(const std::string *filename);
   QPixmap scaleImage(QPixmap original);
   QPixmap FromSvgToPixmap(const QSize &ImageSize, const QString &SvgFile);
+  void setIcon(const Course *course);
   const std::string *svgFilename;
 };
-
 
 #endif  // INCLUDE_UI_SIDEBARICON_HPP_

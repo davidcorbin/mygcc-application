@@ -15,16 +15,23 @@ class SidebarListItem : public QWidget {
  public:
   explicit SidebarListItem(const Course *course);
   void setup();
+  void setNormal();
+  void setActive();
+  void setSelected();
+  const Course *course;
+
+ protected:
+  void enterEvent(QEvent *event) override;
+  void leaveEvent(QEvent *event) override;
+  void mouseReleaseEvent(QMouseEvent *event) override;
 
  private:
-  const Course *course;
   SidebarLabel *label;
   SidebarIcon *icon;
   QGridLayout *layout;
   QLabel *image_label;
-
-  void enterEvent(QEvent* event) override;
-  void leaveEvent(QEvent* event) override;
+  enum State {NORMAL, ACTIVE, SELECTED};
+  State currentState;
 };
 
 

@@ -3,7 +3,6 @@
  */
 
 #include <include/ui/Color.hpp>
-#include <QPalette>
 
 QPalette Color::bg_primary() {
   QPalette pal;
@@ -17,9 +16,14 @@ QPalette Color::text_primary() {
   return pal;
 }
 
-
 QPalette Color::text_secondary() {
   QPalette pal;
   pal.setColor(QPalette::WindowText, QColor(175, 175, 175));
+  return pal;
+}
+
+QPalette Color::text_selected() {
+  QPalette pal;
+  pal.setColor(QPalette::WindowText, QColor(155, 89, 182));
   return pal;
 }
