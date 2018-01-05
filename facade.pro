@@ -1,23 +1,39 @@
-QT += core gui widgets
+QT += core gui widgets svg
 
 INCLUDEPATH += $$PRO_FILE_PWD/ext/cpr/include/ \
                $$PRO_FILE_PWD/ext/json/src/ \
                $$PRO_FILE_PWD/include/ \
 
 SOURCES = src/main.cpp \
-          src/MainWindow.cpp \
-          #src/SlackFeedback.cpp \
-          src/ProfileImage.cpp \
           src/OS.cpp \
-          src/Color.cpp \
           src/FileManager.cpp \
-          src/Font.cpp \
+          #src/SlackFeedback.cpp \
+          src/types/Course.cpp \
+          src/ui/Color.cpp \
+          src/ui/Font.cpp \
+          src/ui/Image.cpp \
+          src/ui/MainWindow.cpp \
+          src/ui/ProfileImage.cpp \
+          src/ui/ProfilePanel.cpp \
+          src/ui/SidebarIcon.cpp \
+          src/ui/SidebarLabel.cpp \
+          src/ui/SidebarListItem.cpp \
+          src/ui/SidebarPanel.cpp \
 
-HEADERS = include/ProfileImage.hpp \
-          include/OS.hpp \
-          include/Color.hpp \
+HEADERS = include/OS.hpp \
           include/FileManager.hpp \
           include/FileNotFound.hpp \
-          include/Font.hpp \
+          #include/slack_feedback.hpp \
+          include/types/Course.hpp \
+          include/ui/Color.hpp \
+          include/ui/Font.hpp \
+          include/ui/Image.hpp \
+          include/ui/MainWindow.hpp \
+          include/ui/ProfileImage.hpp \
+          include/ui/ProfilePanel.hpp \
+          include/ui/SidebarIcon.hpp \
+          include/ui/SidebarLabel.hpp \
+          include/ui/SidebarListItem.hpp \
+          include/ui/SidebarPanel.hpp \
 
 TARGET = facade
