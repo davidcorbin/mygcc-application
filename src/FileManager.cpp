@@ -6,9 +6,10 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
+
 #if (defined(_WIN32) || defined(__WIN32__) || defined(_WIN64))
 #include <include/dirent.h>
-#elif
+#else
 #include <dirent.h>
 #endif
 
