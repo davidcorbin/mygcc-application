@@ -26,7 +26,7 @@ std::string SidebarIcon::loadIcon(const std::string *filename) {
 }
 
 QPixmap SidebarIcon::setup() {
-  auto const *iconsize = new QSize(20, 20);
+  auto const *iconsize = new QSize(ICON_DIMENSIONS, ICON_DIMENSIONS);
 
   // Get normal icon
   std::string npcc = *svgFilename + std::string("_normal.svg");
