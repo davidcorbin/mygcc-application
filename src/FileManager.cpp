@@ -3,16 +3,8 @@
  */
 
 #include <include/FileManager.hpp>
-
 #include <sys/types.h>
 #include <sys/stat.h>
-
-#if (defined(_WIN32) || defined(__WIN32__) || defined(_WIN64))
-#include <include/dirent.h>
-#else
-#include <dirent.h>
-#endif
-
 #include <include/OS.hpp>
 #include <include/FileNotFound.hpp>
 #include <QCoreApplication>
@@ -41,15 +33,6 @@ std::string FileManager::getDataDir() {
   } else {
     return getenv("HOME");
   }
-}
-
-bool FileManager::dirExists(std::string directory) {
-  DIR* dir = opendir(directory.c_str());
-  if (dir) {
-    closedir(dir);
-    return true;
-  }
-  return false;
 }
 
 std::string FileManager::getResourcePath(std::string file = "") {
@@ -89,7 +72,7 @@ std::string FileManager::getDataPath(std::string file = "") {
 
   // Make directory if not found
   QDir dir(path.c_str());
-  if (!dir.exists()){
+  if (!dir.exists()) {
     dir.mkdir(".");
   }
 
