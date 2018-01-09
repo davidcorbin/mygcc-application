@@ -14,6 +14,9 @@ class Color {
   static QPalette text_primary();
   static QPalette text_secondary();
   static QPalette text_selected();
+  static QPalette login_bg_primary();
+  static QPalette login_bg_failure();
+  static QPalette login_bg_success();
 };
 
 

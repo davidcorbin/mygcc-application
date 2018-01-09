@@ -27,3 +27,21 @@ QPalette Color::text_selected() {
   pal.setColor(QPalette::WindowText, QColor(155, 89, 182));
   return pal;
 }
+
+QPalette Color::login_bg_primary() {
+  QPalette pal;
+  pal.setColor(QPalette::Background, QColor(230, 147, 234));
+  return pal;
+}
+
+QPalette Color::login_bg_failure() {
+  QPalette pal;
+  pal.setColor(QPalette::Background, QColor(192, 57, 43));
+  return pal;
+}
+
+QPalette Color::login_bg_success() {
+  QPalette pal;
+  pal.setColor(QPalette::Background, QColor(46, 204, 113));
+  return pal;
+}

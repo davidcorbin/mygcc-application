@@ -5,14 +5,17 @@
 #include <include/ui/MainWindow.hpp>
 #include <include/ui/ProfilePanel.hpp>
 #include <include/ui/SidebarPanel.hpp>
-
+#include <include/ui/LoginPanel.hpp>
 #include <QLocale>
-#include <QGraphicsDropShadowEffect>
 #include <QPainter>
 #include <QCoreApplication>
-
 #include <vector>
 #include <string>
+
+#define MIN_HEIGHT        450
+#define SIDEBAR_WIDTH     240
+#define BODY_WIDTH        500
+#define MIN_WIDTH         SIDEBAR_WIDTH + BODY_WIDTH
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   setLocale(QLocale(QLocale::English, QLocale::UnitedStates));
@@ -47,8 +50,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 
   auto *sidebar = new QWidget;
   // Sidebar width constraints
-  sidebar->setMaximumWidth(240);
-  sidebar->setMinimumWidth(240);
+  sidebar->setMaximumWidth(SIDEBAR_WIDTH);
+  sidebar->setMinimumWidth(SIDEBAR_WIDTH);
   sidebar->setLayout(sidebarLayout);
   sidebar->setGraphicsEffect(shadow);
 
@@ -65,10 +68,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   mainBody->setLayout(qhblayout);
 
   // Body width constraints
-  mainBody->setMinimumWidth(500);
+  mainBody->setMinimumWidth(BODY_WIDTH);
 
   // Body height constraints
-  mainBody->setMinimumHeight(450);
+  mainBody->setMinimumHeight(MIN_HEIGHT);
 
   centralLayout = new QGridLayout;
   centralLayout->addWidget(sidebar, 0, 0);
@@ -80,7 +83,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   centralWidget->setLayout(centralLayout);
   centralWidget->setStyleSheet("background-color: rgb(46, 46, 50)");
 
-  setCentralWidget(centralWidget);
+  // setCentralWidget(centralWidget);
+  
+  auto *labelPanel = new LoginPanel(MIN_WIDTH, MIN_HEIGHT);
+  labelPanel->setup();
+  setCentralWidget(labelPanel);
 }
 
 void MainWindow::setTestText(std::string text) {
