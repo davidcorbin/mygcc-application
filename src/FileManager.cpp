@@ -13,8 +13,14 @@
 #include <string>
 
 std::string FileManager::getDataDir() {
-  std::string datadir = QStandardPaths::writableLocation(
+  #if QT_VERSION > QT_VERSION_CHECK(5, 4, 0)
+    std::string datadir = QStandardPaths::writableLocation(
       QStandardPaths::AppDataLocation).toStdString();
+  #else
+    std::string datadir = QStandardPaths::writableLocation(
+      QStandardPaths::DataLocation).toStdString();
+  #endif
+
   if (datadir.empty()) {
     qFatal("No app data location found for OS");
   }
