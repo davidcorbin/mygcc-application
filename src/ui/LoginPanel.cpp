@@ -7,6 +7,9 @@
 #include <include/ui/Color.hpp>
 #include <QStyleOption>
 #include <QPainter>
+#include <QTime>
+#include <QCoreApplication>
+#include <include/ui/MainWindow.hpp>
 
 LoginPanel::LoginPanel(const int min_width, const int min_height) :
     min_width(min_width), min_height(min_height),
@@ -99,7 +102,7 @@ void LoginPanel::setupPasswordTextInput() {
 bool LoginPanel::login() {
   QString username = usernameText->text();
   QString password = passwordText->text();
-  return username == "1234" && password == "pass";
+  return username == "a" && password == "a";
 }
 
 void LoginPanel::loginProcedure() {
@@ -110,6 +113,20 @@ void LoginPanel::loginProcedure() {
     backgroundAnimation->start();
     buttonAnimation->start();
     bgState = SUCCESS;
+    usernameText->hide();
+    passwordText->hide();
+    loginButton->hide();
+    subtitleLabel->setText("Loading...");
+
+    // Delay For demo purposes
+    QTime dieTime = QTime::currentTime().addSecs(2);
+    while (QTime::currentTime() < dieTime)
+      QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+
+    // Switch central widget to logged in widget
+    auto *mw = reinterpret_cast<MainWindow*>(parent());
+    mw->setCentralWidget(mw->centralWidget);
+
   } else {
     auto *backgroundAnimation = errorAnimation(this);
     auto *buttonAnimation = errorAnimation(loginButton);

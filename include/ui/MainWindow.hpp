@@ -5,6 +5,7 @@
 #ifndef INCLUDE_UI_MAINWINDOW_HPP_
 #define INCLUDE_UI_MAINWINDOW_HPP_
 
+#include <include/ui/LoginPanel.hpp>
 #include <QMainWindow>
 #include <QLabel>
 #include <QHBoxLayout>
@@ -15,13 +16,14 @@ class MainWindow : public QMainWindow {
  public:
   explicit MainWindow(QWidget *parent = nullptr);
   void setTestText(std::string text);
+  QWidget *centralWidget;
+  LoginPanel *loginPanel;
 
  private:
   QLabel *testlabel;
   QHBoxLayout *qhblayout;
   QWidget *mainBody;
   QGridLayout *centralLayout;
-  QWidget *centralWidget;
 };
 
 #endif  // INCLUDE_UI_MAINWINDOW_HPP_

@@ -83,10 +83,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   centralWidget->setLayout(centralLayout);
   centralWidget->setStyleSheet("background-color: rgb(46, 46, 50)");
 
-  // setCentralWidget(centralWidget);
-  auto *labelPanel = new LoginPanel(MIN_WIDTH, MIN_HEIGHT);
-  labelPanel->setup();
-  setCentralWidget(labelPanel);
+  // Show login panel
+  loginPanel = new LoginPanel(MIN_WIDTH, MIN_HEIGHT);
+  loginPanel->setup();
+  setCentralWidget(loginPanel);
 }
 
 void MainWindow::setTestText(std::string text) {
