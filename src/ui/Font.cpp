@@ -5,6 +5,7 @@
 #include <include/ui/Font.hpp>
 #include <include/FileManager.hpp>
 #include <QFontDatabase>
+#include <QStringList>
 #include <string>
 
 #define LATO_LIGHT            "Lato-Light.ttf"

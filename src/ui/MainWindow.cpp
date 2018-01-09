@@ -84,7 +84,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   centralWidget->setStyleSheet("background-color: rgb(46, 46, 50)");
 
   // setCentralWidget(centralWidget);
-  
   auto *labelPanel = new LoginPanel(MIN_WIDTH, MIN_HEIGHT);
   labelPanel->setup();
   setCentralWidget(labelPanel);
