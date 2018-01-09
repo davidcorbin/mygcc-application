@@ -9,30 +9,16 @@
 #include <include/FileNotFound.hpp>
 #include <QCoreApplication>
 #include <QDir>
+#include <QStandardPaths>
 #include <string>
 
-#define MACOS_DATA_DIR      "/Library/Application Support/Facade"
-#define WIN_DATA_DIR        "\\AppData\\Roaming\\Facade"
-#define LINUX_DATA_DIR      "./facade"
-
 std::string FileManager::getDataDir() {
-  std::string osname = OS::getOSName();
-
-  if (osname == "macOSX") {
-    auto *homedir = getenv("HOME");
-    std::string home(homedir);
-    return home + MACOS_DATA_DIR;
-  } else if (osname == "Unix" || osname == "Linux") {
-    auto *homedir = getenv("HOME");
-    std::string home(homedir);
-    return home + LINUX_DATA_DIR;
-  } else if (osname == "Windows 32-bit" || osname == "Windows 64-bit") {
-    auto *homedir = getenv("APPDATA");
-    std::string home(homedir);
-    return home + WIN_DATA_DIR;
-  } else {
-    return getenv("HOME");
+  std::string datadir = QStandardPaths::writableLocation(
+      QStandardPaths::AppDataLocation).toStdString();
+  if (datadir.empty()) {
+    qFatal("No app data location found for OS");
   }
+  return datadir;
 }
 
 std::string FileManager::getResourcePath(std::string file = "") {
@@ -48,7 +34,7 @@ std::string FileManager::getResourcePath(std::string file = "") {
     return full;
   } else if (osname == "Windows 32-bit" || osname == "Windows 64-bit") {
     std::string abs = QCoreApplication::applicationDirPath().toStdString();
-    std::string full = abs + "/Resources/" + file;
+    std::string full = abs + "/" + file;
     // Check if file exists
     if (!file.empty() && !fileExists(full)) {
       qFatal("Resource not found: %s\n", full.c_str());
@@ -56,7 +42,7 @@ std::string FileManager::getResourcePath(std::string file = "") {
     return full;
   } else if (osname == "Linux" || osname == "Unix") {
     std::string abs = QCoreApplication::applicationDirPath().toStdString();
-    std::string full = abs + "/Resources/" + file;
+    std::string full = abs + "/../share/facade/Facade" + file;
     // Check if file exists
     if (!file.empty() && !fileExists(full)) {
       qFatal("Resource not found: %s\n", full.c_str());
