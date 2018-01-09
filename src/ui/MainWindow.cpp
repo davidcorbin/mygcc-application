@@ -5,7 +5,6 @@
 #include <include/ui/MainWindow.hpp>
 #include <include/ui/ProfilePanel.hpp>
 #include <include/ui/SidebarPanel.hpp>
-#include <include/ui/LoginPanel.hpp>
 #include <QLocale>
 #include <QPainter>
 #include <QCoreApplication>
@@ -15,7 +14,7 @@
 #define MIN_HEIGHT        450
 #define SIDEBAR_WIDTH     240
 #define BODY_WIDTH        500
-#define MIN_WIDTH         SIDEBAR_WIDTH + BODY_WIDTH
+#define MIN_WIDTH         (SIDEBAR_WIDTH + BODY_WIDTH)
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   setLocale(QLocale(QLocale::English, QLocale::UnitedStates));
