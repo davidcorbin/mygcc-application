@@ -19,6 +19,10 @@ SOURCES = src/main.cpp \
           src/ui/SidebarLabel.cpp \
           src/ui/SidebarListItem.cpp \
           src/ui/SidebarPanel.cpp \
+          src/ui/LoginPanel.cpp \
+          src/ui/LoginButton.cpp \
+          src/ui/InfoGrid.cpp \
+          src/ui/GridItem.cpp \
 
 HEADERS = include/OS.hpp \
           include/FileManager.hpp \
@@ -35,5 +39,9 @@ HEADERS = include/OS.hpp \
           include/ui/SidebarLabel.hpp \
           include/ui/SidebarListItem.hpp \
           include/ui/SidebarPanel.hpp \
+          include/ui/LoginPanel.hpp \
+          include/ui/LoginButton.hpp \
+          include/ui/InfoGrid.hpp \
+          include/ui/GridItem.hpp \
 
 TARGET = facade
