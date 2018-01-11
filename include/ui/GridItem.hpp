@@ -16,6 +16,10 @@ class GridItem : public QWidget {
  public:
   GridItem(QString *title, QString *subtitle, QPalette color);
 
+ protected:
+  void enterEvent(QEvent* event) override;
+  void leaveEvent(QEvent* event) override;
+
  private:
   QString *title;
   QString* subtitle;

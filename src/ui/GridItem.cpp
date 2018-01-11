@@ -3,6 +3,7 @@
  */
 
 #include <include/ui/GridItem.hpp>
+#include <stdlib.h>
 #include <include/ui/Font.hpp>
 
 GridItem::GridItem(QString *title,
@@ -54,4 +55,44 @@ QGraphicsDropShadowEffect* GridItem::shadowEffect(QObject *parent,
   effect->setColor(QColor(color));
   effect->setOffset(2, 2);
   return effect;
+}
+
+void GridItem::enterEvent(QEvent* event) {
+  setGraphicsEffect(shadowEffect(this, 5, "#333"));
+
+  heroLabel->setStyleSheet(QString("color: #fff;"
+                                       "border-top-left-radius: 3px;"
+                                       "border-top-right-radius: 3px;"
+                                       "background: rgb(%1, %2, %3);").arg(
+      abs(color.color(QPalette::Background).red()-20)).arg(
+      abs(color.color(QPalette::Background).green()-20)).arg(
+      abs(color.color(QPalette::Background).blue()-20)));
+
+  subtitleLabel->setStyleSheet(QString("color: #fff;"
+                                           "border-bottom-left-radius: 3px;"
+                                           "border-bottom-right-radius: 3px;"
+                                           "background: rgb(%1, %2, %3);").arg(
+      abs(color.color(QPalette::Background).red()-20)).arg(
+      abs(color.color(QPalette::Background).green()-20)).arg(
+      abs(color.color(QPalette::Background).blue()-20)));
+}
+
+void GridItem::leaveEvent(QEvent* event) {
+  setGraphicsEffect(shadowEffect(this, 10, "#222"));
+
+  heroLabel->setStyleSheet(QString("color: #fff;"
+                                       "border-top-left-radius: 3px;"
+                                       "border-top-right-radius: 3px;"
+                                       "background: rgb(%1, %2, %3);").arg(
+      color.color(QPalette::Background).red()).arg(
+      color.color(QPalette::Background).green()).arg(
+      color.color(QPalette::Background).blue()));
+
+  subtitleLabel->setStyleSheet(QString("color: #fff;"
+                                           "border-bottom-left-radius: 3px;"
+                                           "border-bottom-right-radius: 3px;"
+                                           "background: rgb(%1, %2, %3);").arg(
+      color.color(QPalette::Background).red()).arg(
+      color.color(QPalette::Background).green()).arg(
+      color.color(QPalette::Background).blue()));
 }
