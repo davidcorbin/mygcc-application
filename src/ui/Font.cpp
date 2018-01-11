@@ -54,6 +54,20 @@ QFont Font::startupInput() {
   return *font;
 }
 
+QFont Font::heroNumber() {
+  auto *font = new QFont();
+  font->setPointSize(50);
+  font->setFamily(loadFont(LATO_LIGHT));
+  return *font;
+}
+
+QFont Font::subtitleLabel() {
+  auto *font = new QFont();
+  font->setPointSize(10);
+  font->setFamily(loadFont(LATO_LIGHT));
+  return *font;
+}
+
 QString Font::loadFont(std::string font) {
   auto *fm = new FileManager();
   std::string absPath = fm->getResourcePath(font);

@@ -48,5 +48,4 @@ void SidebarPanel::setSelected(const Course *course) {
 
   auto *mainwindow = qobject_cast<MainWindow *>(
       parentWidget()->parentWidget()->parentWidget());
-  mainwindow->setTestText(course->getName());
 }

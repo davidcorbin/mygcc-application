@@ -11,12 +11,21 @@
 
 class Font {
  public:
+  // Profile panel
   static QFont profileName();
   static QFont profileMajor();
+
+  // Sidebar
   static QFont sidebarItem();
+
+  // Startup panel
   static QFont startupTitle();
   static QFont startupSubtitle();
   static QFont startupInput();
+
+  // Grid panel
+  static QFont heroNumber();
+  static QFont subtitleLabel();
 
  private:
   static QString loadFont(std::string font);

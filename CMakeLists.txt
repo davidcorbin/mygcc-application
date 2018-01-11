@@ -47,7 +47,9 @@ set(SOURCE_FILES src/main.cpp
         src/ui/SidebarListItem.cpp
         src/ui/Image.cpp
         src/ui/LoginPanel.cpp
-        src/ui/LoginButton.cpp)
+        src/ui/LoginButton.cpp
+        src/ui/InfoGrid.cpp
+        src/ui/GridItem.cpp)
 
 set(HEADER_FILES include/OS.hpp
         include/FileManager.hpp
@@ -64,7 +66,9 @@ set(HEADER_FILES include/OS.hpp
         include/ui/SidebarListItem.hpp
         include/ui/Image.hpp
         include/ui/LoginPanel.hpp
-        include/ui/LoginButton.hpp)
+        include/ui/LoginButton.hpp
+        include/ui/InfoGrid.hpp
+        include/ui/GridItem.hpp)
 
 file(GLOB_RECURSE RESOURCE_FILES "res/*/*.svg"
         "res/*/*.jpg"

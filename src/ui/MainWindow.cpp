@@ -5,6 +5,7 @@
 #include <include/ui/MainWindow.hpp>
 #include <include/ui/ProfilePanel.hpp>
 #include <include/ui/SidebarPanel.hpp>
+#include <include/ui/Color.hpp>
 #include <QLocale>
 #include <QPainter>
 #include <QCoreApplication>
@@ -57,24 +58,35 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   // Sidebar height constraints
   sidebar->setMinimumHeight(450);
 
-  qhblayout = new QHBoxLayout;
-  testlabel = new QLabel();
-  testlabel->setText("Home");
-  testlabel->setAlignment(Qt::AlignCenter);
-  testlabel->setStyleSheet("color: white");
-  qhblayout->addWidget(testlabel);
-  mainBody = new QWidget;
-  mainBody->setLayout(qhblayout);
+  auto *items = new std::vector<GridItem*>();
+  items->push_back(new GridItem(new QString("13"),
+                                new QString("chapels left"),
+                                Color::grid_blue()));
+  items->push_back(new GridItem(new QString("7"),
+                                new QString("assignments"),
+                                Color::grid_green()));
+  items->push_back(new GridItem(new QString("15"),
+                                new QString("chapels received"),
+                                Color::grid_purple()));
+  items->push_back(new GridItem(new QString("2/7"),
+                                new QString("assignments received"),
+                                Color::grid_red()));
+  items->push_back(new GridItem(new QString("PDF"),
+                                new QString("Programming Project 2 PDF"),
+                                Color::grid_yellow()));
+
+  infogrid = new InfoGrid(items);
+  infogrid->setup();
 
   // Body width constraints
-  mainBody->setMinimumWidth(BODY_WIDTH);
+  infogrid->setMinimumWidth(BODY_WIDTH);
 
   // Body height constraints
-  mainBody->setMinimumHeight(MIN_HEIGHT);
+  infogrid->setMinimumHeight(MIN_HEIGHT);
 
   centralLayout = new QGridLayout;
   centralLayout->addWidget(sidebar, 0, 0);
-  centralLayout->addWidget(mainBody, 0, 1);
+  centralLayout->addWidget(infogrid, 0, 1);
   centralLayout->setSpacing(3);
   centralLayout->setContentsMargins(0, 0, 0, 0);
 
@@ -86,8 +98,4 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   loginPanel = new LoginPanel(MIN_WIDTH, MIN_HEIGHT);
   loginPanel->setup();
   setCentralWidget(loginPanel);
-}
-
-void MainWindow::setTestText(std::string text) {
-  testlabel->setText(text.c_str());
 }
