@@ -63,9 +63,14 @@ std::string FileManager::getDataPath(std::string file = "") {
   auto path = getDataDir();
 
   // Make directory if not found
-  QDir dir(path.c_str());
+  auto qpath = QString::fromStdString(path);
+  QDir dir(qpath);
   if (!dir.exists()) {
-    dir.mkdir(".");
+    dir.mkpath(qpath);
+
+    // Set path permissions
+    QFile::setPermissions(qpath, QFileDevice::ReadUser |
+        QFileDevice::WriteUser | QFileDevice::ExeUser);
   }
 
   auto full = dir.absolutePath().toStdString() + "/" + file;
