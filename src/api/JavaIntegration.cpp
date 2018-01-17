@@ -44,6 +44,8 @@ void JavaIntegration::startAPIServer() {
   }
   delete[] options;
   delete[] writable;
+
+  // Find Main class
   jclass cls = env->FindClass("com/mygcc/api/Main");
   if (cls != nullptr) {
     qDebug("mygcc-api class loaded");
@@ -54,9 +56,9 @@ void JavaIntegration::startAPIServer() {
   // Call public static void main(String[] args)
   jmethodID mid = env->GetStaticMethodID(cls, "main", "([Ljava/lang/String;)V");
   if (mid == nullptr) {
-    qDebug("mygcc-api method not found");
+    qDebug("mygcc-api main method not found");
   } else {
-    qWarning("mygcc-api method found");
+    qWarning("mygcc-api main method found");
     env->CallStaticVoidMethod(cls, mid);
   }
 }
