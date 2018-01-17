@@ -8,8 +8,8 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Instruct CMake to run moc automatically when needed.
 set(CMAKE_AUTOMOC ON)
-
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y -Wall")
+# Compiler flags
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
 
 # Find necessary packages
 find_package(Qt5Widgets REQUIRED)
@@ -41,6 +41,7 @@ include_directories(ext/cpr/include)
 include_directories(ext/json/src)
 include_directories(ext/json/src/api)
 include_directories(${JAVA_INCLUDE_PATH})
+include_directories(${JAVA_INCLUDE_PATH2})
 include_directories(${CPR_INCLUDE_DIRS} ${JSON_INCLUDE_DIRS} ${JNI_LIBRARIES})
 
 add_subdirectory(include)
