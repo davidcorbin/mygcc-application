@@ -6,7 +6,6 @@
 #include <include/ui/ProfilePanel.hpp>
 #include <include/ui/SidebarPanel.hpp>
 #include <include/ui/Color.hpp>
-#include <include/ui/FeedbackPanel.hpp>
 #include <QLocale>
 #include <QPainter>
 #include <QCoreApplication>
@@ -27,9 +26,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
                                      new std::string("GCCshield.jpg"));
   profPanel->setup();
 
-  auto *feedbackPanel = new FeedbackPanel;
-  feedbackPanel->setup();
-
   auto *bio = new Course("Biology 1", "BIOL101");
   auto *calc = new Course("Calculus 3", "MATH261");
   auto *dis = new Course("Discrete Math", "MATH213");
@@ -43,7 +39,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   auto *sidebarLayout = new QGridLayout;
   sidebarLayout->addWidget(profPanel, 0, 0);
   sidebarLayout->addWidget(sidebarPanel, 1, 0);
-  sidebarLayout->addWidget(feedbackPanel, 2, 0);
   sidebarLayout->setContentsMargins(0, 0, 0, 0);
   sidebarLayout->setSpacing(0);
 
