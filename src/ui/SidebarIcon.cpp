@@ -2,6 +2,7 @@
  * Copyright 2018 <David Corbin, Mitchell Harvey>
  */
 
+#include <ext/json/src/json.hpp>
 #include <include/ui/SidebarIcon.hpp>
 #include <include/FileManager.hpp>
 #include <QSvgRenderer>
@@ -9,6 +10,7 @@
 #include <QPainter>
 #include <QScreen>
 #include <string>
+#include <fstream>
 
 #define ICON_DIMENSIONS   20
 
@@ -78,19 +80,28 @@ QPixmap SidebarIcon::FromSvgToPixmap(const QSize &ImageSize,
 // Sets icon file name based on course code. Assumes that the icon exists
 // without checking. There should be a different relevant icon for each major.
 void SidebarIcon::setIcon(const Course *course) {
-  const std::string code = course->getCode();
+  std::string code = course->getCode();
 
-  if (code == "Home") {
-    svgFilename = new std::string("home");
-  } else if (code.find("BIOL") != std::string::npos) {  // BIOL class
-    svgFilename = new std::string("flask");
-  } else if (code.find("COMP") != std::string::npos) {  // COMP class
-    svgFilename = new std::string("computer");
-  } else if (code.find("MATH") != std::string::npos) {  // MATH class
-    svgFilename = new std::string("division");
-  } else if (code.find("WRIT") != std::string::npos) {  // WRIT class
-    svgFilename = new std::string("pen");
-  } else {
+  // Get location of file.
+  auto *fm = new FileManager();
+  std::string path;
+  path = fm->getResourcePath("icons.json");
+
+  // Read json file into json object.
+  std::ifstream in(path);
+  nlohmann::json lookup;
+  in >> lookup;
+  in.close();
+
+  // Remove digits from course code.
+  code.erase(
+  std::remove_if(code.begin(), code.end(), &isdigit),
+  code.end());
+
+  // If class code does not exist, use default icon.
+  try {
+    svgFilename = new std::string(lookup.at(code).get<std::string>());
+  } catch (nlohmann::detail::out_of_range) {
     svgFilename = new std::string("home");
   }
 }

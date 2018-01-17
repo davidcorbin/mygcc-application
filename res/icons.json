@@ -1,0 +1,74 @@
+{
+	"Home": "home",
+
+	"BIOL": "flask",
+	"CHEM": "flask",
+	"PHYS": "flask",
+	"SCIC": "flask",
+
+	"COMP": "computer",
+
+	"MATH": "division",
+
+	"WRIT": "pen",
+
+	"ACCT": "chart",
+	"ECON": "chart",
+	"FNCE": "chart",
+
+	"ABRD": "world",
+	"POLS": "world",
+
+	"ART": "palette",
+
+	"ASTR": "telescope",
+
+	"BUSA": "briefcase",
+
+	"CHIN": "yinyang",
+
+	"COMM": "speaking",
+	"SOCI": "speaking",
+	"SOCW": "speaking",
+
+	"DESI": "compass",
+
+	"EDUC": "apple",
+	"SEDU": "apple",
+
+	"ELEE": "transistor",
+
+	"ENGL": "book",
+	"RELI": "book",
+
+	"ENGR": "wrench",
+	"MECE": "wrench",
+	"ROBO": "wrench",
+
+	"ENTR": "money",
+
+	"EXER": "dumbbell",
+	"PHYE": "dumbbell",
+
+	"FREN": "eiffel",
+
+	"GEOL": "mountain",
+
+	"GOBL": "translate",
+	"GREK": "translate",
+	"HEBR": "translate",
+	"SPAN": "translate",
+
+	"HIST": "hourglass",
+
+	"HUMA": "brain",
+	"PHIL": "brain",
+	"PSYC": "brain",
+	"SSFT": "brain",
+
+	"MUSI": "music",
+
+	"THEA": "masks",
+
+	"ZLOAD": "error"
+}
