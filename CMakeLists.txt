@@ -9,6 +9,8 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Instruct CMake to run moc automatically when needed.
 set(CMAKE_AUTOMOC ON)
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y -Wall")
+
 # Find the Qt5 library
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Core REQUIRED)
@@ -31,50 +33,11 @@ add_subdirectory(include)
 add_subdirectory(src)
 add_subdirectory(ext)
 
-set(SOURCE_FILES src/main.cpp
-        src/FileManager.cpp
-        src/OS.cpp
-        src/SlackFeedback.cpp
-        src/types/Course.cpp
-        src/ui/MainWindow.cpp
-        src/ui/ProfileImage.cpp
-        src/ui/Color.cpp
-        src/ui/Font.cpp
-        src/ui/SidebarPanel.cpp
-        src/ui/ProfilePanel.cpp
-        src/ui/SidebarLabel.cpp
-        src/ui/SidebarIcon.cpp
-        src/ui/SidebarListItem.cpp
-        src/ui/Image.cpp
-        src/ui/LoginPanel.cpp
-        src/ui/LoginButton.cpp
-        src/ui/InfoGrid.cpp
-        src/ui/GridItem.cpp)
+file(GLOB_RECURSE SOURCE_FILES ${PROJECT_SOURCE_DIR}/src/*.cpp)
+file(GLOB_RECURSE HEADER_FILES ${PROJECT_SOURCE_DIR}/include/*.hpp)
+file(GLOB_RECURSE RESOURCE_FILES "res/*/*.svg" "res/*/*.jpg" "res/*/*.ttf")
 
-set(HEADER_FILES include/OS.hpp
-        include/FileManager.hpp
-        include/FileNotFound.hpp
-        include/types/Course.hpp
-        include/ui/MainWindow.hpp
-        include/ui/Color.hpp
-        include/ui/Font.hpp
-        include/ui/ProfileImage.hpp
-        include/ui/ProfilePanel.hpp
-        include/ui/SidebarPanel.hpp
-        include/ui/SidebarLabel.hpp
-        include/ui/SidebarIcon.hpp
-        include/ui/SidebarListItem.hpp
-        include/ui/Image.hpp
-        include/ui/LoginPanel.hpp
-        include/ui/LoginButton.hpp
-        include/ui/InfoGrid.hpp
-        include/ui/GridItem.hpp)
-
-file(GLOB_RECURSE RESOURCE_FILES "res/*/*.svg"
-        "res/*/*.jpg"
-        "res/*/*.ttf")
-
-add_executable(facade "${SOURCE_FILES}" "${HEADER_FILES}" "${RESOURCE_FILES}")
+add_executable(facade ${SOURCE_FILES} ${HEADER_FILES} ${RESOURCE_FILES})
 
 # Use custom macOS settings
 if (APPLE)
