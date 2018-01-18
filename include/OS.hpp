@@ -11,6 +11,7 @@
 class OS {
  public:
   static std::string getOSName();
+  static std::string* appVersion();
 };
 
 #endif  // INCLUDE_OS_HPP_

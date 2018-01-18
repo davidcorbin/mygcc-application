@@ -18,6 +18,7 @@ class MainWindow : public QMainWindow {
   explicit MainWindow(QWidget *parent = nullptr);
   QWidget *centralWidget;
   LoginPanel *loginPanel;
+  void viewFeedbackPanel();
 
  private:
   QGridLayout *centralLayout;

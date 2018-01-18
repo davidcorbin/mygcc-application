@@ -27,6 +27,8 @@ class Font {
   static QFont heroNumber();
   static QFont subtitleLabel();
 
+  // Feedback panel
+  static QFont feedbackTextbox();
  private:
   static QString loadFont(std::string font);
 };

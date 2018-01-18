@@ -68,6 +68,13 @@ QFont Font::subtitleLabel() {
   return *font;
 }
 
+QFont Font::feedbackTextbox() {
+  auto *font = new QFont();
+  font->setPointSize(12);
+  font->setFamily(loadFont(LATO_LIGHT));
+  return *font;
+}
+
 QString Font::loadFont(std::string font) {
   auto *fm = new FileManager();
   std::string absPath = fm->getResourcePath(font);

@@ -5,6 +5,7 @@
 #include <include/ui/MainWindow.hpp>
 #include <include/ui/ProfilePanel.hpp>
 #include <include/ui/SidebarPanel.hpp>
+#include <include/ui/FeedbackListItem.hpp>
 #include <include/ui/FeedbackPanel.hpp>
 #include <include/ui/Color.hpp>
 #include <QLocale>
@@ -37,7 +38,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   auto *sidebarPanel = new SidebarPanel(&classes);
   sidebarPanel->setup();
 
-  auto *feedbackPanel = new FeedbackPanel;
+  auto *feedbackPanel = new FeedbackListItem;
   feedbackPanel->setup();
 
   auto *sidebarLayout = new QGridLayout;
@@ -103,4 +104,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   loginPanel = new LoginPanel(MIN_WIDTH, MIN_HEIGHT);
   loginPanel->setup();
   setCentralWidget(loginPanel);
+}
+
+void MainWindow::viewFeedbackPanel() {
+  auto *feedbackPanel = new FeedbackPanel;
+  feedbackPanel->setup();
+  centralLayout->removeWidget(infogrid);
+  centralLayout->addWidget(feedbackPanel, 0, 1);
 }
