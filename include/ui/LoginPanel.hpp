@@ -19,7 +19,7 @@ class LoginPanel : public QWidget {
   Q_PROPERTY(QColor color READ color WRITE setBackgroundColor)
 
  public:
-  LoginPanel(const int min_width, const int min_height);
+  LoginPanel(int min_width, int min_height);
   void setup();
   LoginButton *loginButton;
 

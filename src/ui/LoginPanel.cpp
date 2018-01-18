@@ -11,7 +11,7 @@
 #include <QCoreApplication>
 #include <include/ui/MainWindow.hpp>
 
-LoginPanel::LoginPanel(const int min_width, const int min_height) :
+LoginPanel::LoginPanel(int min_width, int min_height) :
     min_width(min_width), min_height(min_height),
     bgPrimary(Color::login_bg_primary().color(QPalette::Background)),
     bgSuccess(Color::login_bg_success().color(QPalette::Background)),
@@ -136,10 +136,10 @@ void LoginPanel::loginProcedure() {
   }
 }
 
-QGraphicsDropShadowEffect* LoginPanel::shadowEffect(QObject *parent,
-                                                    int blurRadius,
-                                                    const char *color) {
-  QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect(parent);
+static QGraphicsDropShadowEffect* LoginPanel::shadowEffect(QObject *parent,
+                                                           int blurRadius,
+                                                           const char *color) {
+  auto *effect = new QGraphicsDropShadowEffect(parent);
   effect->setBlurRadius(blurRadius);
   effect->setColor(QColor(color));
   effect->setOffset(1, 1);
