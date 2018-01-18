@@ -11,6 +11,8 @@
 #include <vector>
 
 class InfoGrid : public QWidget {
+  Q_OBJECT
+
  public:
   explicit InfoGrid(std::vector<GridItem*> *items);
   void setup();
