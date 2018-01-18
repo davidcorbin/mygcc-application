@@ -136,9 +136,9 @@ void LoginPanel::loginProcedure() {
   }
 }
 
-static QGraphicsDropShadowEffect* LoginPanel::shadowEffect(QObject *parent,
-                                                           int blurRadius,
-                                                           const char *color) {
+QGraphicsDropShadowEffect* LoginPanel::shadowEffect(QObject *parent,
+                                                    int blurRadius,
+                                                    const char *color) {
   auto *effect = new QGraphicsDropShadowEffect(parent);
   effect->setBlurRadius(blurRadius);
   effect->setColor(QColor(color));
