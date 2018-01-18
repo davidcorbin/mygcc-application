@@ -44,11 +44,15 @@ void FeedbackPanel::setup() {
 
   textbox = new QPlainTextEdit;
   textbox->setStyleSheet("background: #fff; border-radius: 5px; padding: 5px;");
-  textbox->setPlaceholderText(FEEDBACK_PLHOLDER);
   textbox->setMaximumWidth(500);
   textbox->setMinimumWidth(400);
   textbox->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   textbox->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+  // Place holder text support added in Qt 5.3
+  #if QT_VERSION > QT_VERSION_CHECK(5, 3, 0)
+    textbox->setPlaceholderText(FEEDBACK_PLHOLDER);
+  #endif
 
   submitButton = new QPushButton("Submit");
   submitButton->setStyleSheet("background: rgb(182, 45, 214);"
