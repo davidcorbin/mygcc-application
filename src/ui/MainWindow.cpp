@@ -6,13 +6,14 @@
 #include <include/ui/ProfilePanel.hpp>
 #include <include/ui/SidebarPanel.hpp>
 #include <include/ui/FeedbackListItem.hpp>
-#include <include/ui/FeedbackPanel.hpp>
 #include <include/ui/Color.hpp>
 #include <QLocale>
 #include <QPainter>
 #include <QCoreApplication>
 #include <vector>
 #include <string>
+
+#define WINDOW_TITLE            "Facade [SNAPSHOT]"
 
 #define MIN_HEIGHT        450
 #define SIDEBAR_WIDTH     240
@@ -21,7 +22,7 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   setLocale(QLocale(QLocale::English, QLocale::UnitedStates));
-  setWindowTitle("Facade");
+  setWindowTitle(WINDOW_TITLE);
 
   auto *profPanel = new ProfilePanel(new std::string("John Smith"),
                                      new std::string("Computer Science"),
@@ -38,13 +39,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   auto *sidebarPanel = new SidebarPanel(&classes);
   sidebarPanel->setup();
 
-  auto *feedbackPanel = new FeedbackListItem;
-  feedbackPanel->setup();
+  auto *feedbackListItem = new FeedbackListItem;
+  feedbackListItem->setup();
 
   auto *sidebarLayout = new QGridLayout;
   sidebarLayout->addWidget(profPanel, 0, 0);
   sidebarLayout->addWidget(sidebarPanel, 1, 0);
-  sidebarLayout->addWidget(feedbackPanel, 2, 0);
+  sidebarLayout->addWidget(feedbackListItem, 2, 0);
   sidebarLayout->setContentsMargins(0, 0, 0, 0);
   sidebarLayout->setSpacing(0);
 
@@ -81,8 +82,15 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
                                 new QString("Programming Project 2 PDF"),
                                 Color::grid_yellow()));
 
+  // Setup the Home view
   infogrid = new InfoGrid(items);
   infogrid->setup();
+  infogrid->show();
+
+  // Setup class view
+  feedbackPanel = new FeedbackPanel;
+  feedbackPanel->setup();
+  feedbackPanel->hide();
 
   // Body width constraints
   infogrid->setMinimumWidth(BODY_WIDTH);
@@ -93,6 +101,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   centralLayout = new QGridLayout;
   centralLayout->addWidget(sidebar, 0, 0);
   centralLayout->addWidget(infogrid, 0, 1);
+  centralLayout->addWidget(feedbackPanel, 0, 1);
+  currentBodyWidget = infogrid;
   centralLayout->setSpacing(3);
   centralLayout->setContentsMargins(0, 0, 0, 0);
 
@@ -107,8 +117,17 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 }
 
 void MainWindow::viewFeedbackPanel() {
-  auto *feedbackPanel = new FeedbackPanel;
-  feedbackPanel->setup();
-  centralLayout->removeWidget(infogrid);
-  centralLayout->addWidget(feedbackPanel, 0, 1);
+  currentBodyWidget->hide();
+  feedbackPanel->show();
+  currentBodyWidget = feedbackPanel;
+}
+
+void MainWindow::viewGridPanel() {
+  currentBodyWidget->hide();
+  infogrid->show();
+  currentBodyWidget = infogrid;
+}
+
+void MainWindow::viewCourse(const Course *course) {
+  currentBodyWidget->hide();
 }

@@ -7,6 +7,8 @@
 
 #include <include/ui/LoginPanel.hpp>
 #include <include/ui/InfoGrid.hpp>
+#include <include/ui/FeedbackPanel.hpp>
+#include <include/types/Course.hpp>
 #include <QMainWindow>
 #include <QLabel>
 #include <QHBoxLayout>
@@ -19,10 +21,14 @@ class MainWindow : public QMainWindow {
   QWidget *centralWidget;
   LoginPanel *loginPanel;
   void viewFeedbackPanel();
+  void viewGridPanel();
+  void viewCourse(const Course *course);
 
  private:
   QGridLayout *centralLayout;
   InfoGrid *infogrid;
+  FeedbackPanel *feedbackPanel;
+  QWidget *currentBodyWidget;
 };
 
 #endif  // INCLUDE_UI_MAINWINDOW_HPP_

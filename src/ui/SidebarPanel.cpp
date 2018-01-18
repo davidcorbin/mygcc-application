@@ -46,6 +46,11 @@ void SidebarPanel::setSelected(const Course *course) {
     }
   }
 
-  auto *mainwindow = qobject_cast<MainWindow *>(
+  auto *mainWindow = qobject_cast<MainWindow *>(
       parentWidget()->parentWidget()->parentWidget());
+  if (course->getCode() == "Home") {
+    mainWindow->viewGridPanel();
+  } else {
+    mainWindow->viewCourse(course);
+  }
 }
