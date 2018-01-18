@@ -13,6 +13,7 @@
 class SidebarIcon {
  public:
   explicit SidebarIcon(const Course *course);
+  explicit SidebarIcon(const std::string *iconName);
 
   QPixmap setup();
   QPixmap normal;

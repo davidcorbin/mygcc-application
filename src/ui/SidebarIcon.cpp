@@ -18,6 +18,10 @@ SidebarIcon::SidebarIcon(const Course *course) {
   setIcon(course);
 }
 
+SidebarIcon::SidebarIcon(const std::string *iconName) {
+  svgFilename = iconName;
+}
+
 std::string SidebarIcon::loadIcon(const std::string *filename) {
   auto *fm = new FileManager();
 

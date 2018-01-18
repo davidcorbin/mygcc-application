@@ -23,6 +23,8 @@ SOURCES = src/main.cpp \
           src/ui/LoginButton.cpp \
           src/ui/InfoGrid.cpp \
           src/ui/GridItem.cpp \
+          src/data/Login.cpp \
+          src/data/TestData.cpp \
 
 HEADERS = include/OS.hpp \
           include/FileManager.hpp \
@@ -43,5 +45,7 @@ HEADERS = include/OS.hpp \
           include/ui/LoginButton.hpp \
           include/ui/InfoGrid.hpp \
           include/ui/GridItem.hpp \
+          include/data/Login.hpp \
+          include/data/TestData.hpp \
 
 TARGET = facade

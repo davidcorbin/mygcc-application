@@ -5,6 +5,7 @@
 #include <include/ui/MainWindow.hpp>
 #include <include/ui/ProfilePanel.hpp>
 #include <include/ui/SidebarPanel.hpp>
+#include <include/ui/FeedbackPanel.hpp>
 #include <include/ui/Color.hpp>
 #include <QLocale>
 #include <QPainter>
@@ -36,9 +37,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   auto *sidebarPanel = new SidebarPanel(&classes);
   sidebarPanel->setup();
 
+  auto *feedbackPanel = new FeedbackPanel;
+  feedbackPanel->setup();
+
   auto *sidebarLayout = new QGridLayout;
   sidebarLayout->addWidget(profPanel, 0, 0);
   sidebarLayout->addWidget(sidebarPanel, 1, 0);
+  sidebarLayout->addWidget(feedbackPanel, 2, 0);
   sidebarLayout->setContentsMargins(0, 0, 0, 0);
   sidebarLayout->setSpacing(0);
 
