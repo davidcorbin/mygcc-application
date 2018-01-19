@@ -78,7 +78,8 @@ void LoginPanel::setupUsernameTextInput() {
   usernameText->setFixedWidth(220);
   usernameText->setStyleSheet("background: #fff; "
                                   "border-radius: 3px; "
-                                  "padding: 10px;");
+                                  "padding: 10px; "
+                                  "color: #000;");
   usernameText->setFont(Font::startupInput());
   usernameText->setPlaceholderText("myGCC Username");
   usernameText->setGraphicsEffect(shadowEffect(usernameText, 20, "#777"));
@@ -90,7 +91,8 @@ void LoginPanel::setupPasswordTextInput() {
   passwordText->setFixedWidth(220);
   passwordText->setStyleSheet("background: #fff; "
                                   "border-radius: 3px; "
-                                  "padding: 10px;");
+                                  "padding: 10px; "
+                                  "color: #000;");
   passwordText->setFont(Font::startupInput());
   passwordText->setPlaceholderText("myGCC Password");
   passwordText->setGraphicsEffect(shadowEffect(passwordText, 20, "#777"));

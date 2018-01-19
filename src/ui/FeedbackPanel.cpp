@@ -43,7 +43,7 @@ void FeedbackPanel::setup() {
   dropdown->setContentsMargins(10, 5, 10, 5);
 
   textbox = new QPlainTextEdit;
-  textbox->setStyleSheet("background: #fff; border-radius: 5px; padding: 5px;");
+  textbox->setStyleSheet("background: #fff; border-radius: 5px; padding: 5px; color: #000;");
   textbox->setMaximumWidth(500);
   textbox->setMinimumWidth(400);
   textbox->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
