@@ -35,7 +35,7 @@ add_subdirectory(ext)
 
 file(GLOB_RECURSE SOURCE_FILES ${PROJECT_SOURCE_DIR}/src/*.cpp)
 file(GLOB_RECURSE HEADER_FILES ${PROJECT_SOURCE_DIR}/include/*.hpp)
-file(GLOB_RECURSE RESOURCE_FILES "res/*/*.svg" "res/*/*.jpg" "res/*/*.ttf")
+file(GLOB_RECURSE RESOURCE_FILES "res/*.icns" "res/*/*.svg" "res/*/*.jpg" "res/*/*.ttf")
 
 add_executable(facade ${SOURCE_FILES} ${HEADER_FILES} ${RESOURCE_FILES})
 
