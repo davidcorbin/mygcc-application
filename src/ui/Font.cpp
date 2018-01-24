@@ -75,6 +75,34 @@ QFont Font::feedbackTextbox() {
   return *font;
 }
 
+QFont Font::assignmentGrade() {
+  auto *font = new QFont();
+  font->setPointSize(32);
+  font->setFamily(loadFont(LATO_LIGHT));
+  return *font;
+}
+
+QFont Font::assignmentPoints() {
+  auto *font = new QFont();
+  font->setPointSize(18);
+  font->setFamily(loadFont(LATO_LIGHT));
+  return *font;
+}
+
+QFont Font::assignmentName() {
+  auto *font = new QFont();
+  font->setPointSize(18);
+  font->setFamily(loadFont(LATO_LIGHT));
+  return *font;
+}
+
+QFont Font::assignmentDueDate() {
+  auto *font = new QFont();
+  font->setPointSize(18);
+  font->setFamily(loadFont(LATO_LIGHT));
+  return *font;
+}
+
 QString Font::loadFont(std::string font) {
   auto *fm = new FileManager();
   std::string absPath = fm->getResourcePath(font);

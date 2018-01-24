@@ -16,12 +16,12 @@ class SidebarPanel : public QWidget {
  public:
   explicit SidebarPanel(std::vector<Course *> *courses);
   void setup();
-  void setSelected(const Course *course);
+  void setSelected(Course *course);
 
  private:
   QVBoxLayout *sidebarItemLayout;
   std::vector<Course *> courses;
-  const Course *selectedCourse;
+  Course *selectedCourse;
   std::vector<SidebarListItem *> *listItems;
 };
 

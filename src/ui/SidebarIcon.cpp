@@ -14,7 +14,7 @@
 
 #define ICON_DIMENSIONS   20
 
-SidebarIcon::SidebarIcon(const Course *course) {
+SidebarIcon::SidebarIcon(Course *course) {
   setIcon(course);
 }
 
@@ -83,8 +83,8 @@ QPixmap SidebarIcon::FromSvgToPixmap(const QSize &ImageSize,
 
 // Sets icon file name based on course code. Assumes that the icon exists
 // without checking. There should be a different relevant icon for each major.
-void SidebarIcon::setIcon(const Course *course) {
-  std::string code = course->getCode();
+void SidebarIcon::setIcon(Course *course) {
+  std::string *code = course->getCode();
 
   // Get location of file.
   auto *fm = new FileManager();
@@ -98,13 +98,13 @@ void SidebarIcon::setIcon(const Course *course) {
   in.close();
 
   // Remove digits from course code.
-  code.erase(
-  std::remove_if(code.begin(), code.end(), &isdigit),
-  code.end());
+  code->erase(
+  std::remove_if(code->begin(), code->end(), &isdigit),
+  code->end());
 
   // If class code does not exist, use default icon.
   try {
-    svgFilename = new std::string(lookup.at(code).get<std::string>());
+    svgFilename = new std::string(lookup.at(*code).get<std::string>());
   } catch (nlohmann::detail::out_of_range) {
     svgFilename = new std::string("home");
   }

@@ -29,6 +29,13 @@ class Font {
 
   // Feedback panel
   static QFont feedbackTextbox();
+
+  // Assignment item panel
+  static QFont assignmentGrade();
+  static QFont assignmentPoints();
+  static QFont assignmentName();
+  static QFont assignmentDueDate();
+
  private:
   static QString loadFont(std::string font);
 };

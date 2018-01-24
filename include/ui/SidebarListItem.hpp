@@ -13,12 +13,12 @@
 
 class SidebarListItem : public QWidget {
  public:
-  explicit SidebarListItem(const Course *course);
+  explicit SidebarListItem(Course *course);
   void setup();
   void setNormal();
   void setActive();
   void setSelected();
-  const Course *course;
+  Course *course;
 
  protected:
   void enterEvent(QEvent *event) override;

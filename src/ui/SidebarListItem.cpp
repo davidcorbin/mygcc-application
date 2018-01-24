@@ -8,8 +8,8 @@
 #include <QApplication>
 #include <string>
 
-SidebarListItem::SidebarListItem(const Course *course) : course(course) {
-  label = new SidebarLabel(course->getName().c_str());
+SidebarListItem::SidebarListItem(Course *course) : course(course) {
+  label = new SidebarLabel(course->getName()->c_str());
   icon = new SidebarIcon(course);
 }
 

@@ -5,6 +5,7 @@
 #include <include/ui/Color.hpp>
 #include <include/ui/SidebarPanel.hpp>
 #include <include/ui/MainWindow.hpp>
+#include <string>
 #include <vector>
 
 SidebarPanel::SidebarPanel(std::vector<Course *> *courses) :
@@ -16,7 +17,8 @@ void SidebarPanel::setup() {
   sidebarItemLayout = new QVBoxLayout;
 
   // Home item
-  auto home = new SidebarListItem(new Course("Home", "Home"));
+  auto home = new SidebarListItem(new Course(new std::string("Home"),
+                                             new std::string("Home")));
   home->setup();
   sidebarItemLayout->addWidget(home);
   listItems->push_back(home);
@@ -37,7 +39,7 @@ void SidebarPanel::setup() {
 }
 
 // Sets selected course in sidebar.
-void SidebarPanel::setSelected(const Course *course) {
+void SidebarPanel::setSelected(Course *course) {
   selectedCourse = course;
   for (auto listItem : *listItems) {
     listItem->setNormal();
@@ -48,7 +50,7 @@ void SidebarPanel::setSelected(const Course *course) {
 
   auto *mainWindow = qobject_cast<MainWindow *>(
       parentWidget()->parentWidget()->parentWidget());
-  if (course->getCode() == "Home") {
+  if (*(course->getCode()) == "Home") {
     mainWindow->viewGridPanel();
   } else {
     mainWindow->viewCourse(course);

@@ -3,17 +3,21 @@
  */
 
 #include <include/types/Course.hpp>
-
 #include <string>
+#include <vector>
 
-Course::Course(const std::string &name, const std::string &code) : name(name),
-                                                                   code(code) {
+Course::Course(std::string *name, std::string *code) : name(name),
+                                                       code(code) {
 }
 
-const std::string &Course::getName() const {
+std::string* Course::getName() {
   return name;
 }
 
-const std::string &Course::getCode() const {
+std::string* Course::getCode() {
   return code;
+}
+
+std::vector<Assignment *>* Course::getAssignments() {
+  return homework;
 }

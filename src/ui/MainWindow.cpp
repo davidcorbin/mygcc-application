@@ -29,12 +29,24 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
                                      new std::string("GCCshield.jpg"));
   profPanel->setup();
 
-  auto *bio = new Course("Biology 1", "BIOL101");
-  auto *calc = new Course("Calculus 3", "MATH261");
-  auto *dis = new Course("Discrete Math", "MATH213");
-  auto *writ = new Course("Writing", "WRIT101");
-  auto *prog = new Course("Programming 2", "COMP220");
-  std::vector<Course *> classes = {bio, calc, dis, writ, prog};
+  auto *bio = new Course(new std::string("Biology 1"),
+                         new std::string("BIOL101"));
+  auto *calc = new Course(new std::string("Calculus 3"),
+                          new std::string("MATH261"));
+  auto *dis = new Course(new std::string("Discrete Math"),
+                         new std::string("MATH213"));
+  auto *writ = new Course(new std::string("Writing"),
+                          new std::string("WRIT101"));
+  auto *prog = new Course(new std::string("Programming 2"),
+                          new std::string("COMP220"));
+  classes = {bio, calc, dis, writ, prog};
+
+  for (Course *cour : classes) {
+    auto *cv = new CourseView(cour);
+    cv->setup();
+    cv->setVisible(false);
+    courseViews.push_back(cv);
+  }
 
   auto *sidebarPanel = new SidebarPanel(&classes);
   sidebarPanel->setup();
@@ -102,6 +114,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   centralLayout->addWidget(sidebar, 0, 0);
   centralLayout->addWidget(infogrid, 0, 1);
   centralLayout->addWidget(feedbackPanel, 0, 1);
+  // Add Course Views
+  for (CourseView *cv : courseViews) {
+    centralLayout->addWidget(cv, 0, 1);
+  }
   currentBodyWidget = infogrid;
   centralLayout->setSpacing(3);
   centralLayout->setContentsMargins(0, 0, 0, 0);
@@ -128,6 +144,12 @@ void MainWindow::viewGridPanel() {
   currentBodyWidget = infogrid;
 }
 
-void MainWindow::viewCourse(const Course *course) {
+void MainWindow::viewCourse(Course *course) {
   currentBodyWidget->hide();
+  for (CourseView *cv : courseViews) {
+    if (cv->course == course) {
+      cv->show();
+      currentBodyWidget = cv;
+    }
+  }
 }

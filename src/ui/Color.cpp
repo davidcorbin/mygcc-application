@@ -75,3 +75,21 @@ QPalette Color::grid_purple() {
   pal.setColor(QPalette::Background, QColor(208, 51, 237));
   return pal;
 }
+
+QPalette Color::assignment_green() {
+  QPalette pal;
+  pal.setColor(QPalette::WindowText, QColor(46, 204, 113));
+  return pal;
+}
+
+QPalette Color::assignment_yellow() {
+  QPalette pal;
+  pal.setColor(QPalette::WindowText, QColor(241, 196, 15));
+  return pal;
+}
+
+QPalette Color::assignment_red() {
+  QPalette pal;
+  pal.setColor(QPalette::WindowText, QColor(231, 76, 60));
+  return pal;
+}

@@ -12,7 +12,7 @@
 
 class SidebarIcon {
  public:
-  explicit SidebarIcon(const Course *course);
+  explicit SidebarIcon(Course *course);
   explicit SidebarIcon(const std::string *iconName);
 
   QPixmap setup();
@@ -24,7 +24,7 @@ class SidebarIcon {
   std::string loadIcon(const std::string *filename);
   QPixmap scaleImage(QPixmap original);
   QPixmap FromSvgToPixmap(const QSize &ImageSize, const QString &SvgFile);
-  void setIcon(const Course *course);
+  void setIcon(Course *course);
   const std::string *svgFilename;
 };
 
