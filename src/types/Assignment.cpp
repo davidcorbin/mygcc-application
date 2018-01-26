@@ -11,13 +11,20 @@ Assignment::Assignment(std::string *assignment_url,
                        std::string *duedate,
                        std::string *description,
                        bool open,
-                       Grade grade) : assignment_url(assignment_url),
+                       std::string *letter_grade,
+                       double received_score,
+                       double percent,
+                       double points) : assignment_url(assignment_url),
                                       course_url(course_url),
                                       title(title),
                                       duedate(duedate),
                                       description(description),
-                                      open(open),
-                                      grade(grade) {}
+                                      open(open) {
+  grade.letter_grade = letter_grade;
+  grade.received_score = received_score;
+  grade.percent = percent;
+  grade.points = points;
+}
 
 std::string *Assignment::getAssignment_url() const {
   return assignment_url;

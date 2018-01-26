@@ -14,6 +14,7 @@ class Course {
   Course(std::string *name, std::string *code);
   std::string* getName();
   std::string* getCode();
+  void addAssignment(Assignment *assignment);
   std::vector<Assignment *>* getAssignments();
 
  private:

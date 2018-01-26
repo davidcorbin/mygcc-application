@@ -22,7 +22,10 @@ class Assignment {
              std::string *duedate,
              std::string *description,
              bool open,
-             Grade grade);
+             std::string *letter_grade,
+             double received_score,
+             double percent,
+             double points);
 
   std::string *getAssignment_url() const;
   void setAssignment_url(std::string *assignment_url);

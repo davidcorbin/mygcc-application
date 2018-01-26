@@ -17,36 +17,18 @@ void CourseView::setup() {
   tabBar->addTab("Files");
   tabBar->addTab("People");
 
-  auto *a = new CourseAssignmentItem(course);
-  a->setup();
-  auto *s = new CourseAssignmentItem(course);
-  s->setup();
-  auto *d = new CourseAssignmentItem(course);
-  d->setup();
-  auto *f = new CourseAssignmentItem(course);
-  f->setup();
-  auto *g = new CourseAssignmentItem(course);
-  g->setup();
-  auto *h = new CourseAssignmentItem(course);
-  h->setup();
-  auto *i = new CourseAssignmentItem(course);
-  i->setup();
-  auto *j = new CourseAssignmentItem(course);
-  j->setup();
-
-
   auto *cont = new QWidget;
 
   auto *assignmentLayout = new QVBoxLayout(cont);
   assignmentLayout->setContentsMargins(0, 0, 0, 0);
-  assignmentLayout->addWidget(a);
-  assignmentLayout->addWidget(s);
-  assignmentLayout->addWidget(d);
-  assignmentLayout->addWidget(f);
-  assignmentLayout->addWidget(g);
-  assignmentLayout->addWidget(h);
-  assignmentLayout->addWidget(i);
-  assignmentLayout->addWidget(j);
+  assignmentLayout->setAlignment(Qt::AlignTop);
+
+  auto *assignments = course->getAssignments();
+  for (auto *assignment : *assignments) {
+    auto *assignmentItem = new CourseAssignmentItem(assignment);
+    assignmentItem->setup();
+    assignmentLayout->addWidget(assignmentItem);
+  }
 
   auto *scrollArea = new QScrollArea;
   scrollArea->setWidget(cont);

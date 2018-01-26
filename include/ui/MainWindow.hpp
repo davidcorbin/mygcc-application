@@ -26,6 +26,9 @@ class MainWindow : public QMainWindow {
   void viewGridPanel();
   void viewCourse(Course *course);
 
+ protected:
+  void showEvent(QShowEvent* event) override;
+
  private:
   QGridLayout *centralLayout;
   InfoGrid *infogrid;

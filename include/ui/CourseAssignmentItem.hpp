@@ -8,10 +8,11 @@
 #include <include/types/Course.hpp>
 #include <QWidget>
 #include <QLabel>
+#include <string>
 
 class CourseAssignmentItem : public QWidget {
  public:
-  explicit CourseAssignmentItem(Course *course);
+  explicit CourseAssignmentItem(Assignment *assignment);
   void setup();
 
  private:
@@ -19,7 +20,9 @@ class CourseAssignmentItem : public QWidget {
   QLabel* setupGradeLabel(QString *gradeStr);
   QLabel* setupNameLabel(QString *nameStr);
   QLabel* setupDueDateLabel(QString *dueDateStr);
-  Course *course;
+  std::string getPointsString();
+  std::string getReadablePoints(double points);
+  Assignment *assignment;
 };
 
 #endif  // INCLUDE_UI_COURSEASSIGNMENTITEM_HPP_

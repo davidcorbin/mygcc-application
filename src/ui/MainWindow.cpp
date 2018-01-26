@@ -29,8 +29,19 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
                                      new std::string("GCCshield.jpg"));
   profPanel->setup();
 
+  auto *biohw1 = new Assignment(new std::string("https://davcor.co"),
+                                new std::string("https://google.com"),
+                                new std::string("BIOL 101 Lab Grade"),
+                                new std::string("Thursday, December 21"),
+                                new std::string("Description"),
+                                true,
+                                new std::string("A+"),
+                                2.25,
+                                100.0,
+                                3.0);
   auto *bio = new Course(new std::string("Biology 1"),
                          new std::string("BIOL101"));
+  bio->addAssignment(biohw1);
   auto *calc = new Course(new std::string("Calculus 3"),
                           new std::string("MATH261"));
   auto *dis = new Course(new std::string("Discrete Math"),
@@ -152,4 +163,8 @@ void MainWindow::viewCourse(Course *course) {
       currentBodyWidget = cv;
     }
   }
+}
+
+// When window becomes visible, trigger event
+void MainWindow::showEvent(QShowEvent* event) {
 }

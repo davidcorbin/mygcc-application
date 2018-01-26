@@ -6,21 +6,24 @@
 #include <include/ui/Color.hpp>
 #include <include/ui/Font.hpp>
 #include <QHBoxLayout>
+#include <cmath>
+#include <string>
 
-CourseAssignmentItem::CourseAssignmentItem(Course *course) : course(course) {
+CourseAssignmentItem::CourseAssignmentItem(Assignment *assignment) :
+    assignment(assignment) {
 }
 
 void CourseAssignmentItem::setup() {
-  auto *gradeString = new QString("A+");
+  auto *gradeString = new QString(assignment->getGrade().letter_grade->data());
   auto *gradeLabel = setupLetterLabel(gradeString);
 
-  auto *pointsString = new QString("8/8");
+  auto *pointsString = new QString(getPointsString().c_str());
   auto *pointsLabel = setupGradeLabel(pointsString);
 
-  auto *nameString = new QString("Celebration of Learning 5");
+  auto *nameString = new QString(assignment->getTitle()->c_str());
   auto *assignmentNameLabel = setupNameLabel(nameString);
 
-  auto *dueDateString = new QString("Monday, December 11 at 5 pm");
+  auto *dueDateString = new QString(assignment->getDuedate()->c_str());
   auto *dueDateLabel = setupDueDateLabel(dueDateString);
 
   auto *textDivider = new QVBoxLayout;
@@ -88,4 +91,29 @@ QLabel* CourseAssignmentItem::setupDueDateLabel(QString *dueDateStr) {
   QFontMetrics fm(font);
   gradeLabel->setMaximumWidth(fm.width(dueDateStr->toLatin1()) + 10);
   return gradeLabel;
+}
+
+std::string CourseAssignmentItem::getPointsString() {
+  double receivedScore = assignment->getGrade().received_score;
+  double totalPoints = assignment->getGrade().points;
+
+  std::string receivedStr = getReadablePoints(receivedScore);
+  std::string totalStr = getReadablePoints(totalPoints);
+
+  std::string pointsStringText = receivedStr + "/" + totalStr;
+  return pointsStringText;
+}
+
+std::string CourseAssignmentItem::getReadablePoints(double points) {
+  double wholeNum;
+  double decimal = std::modf(points, &wholeNum);
+
+  // If the value is an int (no decimal places)
+  if (decimal == 0) {
+    return std::to_string(static_cast<int>(wholeNum));
+  } else {  // If there is a decimal
+    std::string pointsString = std::to_string(points);
+    return pointsString.erase(pointsString.find_last_not_of('0') + 1,
+                              std::string::npos);
+  }
 }
