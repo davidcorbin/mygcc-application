@@ -9,6 +9,7 @@
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QTabBar>
+#include <QScrollArea>
 
 class CourseView : public QWidget {
   Q_OBJECT
@@ -22,6 +23,15 @@ class CourseView : public QWidget {
  private:
   QVBoxLayout *tabBodyLayout;
   QTabBar *tabBar;
+  QWidget *currentWidget;
+  QScrollArea *assignmentScrollArea;
+  QScrollArea *fileViewArea;
+  QScrollArea *classroomViewArea;
+
+  void setupTabBar();
+  void setupAssignmentView();
+  void setupFileView();
+  void setupClassroomView();
 
  private slots:  // NOLINT
   void tabBarClicked();
