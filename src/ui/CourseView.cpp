@@ -6,6 +6,8 @@
 #include <include/ui/CourseAssignmentItem.hpp>
 #include <QScrollArea>
 #include <QLabel>
+#include <include/ui/Color.hpp>
+#include <include/ui/Font.hpp>
 
 CourseView::CourseView(Course *course) : course(course) {
   tabBodyLayout = new QVBoxLayout;
@@ -28,6 +30,15 @@ void CourseView::setup() {
     auto *assignmentItem = new CourseAssignmentItem(assignment);
     assignmentItem->setup();
     assignmentLayout->addWidget(assignmentItem);
+  }
+
+  if (course->getAssignments()->size() == 0) {
+    auto *emptyLabel = new QLabel("No assignments yet");
+    emptyLabel->setFont(Font::assignmentName());
+    emptyLabel->setPalette(Color::text_primary());
+    emptyLabel->setAlignment(Qt::AlignCenter);
+    assignmentLayout->addWidget(emptyLabel);
+    assignmentLayout->setAlignment(Qt::AlignVCenter);
   }
 
   auto *scrollArea = new QScrollArea;
