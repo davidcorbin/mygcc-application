@@ -32,7 +32,7 @@ void CourseView::setup() {
     assignmentLayout->addWidget(assignmentItem);
   }
 
-  if (course->getAssignments()->size() == 0) {
+  if (course->getAssignments()->empty()) {
     auto *emptyLabel = new QLabel("No assignments yet");
     emptyLabel->setFont(Font::assignmentName());
     emptyLabel->setPalette(Color::text_primary());
