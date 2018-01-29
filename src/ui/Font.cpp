@@ -91,14 +91,14 @@ QFont Font::assignmentPoints() {
 
 QFont Font::assignmentName() {
   auto *font = new QFont();
-  font->setPointSize(18);
+  font->setPointSize(20);
   font->setFamily(loadFont(LATO_LIGHT));
   return *font;
 }
 
 QFont Font::assignmentDueDate() {
   auto *font = new QFont();
-  font->setPointSize(18);
+  font->setPointSize(16);
   font->setFamily(loadFont(LATO_LIGHT));
   return *font;
 }
