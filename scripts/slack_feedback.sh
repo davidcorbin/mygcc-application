@@ -1,1 +1,3 @@
+#!/bin/bash
+
 curl -X POST -H 'Content-type: application/json' --data '{"attachments": [{"fallback": "Facade Feedback", "title": "Facade Feedback", "fields": [{"title": "Type","value": "Issue/Bug","short": true}, {"title": "Version","value": "0.3.1", "short": true},{"title": "Operating System","value": "Windows 10","short": true}, {"title": "Log","value": "Error message here","short": false}],"color": "#95a5a6"}]}' https://hooks.slack.com/services/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
