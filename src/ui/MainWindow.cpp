@@ -39,9 +39,49 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
                                 2.25,
                                 100.0,
                                 3.0);
+  auto *student1 = new Student(nullptr,
+                               false,
+                               new std::string("David Corbin"),
+                               123456);
+  auto *student2 = new Student(nullptr,
+                               false,
+                               new std::string("David Corbin"),
+                               123456);
+  auto *student3 = new Student(nullptr,
+                               false,
+                               new std::string("David Corbin"),
+                               123456);
+  auto *student4 = new Student(nullptr,
+                               false,
+                               new std::string("David Corbin"),
+                               123456);
+  auto *student5 = new Student(nullptr,
+                               false,
+                               new std::string("David Corbin"),
+                               123456);
+  auto *student6 = new Student(nullptr,
+                               false,
+                               new std::string("David Corbin"),
+                               123456);
+  auto *student7 = new Student(nullptr,
+                               false,
+                               new std::string("David Corbin"),
+                               123456);
+  auto *student8 = new Student(nullptr,
+                               false,
+                               new std::string("David Corbin"),
+                               123456);
   auto *bio = new Course(new std::string("Biology 1"),
                          new std::string("BIOL101"));
   bio->addAssignment(biohw1);
+  bio->addStudent(student1);
+  bio->addStudent(student2);
+  bio->addStudent(student3);
+  bio->addStudent(student4);
+  bio->addStudent(student5);
+  bio->addStudent(student6);
+  bio->addStudent(student7);
+  bio->addStudent(student8);
   auto *calc = new Course(new std::string("Calculus 3"),
                           new std::string("MATH261"));
   auto *dis = new Course(new std::string("Discrete Math"),
@@ -53,7 +93,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
   classes = {bio, calc, dis, writ, prog};
 
   for (Course *cour : classes) {
-    auto *cv = new CourseView(cour);
+    auto *cv = new CourseView(cour, BODY_WIDTH);
     cv->setup();
     cv->setVisible(false);
     courseViews.push_back(cv);

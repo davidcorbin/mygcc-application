@@ -6,13 +6,17 @@
 #include <include/ui/CourseAssignmentItem.hpp>
 #include <include/ui/Color.hpp>
 #include <include/ui/Font.hpp>
+#include <QNetworkRequest>
+#include <iostream>
 
-CourseView::CourseView(Course *course) : course(course) {
+CourseView::CourseView(Course *course, int min_width) : course(course) {
+  setMinimumWidth(min_width);
   tabBodyLayout = new QVBoxLayout;
   tabBar = new QTabBar;
   assignmentScrollArea = new QScrollArea;
   fileViewArea = new QScrollArea;
   classroomViewArea = new QScrollArea;
+  classroomView = new ClassroomView(course);
 }
 
 void CourseView::setup() {
@@ -87,7 +91,8 @@ void CourseView::setupFileView() {
 }
 
 void CourseView::setupClassroomView() {
-  classroomViewArea->setWidget(new QLabel("classroom..."));
+  classroomView->setup();
+  classroomViewArea->setWidget(classroomView);
   classroomViewArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   classroomViewArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   classroomViewArea->setStyleSheet("border: none; padding: 0px;");

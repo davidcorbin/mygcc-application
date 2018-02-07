@@ -6,6 +6,7 @@
 #define INCLUDE_UI_COURSEVIEW_HPP_
 
 #include <include/types/Course.hpp>
+#include <include/ui/ClassroomView.hpp>
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QTabBar>
@@ -15,7 +16,7 @@ class CourseView : public QWidget {
   Q_OBJECT
 
  public:
-  explicit CourseView(Course *course);
+  explicit CourseView(Course *course, int min_width);
   void setup();
 
   Course *course;
@@ -27,6 +28,7 @@ class CourseView : public QWidget {
   QScrollArea *assignmentScrollArea;
   QScrollArea *fileViewArea;
   QScrollArea *classroomViewArea;
+  ClassroomView *classroomView;
 
   void setupTabBar();
   void setupAssignmentView();

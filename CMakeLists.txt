@@ -16,6 +16,7 @@ find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Gui REQUIRED)
 find_package(Qt5Svg REQUIRED)
+find_package(Qt5Network REQUIRED)
 
 if (Qt5Widgets_FOUND)
     if (Qt5Widgets_VERSION VERSION_LESS 5.2.0)
@@ -35,7 +36,7 @@ add_subdirectory(ext)
 
 file(GLOB_RECURSE SOURCE_FILES ${PROJECT_SOURCE_DIR}/src/*.cpp)
 file(GLOB_RECURSE HEADER_FILES ${PROJECT_SOURCE_DIR}/include/*.hpp)
-file(GLOB_RECURSE RESOURCE_FILES "res/*.icns" "res/*/*.svg" "res/*/*.jpg" "res/*/*.ttf")
+file(GLOB_RECURSE RESOURCE_FILES "res/*.icns" "res/*/*.svg" "res/*/*.jpg" "res/*/*.png" "res/*/*.ttf")
 
 add_executable(facade ${SOURCE_FILES} ${HEADER_FILES} ${RESOURCE_FILES})
 
@@ -60,3 +61,4 @@ qt5_use_modules(facade Widgets Svg)
 # Use the Widgets module from Qt 5
 target_link_libraries(facade Qt5::Widgets)
 target_link_libraries(facade Qt5::Svg)
+target_link_libraries(facade Qt5::Network)
