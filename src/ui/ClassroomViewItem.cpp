@@ -21,7 +21,7 @@ ClassroomViewItem::ClassroomViewItem(Student *student) : student(student) {
 void ClassroomViewItem::setup() {
   auto *fm = new FileManager();
   std::string defImagePath = fm->getResourcePath(DEFAULT_PROFILE_IMAGE);
-  auto *studentImage = new StudentImage(new std::string("profile_default.png"));
+  auto *studentImage = new StudentImage(new std::string("profile_user.jpg"));
   defImage = studentImage->setup();
 
   imageLabel->setPixmap(defImage);
