@@ -7,7 +7,7 @@
 #include <include/ui/Color.hpp>
 #include <include/ui/Font.hpp>
 #include <include/ui/InfoGrid.hpp>
-#include <iostream>
+#include <vector>
 
 CourseView::CourseView(Course *course, int min_width) : course(course) {
   setMinimumWidth(min_width);
