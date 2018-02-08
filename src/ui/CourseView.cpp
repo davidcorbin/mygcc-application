@@ -6,7 +6,7 @@
 #include <include/ui/CourseAssignmentItem.hpp>
 #include <include/ui/Color.hpp>
 #include <include/ui/Font.hpp>
-#include <QNetworkRequest>
+#include <include/ui/InfoGrid.hpp>
 #include <iostream>
 
 CourseView::CourseView(Course *course, int min_width) : course(course) {
@@ -80,13 +80,31 @@ void CourseView::setupAssignmentView() {
 }
 
 void CourseView::setupFileView() {
-  fileViewArea->setWidget(new QLabel("files..."));
+  std::vector<GridItem *> *gridItems = new std::vector<GridItem *>();
+  gridItems->push_back(new GridItem(new QString("13"),
+                                new QString("chapels left"),
+                                Color::grid_blue()));
+  gridItems->push_back(new GridItem(new QString("7"),
+                                new QString("assignments"),
+                                Color::grid_green()));
+  gridItems->push_back(new GridItem(new QString("15"),
+                                new QString("chapels received"),
+                                Color::grid_purple()));
+  gridItems->push_back(new GridItem(new QString("2/7"),
+                                new QString("assignments received"),
+                                Color::grid_red()));
+  gridItems->push_back(new GridItem(new QString("PDF"),
+                                new QString("Programming Project 2 PDF"),
+                                Color::grid_yellow()));
+
+  auto *fileGrid = new InfoGrid(gridItems);
+  fileGrid->setup();
+  fileViewArea->setWidget(fileGrid);
   fileViewArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   fileViewArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   fileViewArea->setStyleSheet("border: none; padding: 0px;");
   fileViewArea->setContentsMargins(0, 0, 0, 0);
   fileViewArea->setWidgetResizable(true);
-  fileViewArea->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
   fileViewArea->hide();
 }
 
