@@ -9,7 +9,7 @@
 #include <include/ui/Color.hpp>
 #include <string>
 
-#define DEFAULT_PROFILE_IMAGE            "profile_default.png"
+#define DEFAULT_PROFILE_IMAGE            "default_user.jpg"
 
 ClassroomViewItem::ClassroomViewItem(Student *student) : student(student) {
   verticalLayout = new QVBoxLayout;

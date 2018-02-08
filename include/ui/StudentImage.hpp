@@ -11,7 +11,7 @@
 class StudentImage : public Image {
  public:
   explicit StudentImage(std::string *profileImage) : Image(profileImage, new
-      std::string("profile_default.png")) {}
+      std::string("default_user.jpg")) {}
   QPixmap setup() override;
 };
 
