@@ -11,7 +11,7 @@ The desktop interface to myGCC.
 ## Requirements
 - Qt 5.2 or later
 - CMake 3.0 or later
-- C++11 compiler for your target platform (GCC, Clang, MVSC, MinGW, etc.)
+- C++11 compiler for your target platform (GCC, Clang, MSVC, MinGW, etc.)
 
 ## Build on Ubuntu (recommended)
 ```sh
