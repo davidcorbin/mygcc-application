@@ -7,3 +7,17 @@ The desktop interface to myGCC.
 - Windows 10
 - Ubuntu
 - macOS
+
+## Build on Ubuntu (recommended)
+```sh
+./scripts/build_ubuntu.sh
+```
+
+## Build on Windows
+
+## Build on macOS
+```sh
+mkdir build && cd build
+cmake ..
+cmake --build .
+```
