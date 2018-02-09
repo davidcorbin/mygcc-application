@@ -34,6 +34,12 @@ add_subdirectory(include)
 add_subdirectory(src)
 add_subdirectory(ext)
 
+# Use custon Windows settings
+if (WIN32)
+    include_directories(C:/vcpkg/installed/x86-windows/include)
+    link_directories(C:/vcpkg/installed/x86-windows/lib)
+endif ()
+
 file(GLOB_RECURSE SOURCE_FILES ${PROJECT_SOURCE_DIR}/src/*.cpp)
 file(GLOB_RECURSE HEADER_FILES ${PROJECT_SOURCE_DIR}/include/*.hpp)
 file(GLOB_RECURSE RESOURCE_FILES "res/*.icns" "res/*.json" "res/*/*.svg" "res/*/*.jpg" "res/*/*.png" "res/*/*.ttf")
