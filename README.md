@@ -8,6 +8,11 @@ The desktop interface to myGCC.
 - Ubuntu
 - macOS
 
+## Requirements
+- Qt 5.2 or later
+- CMake 3.0 or later
+- C++11 compiler for your target platform (GCC, Clang, MVSC, MinGW, etc.)
+
 ## Build on Ubuntu (recommended)
 ```sh
 ./scripts/build_ubuntu.sh
@@ -17,6 +22,9 @@ The desktop interface to myGCC.
 
 ## Build on macOS
 ```sh
+cd mygcc-application
+git submodule update --init --recursive
+
 mkdir build && cd build
 cmake ..
 cmake --build .
