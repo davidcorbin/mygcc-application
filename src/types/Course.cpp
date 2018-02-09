@@ -35,3 +35,11 @@ void Course::addStudent(Student *student) {
 std::vector<Student *>* Course::getStudents() {
   return students;
 }
+
+std::vector<NetworkFile *> *Course::getFiles() const {
+  return files;
+}
+
+void Course::setFiles(std::vector<NetworkFile *> *files) {
+  Course::files = files;
+}

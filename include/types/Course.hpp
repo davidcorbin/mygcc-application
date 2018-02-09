@@ -7,6 +7,7 @@
 
 #include <include/types/Assignment.hpp>
 #include <include/types/Student.hpp>
+#include <include/types/NetworkFile.hpp>
 #include <string>
 #include <vector>
 
@@ -19,12 +20,15 @@ class Course {
   std::vector<Assignment *>* getAssignments();
   void addStudent(Student *student);
   std::vector<Student *>* getStudents();
+  std::vector<NetworkFile *> *getFiles() const;
+  void setFiles(std::vector<NetworkFile *> *files);
 
  private:
   std::string *name;
   std::string *code;
   std::vector<Assignment *> *homework;
   std::vector<Student *> *students;
+  std::vector<NetworkFile *> *files;
 };
 
 #endif  // INCLUDE_TYPES_COURSE_HPP_
