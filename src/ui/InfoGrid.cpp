@@ -3,6 +3,8 @@
  */
 
 #include <include/ui/InfoGrid.hpp>
+#include <include/ui/Font.hpp>
+#include <include/ui/Color.hpp>
 #include <vector>
 
 #define COLUMNS       3
@@ -17,6 +19,17 @@ InfoGrid::InfoGrid(std::vector<GridItem*> *items) : items(items) {
 }
 
 void InfoGrid::setup() {
+  //  If there aren't any GridItems to show
+  if (items->empty()) {
+    auto *emptyLabel = new QLabel("No items yet");
+    emptyLabel->setFont(Font::assignmentName());
+    emptyLabel->setPalette(Color::text_primary());
+    emptyLabel->setAlignment(Qt::AlignCenter);
+    grid->addWidget(emptyLabel);
+    grid->setAlignment(Qt::AlignVCenter);
+  }
+
+  // Add GridItems
   for (auto &item : *items) {
     addGridItem(item);
   }
