@@ -7,6 +7,7 @@
     <ProductUrl>https://github.com/davidcorbin/mygcc-application</ProductUrl>
     <InstallerWindowIcon>installericon</InstallerWindowIcon>
     <InstallerApplicationIcon>installericon</InstallerApplicationIcon>
+    <Background>mac-installer-background.png</Background>
 
     <StartMenuDir>Facade</StartMenuDir>
     <MaintenanceToolName>FacadeMaintenance</MaintenanceToolName>
@@ -16,4 +17,5 @@
     <AdminTargetDir>@ApplicationsDir@/Facade</AdminTargetDir>
     <AllowSpaceInPath>true</AllowSpaceInPath>
     <ControlScript>installcontroller.qs</ControlScript>
+    <SupportsModify>false</SupportsModify>
 </Installer>
