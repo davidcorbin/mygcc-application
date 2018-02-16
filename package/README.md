@@ -2,9 +2,9 @@
 
 ## Requirements
 
-- Qt Installer Framework (binaries in `PATH`)
+- Qt Installer Framework (binaries in `$PATH`)
 
-# Build package
+## Build package
 
 ```sh
 cd package

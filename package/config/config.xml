@@ -8,13 +8,12 @@
     <InstallerWindowIcon>installericon</InstallerWindowIcon>
     <InstallerApplicationIcon>installericon</InstallerApplicationIcon>
 
-    <RunProgram>@TargetDir@/facade</RunProgram>
-    <RunProgramDescription>Start Facade</RunProgramDescription>
     <StartMenuDir>Facade</StartMenuDir>
-    <MaintenanceToolName>SDKMaintenanceTool</MaintenanceToolName>
+    <MaintenanceToolName>FacadeMaintenance</MaintenanceToolName>
     <AllowNonAsciiCharacters>true</AllowNonAsciiCharacters>
 
-    <TargetDir>@ApplicationsDir@/Facade</TargetDir>
+    <TargetDir>/Applications/Facade</TargetDir>
+    <AdminTargetDir>@ApplicationsDir@/Facade</AdminTargetDir>
     <AllowSpaceInPath>true</AllowSpaceInPath>
-    <WizardStyle>Mac</WizardStyle>
+    <ControlScript>installcontroller.qs</ControlScript>
 </Installer>
