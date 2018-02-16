@@ -12,7 +12,7 @@
     <MaintenanceToolName>FacadeMaintenance</MaintenanceToolName>
     <AllowNonAsciiCharacters>true</AllowNonAsciiCharacters>
 
-    <TargetDir>/Applications/Facade</TargetDir>
+    <TargetDir>@ApplicationsDir@/Facade</TargetDir>
     <AdminTargetDir>@ApplicationsDir@/Facade</AdminTargetDir>
     <AllowSpaceInPath>true</AllowSpaceInPath>
     <ControlScript>installcontroller.qs</ControlScript>
