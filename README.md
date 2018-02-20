@@ -39,4 +39,5 @@ cmake --build .
     - `cd build`
     - `cmake ..`
     - `cmake --build .`
-4. Copy all resources from C:\mygcc-application\res\* to C:\mygcc-application\build\Debug
+4. Copy all resources from the folder and subfolders of `C:\mygcc-application\res\` to `C:\mygcc-application\build\Debug`
+5. Copy needed DLLs from `C:\Qt\5.10.1\msvc2015\bin` to `C:\mygcc-application\build\Debug`
