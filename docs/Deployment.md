@@ -37,3 +37,7 @@ After the binary is done building, it should located at `mygcc-application\Relea
 Next, you must copy the resources found in the `mygcc-application\res\` directory and its subdirectories to the `mygcc-application\Release\Release\` directory.
 
 #### Create installer
+
+1. Copy the release build of the application and all dependencies/DLLs from the `Release/` directory to `package/packages/com.corbinharvey.facade/data`
+1. `cd packages`
+1. `binarycreator -c config/config.xml -p packages FacadeInstaller-<version>`
