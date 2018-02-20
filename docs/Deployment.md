@@ -4,7 +4,9 @@
 - Qt Installer Framework (v3.0.2 or later)
     - Add `bin` directory to `$PATH`
 
-## Create release binary
+## macOS
+
+#### Create release binary
 To create the release version of Facade, run CMake with the build type Release.
 
 ```sh
@@ -14,7 +16,18 @@ cmake -DCMAKE_BUILD_TYPE=Release ..
 cmake --build .
 ```
 
-## Build installer for macOS
+#### Create installer
 1. Copy the release build of the application (`facade.app`) from the `Release/` directory to `package/packages/com.corbinharvey.facade/data`
 1. `cd packages`
 1. `binarycreator -c config/config.xml -p packages FacadeInstaller-<version>`
+
+## Windows
+
+#### Create release binary
+
+```sh
+mkdir Release
+cd Release
+cmake -DCMAKE_BUILD_TYPE=Release ..
+cmake --build . --target ALL_BUILD --config Release
+```
