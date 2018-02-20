@@ -31,3 +31,9 @@ cd Release
 cmake -DCMAKE_BUILD_TYPE=Release ..
 cmake --build . --target ALL_BUILD --config Release
 ```
+
+After the binary is done building, it should located at `mygcc-application\Release\Release\` with several required DLLs. Notably missing are the Qt5 DLLs. Manually copy `Qt5Core.dll`, `Qt5Gui.dll`, `Qt5Svg.dll`, and `Qt5Widgets.dll` from the `bin` directory of your Qt5 install path for the MSVC version you're using, for example, `C:\Qt\Qt5.10.0\5.10.0\msvc2015\bin` to the Release directory where `facade.exe` is located.
+
+Next, you must copy the resources found in the `mygcc-application\res\` directory and its subdirectories to the `mygcc-application\Release\Release\` directory.
+
+#### Create installer
