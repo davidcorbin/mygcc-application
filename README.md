@@ -18,8 +18,6 @@ The desktop interface to myGCC.
 ./scripts/build_ubuntu.sh
 ```
 
-## Build on Windows
-
 ## Build on macOS
 ```sh
 cd mygcc-application
@@ -29,3 +27,15 @@ mkdir build && cd build
 cmake ..
 cmake --build .
 ```
+
+## Build on Windows
+1. Install [CMake](https://cmake.org/download/), [Qt](https://www.qt.io/download), [Visual Studio](https://www.visualstudio.com/downloads/), and [Vcpkg](https://github.com/Microsoft/vcpkg).
+    - Must install "MSVC 2015 32-bit" Qt library.
+    - For Visual Studio, **Community** edition is fine, pick the "Desktop development with C++" option, or at least VC++.
+    - Follow quick start instructions to install Vcpkg, making sure your install directory is that same as in CMakeLists.txt.
+2. Update submodules: `git submodule update --init --recursive`
+3. Using the **Qt Command Prompt** (Qt 32-bit for Desktop (MSVC)), navigate to the project directory, then run:
+    - `mkdir build`
+    - `cd build`
+    - `cmake ..`
+    - `cmake --build .`
