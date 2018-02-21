@@ -36,6 +36,7 @@ add_subdirectory(ext)
 
 # Use custon Windows settings
 if (WIN32)
+
     include_directories(C:/vcpkg/installed/x86-windows/include)
     link_directories(C:/vcpkg/installed/x86-windows/lib)
 endif ()
@@ -54,7 +55,12 @@ if (APPLE)
             MACOSX_FRAMEWORK_IDENTIFIER com.facade.Facade
             RESOURCE "${RESOURCE_FILES}"
     )
-endif ()
+endif()
+
+if (MSVC)
+    # Stop command prompt from showing behind application
+    set_target_properties(facade PROPERTIES LINK_FLAGS_RELEASE "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup")
+endif()
 
 # Add CPR Libraries
 target_link_libraries(facade ${CPR_LIBRARIES})
