@@ -6,4 +6,5 @@
     <ReleaseDate>2018-02-12</ReleaseDate>
     <Default>script</Default>
     <Script>installscript.qs</Script>
+    <RequiresAdminRights>true</RequiresAdminRights>
 </Package>
