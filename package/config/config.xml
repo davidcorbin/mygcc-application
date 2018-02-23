@@ -14,7 +14,6 @@
     <AllowNonAsciiCharacters>true</AllowNonAsciiCharacters>
 
     <TargetDir>@ApplicationsDir@/Facade</TargetDir>
-    <AdminTargetDir>@ApplicationsDir@/Facade</AdminTargetDir>
     <AllowSpaceInPath>true</AllowSpaceInPath>
     <ControlScript>installcontroller.qs</ControlScript>
     <SupportsModify>false</SupportsModify>
