@@ -4,8 +4,7 @@
 
 #include <include/SlackFeedback.hpp>
 #include <include/OS.hpp>
-#include <cpr/cpr.h>
-#include <json.hpp>
+#include <QtNetwork>
 #include <string>
 
 #define SLACK_FEEDBACK_URL  "https://hooks.slack.com/services/T2CBDTS95"\
@@ -24,26 +23,36 @@ void SlackFeedback::sendFeedback(std::string* message, FeedbackType type) {
   auto *ops = new OS;
   std::string *appVersion = ops->appVersion();
   std::string osname = ops->getOSName();
-  cpr::Post(cpr::Url{SLACK_FEEDBACK_URL},
-            cpr::Body{"{'attachments':["\
-                            "{'fallback': '" SLACK_FALLBACK "', "\
-                            "'title': '" SLACK_TITLE "', "\
-                            "'fields': ["\
-                                "{'title': 'Type', "\
-                                "'value': '" + getTypeString(type) + "',"\
-                                "'short': true}, "\
-                                "{'title': 'Version', "\
-                                "'value': '" + *appVersion + "', "\
-                                "'short': true}, "\
-                                "{'title': 'Operating System', "\
-                                "'value': '" + osname + "', "\
-                                "'short': true}, "\
-                                "{'title': 'Log',"\
-                                "'value': '" + *message + "',"\
-                                "'short': false}"\
-                            "],"\
-                            "'color': '" SLACK_MSG_COLOR "'}]}"},
-            cpr::Header{{"Content-type", HTTP_CONTENT_TYPE}});
+
+  std::string temp = "{\"attachments\":[{\"fallback\": \"" SLACK_FALLBACK "\","\
+    "\"title\": \"" SLACK_TITLE "\", "\
+    "\"fields\": ["\
+        "{\"title\": \"Type\", "\
+        "\"value\": \"" + getTypeString(type) + "\","\
+        "\"short\": true}, "\
+        "{\"title\": \"Version\", "\
+        "\"value\": \"" + *appVersion + "\", "\
+        "\"short\": true}, "\
+        "{\"title\": \"Operating System\", "\
+        "\"value\": \"" + osname + "\", "\
+        "\"short\": true}, "\
+        "{\"title\": \"Log\","\
+        "\"value\": \"" + *message + "\","\
+        "\"short\": false}"\
+    "],"\
+    "\"color\": \"" SLACK_MSG_COLOR "\"}]}";
+
+  auto json = QJsonDocument::fromJson(temp.c_str());
+
+  QNetworkRequest request(QUrl(SLACK_FEEDBACK_URL));
+  request.setHeader(QNetworkRequest::ContentTypeHeader, HTTP_CONTENT_TYPE);
+
+  QNetworkAccessManager nam;
+  QNetworkReply *reply = nam.post(request, QJsonDocument(json).toJson());
+  while (!reply->isFinished()) {
+    qApp->processEvents();
+  }
+  reply->deleteLater();
 }
 
 // Converts FeedbackType to a human readable string for display to the API.
