@@ -12,7 +12,7 @@ Controller.prototype.IntroductionPageCallback = function() {
 		if (installer.value("os") === "win") {
 			widget.MessageLabel.setText("Welcome to Facade, the desktop application for mygcc.\n\nIMPORTANT: If you see an error throughout the install process, please rerun the installer by right-clicking on the installer and choosing 'Run as administrator'.");
 		} else  {
-			widget.MessageLabel.setText("Welcome to Facade, the desktop application for mygcc. Please continue through the installer and you will soon be ready to start using Facade. \n\nIf you see an error saying");
+			widget.MessageLabel.setText("Welcome to Facade, the desktop application for mygcc. Please continue through the installer and you will soon be ready to start using Facade.");
 		}   
 	}
 }
