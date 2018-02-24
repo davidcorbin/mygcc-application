@@ -80,23 +80,7 @@ void CourseView::setupAssignmentView() {
 }
 
 void CourseView::setupFileView() {
-  std::vector<GridItem *> *gridItems = new std::vector<GridItem *>();
-  gridItems->push_back(new GridItem(new QString("13"),
-                                new QString("chapels left"),
-                                Color::grid_blue()));
-  gridItems->push_back(new GridItem(new QString("7"),
-                                new QString("assignments"),
-                                Color::grid_green()));
-  gridItems->push_back(new GridItem(new QString("15"),
-                                new QString("chapels received"),
-                                Color::grid_purple()));
-  gridItems->push_back(new GridItem(new QString("2/7"),
-                                new QString("assignments received"),
-                                Color::grid_red()));
-  gridItems->push_back(new GridItem(new QString("PDF"),
-                                new QString("Programming Project 2 PDF"),
-                                Color::grid_yellow()));
-
+  auto *gridItems = new std::vector<GridItem *>();
   auto *fileGrid = new InfoGrid(gridItems);
   fileGrid->setup();
   fileViewArea->setWidget(fileGrid);
