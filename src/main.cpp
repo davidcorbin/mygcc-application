@@ -7,10 +7,10 @@
 #include <QtGlobal>
 
 int main(int argc, char *argv[]) {
-	//  Scale GUI properly on Windows
-	#if QT_VERSION > QT_VERSION_CHECK(5, 6, 0)
-	qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", "1");
-	#endif
+    //  Scale GUI properly on Windows
+    #if QT_VERSION > QT_VERSION_CHECK(5, 6, 0)
+    qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", "1");
+    #endif
 
     QApplication app(argc, argv);
     QCoreApplication::setOrganizationName("facade");
