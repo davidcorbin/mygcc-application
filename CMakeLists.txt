@@ -36,6 +36,7 @@ add_subdirectory(ext)
 
 # Use custon Windows settings
 if (WIN32)
+
     include_directories(C:/vcpkg/installed/x86-windows/include)
     link_directories(C:/vcpkg/installed/x86-windows/lib)
 endif ()
@@ -44,7 +45,7 @@ file(GLOB_RECURSE SOURCE_FILES ${PROJECT_SOURCE_DIR}/src/*.cpp)
 file(GLOB_RECURSE HEADER_FILES ${PROJECT_SOURCE_DIR}/include/*.hpp)
 file(GLOB_RECURSE RESOURCE_FILES "res/*.icns" "res/*.json" "res/*/*.svg" "res/*/*.jpg" "res/*/*.png" "res/*/*.ttf")
 
-add_executable(facade ${SOURCE_FILES} ${HEADER_FILES} ${RESOURCE_FILES})
+add_executable(facade ${SOURCE_FILES} ${HEADER_FILES} ${RESOURCE_FILES} facade.rc)
 
 # Use custom macOS settings
 if (APPLE)
@@ -54,7 +55,12 @@ if (APPLE)
             MACOSX_FRAMEWORK_IDENTIFIER com.facade.Facade
             RESOURCE "${RESOURCE_FILES}"
     )
-endif ()
+endif()
+
+if (MSVC)
+    # Stop command prompt from showing behind application
+    set_target_properties(facade PROPERTIES LINK_FLAGS_RELEASE "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup")
+endif()
 
 # Add CPR Libraries
 target_link_libraries(facade ${CPR_LIBRARIES})

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Installer>
+    <Name>Facade</Name>
+    <Version>0.1</Version>
+    <Title>Facade</Title>
+    <Publisher>David Corbin and Mitchell Harvey</Publisher>
+    <ProductUrl>https://github.com/davidcorbin/mygcc-application</ProductUrl>
+    <InstallerWindowIcon>installericon</InstallerWindowIcon>
+    <InstallerApplicationIcon>installericon</InstallerApplicationIcon>
+    <Background>mac-installer-background.png</Background>
+
+    <StartMenuDir>Facade</StartMenuDir>
+    <MaintenanceToolName>FacadeMaintenance</MaintenanceToolName>
+    <AllowNonAsciiCharacters>true</AllowNonAsciiCharacters>
+
+    <TargetDir>@ApplicationsDir@/Facade</TargetDir>
+    <AllowSpaceInPath>true</AllowSpaceInPath>
+    <ControlScript>installcontroller.qs</ControlScript>
+    <SupportsModify>false</SupportsModify>
+</Installer>

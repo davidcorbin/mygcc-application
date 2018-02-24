@@ -48,7 +48,7 @@ std::string FileManager::getResourcePath(std::string file = "") {
     return full;
   } else if (osname == "Linux" || osname == "Unix") {
     std::string abs = QCoreApplication::applicationDirPath().toStdString();
-    std::string full = abs + "/../share/facade/Facade/" + file;
+    std::string full = abs + "/res/" + file;
     // Check if file exists
     if (!file.empty() && !fileExists(full)) {
       qFatal("Resource not found: %s\n", full.c_str());
