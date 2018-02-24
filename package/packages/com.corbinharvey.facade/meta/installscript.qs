@@ -4,7 +4,7 @@ function Component() {
 
     // If on Windows, add start menu shortcut
     if (installer.value("os") === "win") {
-        component.addOperation("CreateShortcut", "@TargetDir@/facade.exe", "@StartMenuDir@/Facade.lnk");
+        component.addOperation("CreateShortcut", "@TargetDir@/facade.exe", "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Facade.lnk");
     }
 }
 
