@@ -1,9 +1,3 @@
-[submodule "ext/cpr"]
-	path = ext/cpr
-	url = git@github.com:whoshuu/cpr.git
-[submodule "ext/json"]
-	path = ext/json
-	url = git@github.com:nlohmann/json.git
 [submodule "ext/mygcc-api"]
 	path = ext/mygcc-api
 	url = git@github.com:davidcorbin/mygcc-api.git
