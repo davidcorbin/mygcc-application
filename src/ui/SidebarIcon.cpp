@@ -15,6 +15,7 @@
 #include <string>
 
 #define ICON_DIMENSIONS   20
+#define ICONS_JSON_FILE   "icons.json"
 
 SidebarIcon::SidebarIcon(Course *course) {
   setIcon(course);
@@ -91,20 +92,14 @@ void SidebarIcon::setIcon(Course *course) {
   // Get location of file.
   auto *fm = new FileManager();
   std::string path;
-  path = fm->getResourcePath("icons.json");
+  path = fm->getResourcePath(ICONS_JSON_FILE);
 
-  // Read json file into json object.
-  /*
-  std::ifstream in(path);
-  nlohmann::json lookup;
-  in >> lookup;
-  in.close();
-   */
-
+  // Open icons.json file
   QFile file_obj(path.c_str());
   if (!file_obj.open(QIODevice::ReadOnly)) {
     qFatal("Could not open icons.json");
   }
+
 
   QTextStream file_text(&file_obj);
   QString json_string;
