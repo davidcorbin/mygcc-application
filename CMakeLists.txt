@@ -8,15 +8,18 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Instruct CMake to run moc automatically when needed.
 set(CMAKE_AUTOMOC ON)
-
+# Compiler flags
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1y -Wall")
 
-# Find the Qt5 library
+# Find necessary packages
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Gui REQUIRED)
 find_package(Qt5Svg REQUIRED)
 find_package(Qt5Network REQUIRED)
+find_package(Java 1.8 REQUIRED)
+find_package(JNI 1.8 REQUIRED)
+find_package(Threads REQUIRED)
 
 if (Qt5Widgets_FOUND)
     if (Qt5Widgets_VERSION VERSION_LESS 5.2.0)
@@ -26,24 +29,26 @@ else()
     message(SEND_ERROR "The Qt5Widgets library could not be found!")
 endif(Qt5Widgets_FOUND)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ext/cpr/include)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ext/json/src)
+if (Java_FOUND)
+    message(STATUS "Java Version: " ${Java_VERSION})
+endif()
+
+if (JNI_FOUND)
+    message(STATUS "Java include path: " ${JAVA_INCLUDE_PATH})
+endif()
+
+include_directories(include)
+include_directories(${JAVA_INCLUDE_PATH})
+include_directories(${JAVA_INCLUDE_PATH2})
+include_directories(${JSON_INCLUDE_DIRS} ${JNI_LIBRARIES})
 
 add_subdirectory(include)
 add_subdirectory(src)
 add_subdirectory(ext)
 
-# Use custon Windows settings
-if (WIN32)
-
-    include_directories(C:/vcpkg/installed/x86-windows/include)
-    link_directories(C:/vcpkg/installed/x86-windows/lib)
-endif ()
-
 file(GLOB_RECURSE SOURCE_FILES ${PROJECT_SOURCE_DIR}/src/*.cpp)
 file(GLOB_RECURSE HEADER_FILES ${PROJECT_SOURCE_DIR}/include/*.hpp)
-file(GLOB_RECURSE RESOURCE_FILES "res/*.icns" "res/*.json" "res/*/*.svg" "res/*/*.jpg" "res/*/*.png" "res/*/*.ttf")
+file(GLOB_RECURSE RESOURCE_FILES "res/*.icns" "res/*.json" "res/*/*.svg" "res/*/*.jpg" "res/*/*.png" "res/*/*.ttf" "ext/mygcc-api/target/mygcc-api-jar-with-dependencies.jar")
 
 add_executable(facade ${SOURCE_FILES} ${HEADER_FILES} ${RESOURCE_FILES} facade.rc)
 
@@ -62,15 +67,11 @@ if (MSVC)
     set_target_properties(facade PROPERTIES LINK_FLAGS_RELEASE "/SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup")
 endif()
 
-# Add CPR Libraries
-target_link_libraries(facade ${CPR_LIBRARIES})
-
-# Include directories 
-include_directories(${CPR_INCLUDE_DIRS} ${JSON_INCLUDE_DIRS})
-
 qt5_use_modules(facade Widgets Svg)
 
-# Use the Widgets module from Qt 5
+# Added libraries to link against
 target_link_libraries(facade Qt5::Widgets)
 target_link_libraries(facade Qt5::Svg)
 target_link_libraries(facade Qt5::Network)
+target_link_libraries(facade ${JNI_LIBRARIES})
+target_link_libraries(facade ${CMAKE_THREAD_LIBS_INIT})
