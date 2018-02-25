@@ -2,15 +2,17 @@
  * Copyright 2018 <David Corbin, Mitchell Harvey>
  */
 
-#include <ext/json/src/json.hpp>
 #include <include/ui/SidebarIcon.hpp>
 #include <include/FileManager.hpp>
 #include <QSvgRenderer>
 #include <QApplication>
 #include <QPainter>
 #include <QScreen>
+#include <QFile>
+#include <QTextStream>
+#include <QJsonObject>
+#include <QJsonDocument>
 #include <string>
-#include <fstream>
 
 #define ICON_DIMENSIONS   20
 
@@ -92,10 +94,40 @@ void SidebarIcon::setIcon(Course *course) {
   path = fm->getResourcePath("icons.json");
 
   // Read json file into json object.
+  /*
   std::ifstream in(path);
   nlohmann::json lookup;
   in >> lookup;
   in.close();
+   */
+
+  QFile file_obj(path.c_str());
+  if (!file_obj.open(QIODevice::ReadOnly)) {
+    qFatal("Could not open icons.json");
+  }
+
+  QTextStream file_text(&file_obj);
+  QString json_string;
+  json_string = file_text.readAll();
+  file_obj.close();
+  QByteArray json_bytes = json_string.toLocal8Bit();
+
+  auto json_doc = QJsonDocument::fromJson(json_bytes);
+
+  if (json_doc.isNull()) {
+    qFatal("Failed to create JSON doc.");
+  }
+  if (!json_doc.isObject()) {
+    qFatal("JSON is not an object.");
+  }
+
+  QJsonObject json_obj = json_doc.object();
+
+  if (json_obj.isEmpty()) {
+    qFatal("JSON object is empty.");
+  }
+
+  QVariantMap json_map = json_obj.toVariantMap();
 
   // Remove digits from course code.
   code->erase(
@@ -103,9 +135,10 @@ void SidebarIcon::setIcon(Course *course) {
   code->end());
 
   // If class code does not exist, use default icon.
-  try {
-    svgFilename = new std::string(lookup.at(*code).get<std::string>());
-  } catch (nlohmann::detail::out_of_range) {
+  if (json_map.contains(code->c_str())) {
+    std::string str = json_map[code->c_str()].toString().toStdString();
+    svgFilename = new std::string(str);
+  } else {
     svgFilename = new std::string("home");
   }
 }
