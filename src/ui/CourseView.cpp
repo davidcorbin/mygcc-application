@@ -9,6 +9,10 @@
 #include <include/ui/InfoGrid.hpp>
 #include <vector>
 
+#define ASSIGNMENTS_TAB_TEXT          "Assignments"
+#define PEOPLE_TAB_TEXT               "People"
+#define FILES_TAB_TEXT                "Files"
+
 CourseView::CourseView(Course *course, int min_width) : course(course) {
   setMinimumWidth(min_width);
   tabBodyLayout = new QVBoxLayout;
@@ -40,9 +44,9 @@ void CourseView::setup() {
 }
 
 void CourseView::setupTabBar() {
-  tabBar->addTab("Assignments");
-  tabBar->addTab("Files");
-  tabBar->addTab("People");
+  tabBar->addTab(ASSIGNMENTS_TAB_TEXT);
+  tabBar->addTab(FILES_TAB_TEXT);
+  tabBar->addTab(PEOPLE_TAB_TEXT);
 }
 
 void CourseView::setupAssignmentView() {
