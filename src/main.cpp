@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
   QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
   #endif
 
-  JavaIntegration *ji = new JavaIntegration;
+  auto *ji = new JavaIntegration;
   ji->startAPIThread();
 
   MainWindow w;
