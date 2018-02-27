@@ -41,19 +41,16 @@ QPixmap SidebarIcon::setup() {
   std::string npcc = *svgFilename + std::string("_normal.svg");
   std::string normalpath = loadIcon(&npcc);
   normal = FromSvgToPixmap(*iconsize, QString::fromStdString(normalpath));
-  normal = scaleImage(normal);
 
   // Get active icon
   std::string apcc = *svgFilename + std::string("_active.svg");
   std::string activepath = loadIcon(&apcc);
   active = FromSvgToPixmap(*iconsize, QString::fromStdString(activepath));
-  active = scaleImage(active);
 
   // Get selected icon
   std::string spcc = *svgFilename + std::string("_selected.svg");
   std::string selectedpath = loadIcon(&spcc);
   selected = FromSvgToPixmap(*iconsize, QString::fromStdString(selectedpath));
-  selected = scaleImage(selected);
 
   return normal;
 }
