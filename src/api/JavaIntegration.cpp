@@ -6,6 +6,7 @@
 #include <include/FileNotFound.hpp>
 #include <QFile>
 #include <QTextStream>
+#include <QByteArray>
 #include <string>
 #include <algorithm>
 #include <random>
@@ -21,8 +22,8 @@ JavaIntegration::JavaIntegration() {
 void JavaIntegration::startAPIThread() {
   char *initvect = getInitVect();
   char *enckey = getEncKey();
-  setenv("initvect", initvect, 0);
-  setenv("enckey", enckey, 0);
+  qputenv("initvect", initvect);
+  qputenv("enckey", enckey);
   startAPIServerCmd();
 }
 
@@ -58,9 +59,9 @@ std::string* JavaIntegration::findJava() {
   findJavaExe.start("java");
 
   bool started = findJavaExe.waitForStarted();
-  QByteArray stdout;
+  QByteArray stdoutput;
   do {
-    stdout += findJavaExe.readAllStandardOutput();
+    stdoutput += findJavaExe.readAllStandardOutput();
   } while (!findJavaExe.waitForFinished(100) && findJavaExe.isOpen());
 
   // If java executable in path
@@ -77,17 +78,17 @@ bool JavaIntegration::checkJavaVersion(std::string *javaPath) {
   javaInPath.start(path->append(" -version").c_str());
   javaInPath.waitForStarted();
 
-  QByteArray stderr;
-  QByteArray stdout;
+  QByteArray stderror;
+  QByteArray stdoutput;
 
   javaInPath.waitForStarted();
   do {
-    stderr += javaInPath.readAllStandardError();
+    stderror += javaInPath.readAllStandardError();
   } while (!javaInPath.waitForFinished(100));
 
-  stderr += javaInPath.readAllStandardError();
+  stderror += javaInPath.readAllStandardError();
 
-  auto output = stderr.toStdString();
+  auto output = stderror.toStdString();
   std::string line(output.begin(),
                    std::find(output.begin(), output.end(), '\n'));
   qDebug("%s", line.c_str());
