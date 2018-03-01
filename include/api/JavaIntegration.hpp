@@ -6,21 +6,22 @@
 #define INCLUDE_API_JAVAINTEGRATION_HPP_
 
 #include <include/FileManager.hpp>
-#include <jni.h>
+#include <QProcess>
+#include <string>
 
 class JavaIntegration {
  public:
   JavaIntegration();
-  void startAPIServer();
-  int stopAPIServer();
+  void startAPIServerCmd();
+  int stopAPIServerCmd();
   int getAPIPort();
   void startAPIThread();
+  std::string* findJava();
+  bool checkJavaVersion(std::string *javaPath);
 
  private:
-  JavaVM *jvm;
-  JNIEnv *env;
-  JavaVMInitArgs vm_args;
   FileManager *fm;
+  QProcess javaProcess;
 
   char* getInitVect();
   char* getEncKey();

@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
   auto *ji = new JavaIntegration;
   ji->startAPIThread();
 
-  MainWindow w;
+  MainWindow w(ji);
   w.show();
 
   return app.exec();

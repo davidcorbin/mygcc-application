@@ -3,18 +3,16 @@
  */
 
 #include <include/api/JavaIntegration.hpp>
-#include <qlogging.h>
 #include <include/FileNotFound.hpp>
 #include <QFile>
 #include <QTextStream>
 #include <string>
 #include <algorithm>
-#include <thread>  // NOLINT
-#include <iostream>
 #include <random>
+#include <regex> // NOLINT
 
-#define CLASSPATH_PARAM       "-Djava.class.path="
 #define MYGCC_API_FILENAME    "mygcc-api-jar-with-dependencies.jar"
+#define VALID_JAVA_VER_REG    "1.8"
 
 JavaIntegration::JavaIntegration() {
   fm = new FileManager;
@@ -25,57 +23,76 @@ void JavaIntegration::startAPIThread() {
   char *enckey = getEncKey();
   setenv("initvect", initvect, 0);
   setenv("enckey", enckey, 0);
-  std::thread t(&JavaIntegration::startAPIServer, this);
-  t.detach();
+  startAPIServerCmd();
 }
 
-void JavaIntegration::startAPIServer() {
+void JavaIntegration::startAPIServerCmd() {
   std::string jarPath = fm->getResourcePath(MYGCC_API_FILENAME);
 
-  std::string fullparam = CLASSPATH_PARAM + jarPath;
-  auto *writable = new char[fullparam.size() + 1];
-  std::copy(fullparam.begin(), fullparam.end(), writable);
-  writable[fullparam.size()] = '\0';
-
-  auto* options = new JavaVMOption[1];
-  options[0].optionString = writable;
-  vm_args.version = JNI_VERSION_1_6;
-  vm_args.nOptions = 1;
-  vm_args.options = options;
-  vm_args.ignoreUnrecognized = JNI_FALSE;
-
-  jlong status = JNI_CreateJavaVM(&jvm,
-                                 reinterpret_cast<void**>(&env),
-                                 &vm_args);
-  if (status == JNI_ERR) {
-    qFatal("Unable to load JVM");
-  } else if (status == JNI_OK) {
-    qDebug("JVM loaded successfully!");
-  }
-  delete[] options;
-  delete[] writable;
-
-  // Find Main class
-  jclass cls = env->FindClass("com/mygcc/api/Main");
-  if (cls != nullptr) {
-    qDebug("mygcc-api class loaded");
+  auto *javaPath = findJava();
+  if (!javaPath->empty()) {
+    if (checkJavaVersion(javaPath)) {
+      qDebug("%s", "Valid Java version found");
+      std::string fullStr = javaPath->append(" -cp ")
+                            + jarPath + " com.mygcc.api.Main";
+      javaProcess.start(fullStr.c_str());
+    } else {
+      qDebug("%s", "Invalid java version");
+    }
   } else {
-    env->ExceptionDescribe();
-    qFatal("mygcc-api class failed to load");
-  }
-  // Call public static void main(String[] args)
-  jmethodID mid = env->GetStaticMethodID(cls, "main", "([Ljava/lang/String;)V");
-  if (mid == nullptr) {
-    qDebug("mygcc-api main method not found");
-  } else {
-    qWarning("mygcc-api main method found");
-    env->CallStaticVoidMethod(cls, mid);
+    qDebug("%s", "Could not start java server");
   }
 }
 
-int JavaIntegration::stopAPIServer() {
-  jvm->DestroyJavaVM();
+int JavaIntegration::stopAPIServerCmd() {
+  javaProcess.close();
   return 0;
+}
+
+int JavaIntegration::getAPIPort() {
+  return 8080;
+}
+
+std::string* JavaIntegration::findJava() {
+  QProcess findJavaExe;
+  findJavaExe.start("java");
+
+  bool started = findJavaExe.waitForStarted();
+  QByteArray stdout;
+  do {
+    stdout += findJavaExe.readAllStandardOutput();
+  } while (!findJavaExe.waitForFinished(100) && findJavaExe.isOpen());
+
+  // If java executable in path
+  if (started) {
+    return new std::string("java");
+  } else {
+    return new std::string("");
+  }
+}
+
+bool JavaIntegration::checkJavaVersion(std::string *javaPath) {
+  auto *path = new std::string(javaPath->c_str());
+  QProcess javaInPath;
+  javaInPath.start(path->append(" -version").c_str());
+  javaInPath.waitForStarted();
+
+  QByteArray stderr;
+  QByteArray stdout;
+
+  javaInPath.waitForStarted();
+  do {
+    stderr += javaInPath.readAllStandardError();
+  } while (!javaInPath.waitForFinished(100));
+
+  stderr += javaInPath.readAllStandardError();
+
+  auto output = stderr.toStdString();
+  std::string line(output.begin(),
+                   std::find(output.begin(), output.end(), '\n'));
+  qDebug("%s", line.c_str());
+  std::regex re(VALID_JAVA_VER_REG);
+  return std::regex_search(line, re);
 }
 
 char* JavaIntegration::getInitVect() {

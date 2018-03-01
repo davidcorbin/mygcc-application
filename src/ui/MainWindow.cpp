@@ -9,6 +9,7 @@
 #include <include/ui/Color.hpp>
 #include <QLocale>
 #include <QPainter>
+#include <QCloseEvent>
 #include <QCoreApplication>
 #include <vector>
 #include <string>
@@ -20,7 +21,8 @@
 #define BODY_WIDTH        500
 #define MIN_WIDTH         (SIDEBAR_WIDTH + BODY_WIDTH)
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
+MainWindow::MainWindow(JavaIntegration *ji) : QMainWindow(nullptr),
+                                              javaIntegration(ji) {
   setLocale(QLocale(QLocale::English, QLocale::UnitedStates));
   setWindowTitle(WINDOW_TITLE);
 
@@ -207,4 +209,8 @@ void MainWindow::viewCourse(Course *course) {
 
 // When window becomes visible, trigger event
 void MainWindow::showEvent(QShowEvent* event) {
+}
+
+void MainWindow::closeEvent(QCloseEvent *event) {
+  javaIntegration->stopAPIServerCmd();
 }
