@@ -88,7 +88,9 @@ bool JavaIntegration::checkJavaVersion(std::string *javaPath) {
 
   stderror += javaInPath.readAllStandardError();
 
-  auto output = stderror.toStdString();
+  auto out = new QString(stderror);
+  auto output = out->toStdString();
+
   std::string line(output.begin(),
                    std::find(output.begin(), output.end(), '\n'));
   qDebug("%s", line.c_str());
