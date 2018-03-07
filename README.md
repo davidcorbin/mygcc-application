@@ -33,6 +33,7 @@ cmake --build .
     - Must install "MSVC 2015 32-bit" Qt library.
     - For Visual Studio, **Community** edition is fine, pick the "Desktop development with C++" option, or at least VC++.
     - Follow quick start instructions to install Vcpkg, making sure your install directory is that same as in CMakeLists.txt.
+    - You must add Qt to the path (`setx CMAKE_PREFIX_PATH "C:\Qt\5.10.1\msvc2015"`)
 2. Update submodules: `git submodule update --init --recursive`
 3. Using the **Qt Command Prompt** (Qt 32-bit for Desktop (MSVC)), navigate to the project directory, then run:
     - `mkdir build`
