@@ -93,3 +93,15 @@ QPalette Color::assignment_red() {
   pal.setColor(QPalette::WindowText, QColor(231, 76, 60));
   return pal;
 }
+
+QPalette Color::text_assignment_open() {
+  QPalette pal;
+  pal.setColor(QPalette::WindowText, QColor(157, 157, 157));
+  return pal;
+}
+
+QPalette Color::text_assignment_closed() {
+  QPalette pal;
+  pal.setColor(QPalette::WindowText, QColor(128, 128, 128));
+  return pal;
+}

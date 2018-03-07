@@ -28,11 +28,18 @@ void CourseAssignmentItem::setup() {
 
   auto *textDivider = new QVBoxLayout;
   textDivider->addWidget(assignmentNameLabel);
-  textDivider->setAlignment(assignmentNameLabel,
-                            Qt::AlignRight|Qt::AlignBottom);
-  textDivider->addWidget(dueDateLabel);
-  textDivider->setAlignment(dueDateLabel,
-                            Qt::AlignRight|Qt::AlignTop);
+  if (assignment->isOpen()) {
+    textDivider->setAlignment(assignmentNameLabel,
+                              Qt::AlignRight | Qt::AlignBottom);
+  } else {
+    textDivider->setAlignment(assignmentNameLabel, Qt::AlignRight);
+  }
+
+  if (assignment->isOpen()) {
+    textDivider->addWidget(dueDateLabel);
+    textDivider->setAlignment(dueDateLabel,
+                              Qt::AlignRight | Qt::AlignTop);
+  }
   textDivider->setContentsMargins(0, 0, 0, 0);
 
   auto *assignmentData = new QWidget;
@@ -40,7 +47,9 @@ void CourseAssignmentItem::setup() {
 
   auto *assignmentLayout = new QHBoxLayout;
   assignmentLayout->addWidget(gradeLabel);
-  assignmentLayout->addWidget(pointsLabel);
+  if (!assignment->isOpen()) {
+    assignmentLayout->addWidget(pointsLabel);
+  }
   assignmentLayout->addWidget(assignmentData);
   assignmentLayout->setAlignment(assignmentData, Qt::AlignRight);
 
@@ -52,7 +61,11 @@ void CourseAssignmentItem::setup() {
 QLabel* CourseAssignmentItem::setupLetterLabel(QString *letterStr) {
   auto font = Font::assignmentGrade();
   auto *gradeLabel = new QLabel(letterStr->toLatin1());
-  gradeLabel->setPalette(Color::assignment_green());
+  if (assignment->isOpen()) {
+    gradeLabel->setPalette(Color::text_assignment_open());
+  } else {
+    gradeLabel->setPalette(Color::assignment_green());
+  }
   gradeLabel->setFont(font);
   // Set font width to text size + margin
   QFontMetrics fm(font);
@@ -63,7 +76,13 @@ QLabel* CourseAssignmentItem::setupLetterLabel(QString *letterStr) {
 QLabel* CourseAssignmentItem::setupGradeLabel(QString *gradeStr) {
   auto font = Font::assignmentPoints();
   auto *gradeLabel = new QLabel(gradeStr->toLatin1());
-  gradeLabel->setPalette(Color::text_secondary());
+  if (assignment->isOpen()) {
+    gradeLabel->setPalette(Color::text_assignment_open());
+  } else {
+    font.setBold(true);
+    font.setItalic(true);
+    gradeLabel->setPalette(Color::text_assignment_closed());
+  }
   gradeLabel->setFont(font);
   // Set font width to text size + margin
   QFontMetrics fm(font);
@@ -73,8 +92,14 @@ QLabel* CourseAssignmentItem::setupGradeLabel(QString *gradeStr) {
 
 QLabel* CourseAssignmentItem::setupNameLabel(QString *nameStr) {
   auto font = Font::assignmentName();
+  font.setBold(true);
   auto *gradeLabel = new QLabel(nameStr->toLatin1());
-  gradeLabel->setPalette(Color::text_primary());
+  if (assignment->isOpen()) {
+    gradeLabel->setPalette(Color::text_primary());
+  } else {
+    font.setItalic(true);
+    gradeLabel->setPalette(Color::text_assignment_closed());
+  }
   gradeLabel->setFont(font);
   // Set font width to text size + margin
   QFontMetrics fm(font);
@@ -84,6 +109,7 @@ QLabel* CourseAssignmentItem::setupNameLabel(QString *nameStr) {
 
 QLabel* CourseAssignmentItem::setupDueDateLabel(QString *dueDateStr) {
   auto font = Font::assignmentDueDate();
+  font.setItalic(true);
   auto *gradeLabel = new QLabel(dueDateStr->toLatin1());
   gradeLabel->setPalette(Color::text_secondary());
   gradeLabel->setFont(font);

@@ -37,6 +37,16 @@ MainWindow::MainWindow(JavaIntegration *ji) : QMainWindow(nullptr),
                                 new std::string("Thursday, December 21"),
                                 new std::string("Description"),
                                 true,
+                                new std::string("--"),
+                                0,
+                                0.0,
+                                0);
+  auto *biohw2 = new Assignment(new std::string("https://davcor.co"),
+                                new std::string("https://google.com"),
+                                new std::string("BIOL 101 Lab Grade"),
+                                new std::string(""),
+                                new std::string("Description"),
+                                false,
                                 new std::string("A+"),
                                 2.25,
                                 100.0,
@@ -76,6 +86,7 @@ MainWindow::MainWindow(JavaIntegration *ji) : QMainWindow(nullptr),
   auto *bio = new Course(new std::string("Biology 1"),
                          new std::string("BIOL101"));
   bio->addAssignment(biohw1);
+  bio->addAssignment(biohw2);
   bio->addStudent(student1);
   bio->addStudent(student2);
   bio->addStudent(student3);
@@ -130,7 +141,7 @@ MainWindow::MainWindow(JavaIntegration *ji) : QMainWindow(nullptr),
   // Sidebar height constraints
   sidebar->setMinimumHeight(450);
 
-  auto *items = new std::vector<GridItem*>();
+  auto *items = new std::vector<GridItem *>();
   items->push_back(new GridItem(new QString("13"),
                                 new QString("chapels left"),
                                 Color::grid_blue()));
@@ -208,7 +219,7 @@ void MainWindow::viewCourse(Course *course) {
 }
 
 // When window becomes visible, trigger event
-void MainWindow::showEvent(QShowEvent* event) {
+void MainWindow::showEvent(QShowEvent *event) {
 }
 
 void MainWindow::closeEvent(QCloseEvent *event) {
