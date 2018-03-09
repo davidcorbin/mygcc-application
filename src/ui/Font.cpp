@@ -9,6 +9,8 @@
 #include <string>
 
 #define LATO_LIGHT            "Lato-Light.ttf"
+#define LATO_BOLD             "Lato-Bold.ttf"
+#define LATO_BOLDITALIC       "Lato-BoldItalic.ttf"
 #define MONTSERRAT_REGULAR    "Montserrat-Regular.ttf"
 
 
