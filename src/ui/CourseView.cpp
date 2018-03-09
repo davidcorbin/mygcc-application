@@ -8,7 +8,6 @@
 #include <include/ui/Font.hpp>
 #include <include/ui/InfoGrid.hpp>
 #include <vector>
-#include <QtCore/QFile>
 
 #define ASSIGNMENTS_TAB_TEXT          "Assignments"
 #define PEOPLE_TAB_TEXT               "People"
