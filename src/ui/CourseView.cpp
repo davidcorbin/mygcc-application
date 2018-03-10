@@ -47,6 +47,17 @@ void CourseView::setupTabBar() {
   tabBar->addTab(ASSIGNMENTS_TAB_TEXT);
   tabBar->addTab(FILES_TAB_TEXT);
   tabBar->addTab(PEOPLE_TAB_TEXT);
+  tabBar->setStyleSheet("QTabBar::tab {"
+                            "color: #F5F5F5;"
+                            "background: rgb(40,39,45);"
+                            "padding: 3px;"
+                        "}"
+                        "QTabBar::tab::selected {"
+                            "border-top-left-radius: 3px;"
+                            "border-top-right-radius: 3px;"
+                            "color: #323034;"
+                            "background-color: #F5F5F5;"
+                        "}");
 }
 
 void CourseView::setupAssignmentView() {
