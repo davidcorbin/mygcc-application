@@ -34,6 +34,7 @@ class Font {
   static QFont assignmentGrade();
   static QFont assignmentPoints();
   static QFont assignmentName();
+  static QFont assignmentNameItalic();
   static QFont assignmentDueDate();
 
  private:

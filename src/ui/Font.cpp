@@ -10,6 +10,8 @@
 
 #define LATO_LIGHT            "Lato-Light.ttf"
 #define LATO_BOLD             "Lato-Bold.ttf"
+#define LATO_ITALIC           "Lato-Italic.ttf"
+#define LATO_LIGHTITALIC      "Lato-LightItalic.ttf"
 #define LATO_BOLDITALIC       "Lato-BoldItalic.ttf"
 #define MONTSERRAT_REGULAR    "Montserrat-Regular.ttf"
 
@@ -80,28 +82,40 @@ QFont Font::feedbackTextbox() {
 QFont Font::assignmentGrade() {
   auto *font = new QFont();
   font->setPointSize(32);
-  font->setFamily(loadFont(LATO_LIGHT));
+  font->setFamily(loadFont(LATO_BOLD));
   return *font;
 }
 
 QFont Font::assignmentPoints() {
   auto *font = new QFont();
   font->setPointSize(18);
-  font->setFamily(loadFont(LATO_LIGHT));
+  font->setFamily(loadFont(LATO_LIGHTITALIC));
+  font->setWeight(QFont::DemiBold);
+  font->setStyle(QFont::StyleItalic);
   return *font;
 }
 
 QFont Font::assignmentName() {
   auto *font = new QFont();
   font->setPointSize(20);
-  font->setFamily(loadFont(LATO_LIGHT));
+  font->setFamily(loadFont(LATO_BOLD));
+  return *font;
+}
+
+QFont Font::assignmentNameItalic() {
+  auto *font = new QFont();
+  font->setPointSize(20);
+  font->setFamily(loadFont(LATO_BOLDITALIC));
+  font->setWeight(QFont::DemiBold);
+  font->setStyle(QFont::StyleItalic);
   return *font;
 }
 
 QFont Font::assignmentDueDate() {
   auto *font = new QFont();
   font->setPointSize(16);
-  font->setFamily(loadFont(LATO_LIGHT));
+  font->setFamily(loadFont(LATO_LIGHTITALIC));
+  font->setStyle(QFont::StyleItalic);
   return *font;
 }
 
