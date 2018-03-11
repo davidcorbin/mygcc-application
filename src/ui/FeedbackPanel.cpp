@@ -59,7 +59,7 @@ void FeedbackPanel::setup() {
 
   submitButton = new QPushButton("Submit");
   submitButton->setStyleSheet("background: rgb(182, 45, 214);"
-                              "border-radius: 18px;"
+                              "border-radius: 16px;"
                               "padding: 10px 30px;"
                               "color: #fff;");
   submitButton->setMaximumWidth(150);
