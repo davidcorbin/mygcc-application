@@ -17,6 +17,7 @@ void LoginButton::setup() {
                     "color: #fff;");
   setGraphicsEffect(LoginPanel::shadowEffect(this, 15, "#888"));
   setFont(Font::startupInput());
+  setFocusPolicy(Qt::NoFocus);
 }
 
 QColor LoginButton::color() {

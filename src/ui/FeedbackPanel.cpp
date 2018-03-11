@@ -41,6 +41,7 @@ void FeedbackPanel::setup() {
   dropdown->setStyleSheet("background:#fff;color:#000;border-radius:5px;");
   dropdown->setFont(Font::feedbackTextbox());
   dropdown->setContentsMargins(10, 5, 10, 5);
+  dropdown->setFocusPolicy(Qt::NoFocus);
 
   textbox = new QPlainTextEdit;
   textbox->setStyleSheet("background: #fff; "
@@ -64,6 +65,7 @@ void FeedbackPanel::setup() {
                               "color: #fff;");
   submitButton->setMaximumWidth(150);
   submitButton->setContentsMargins(0, 0, 0, 0);
+  submitButton->setFocusPolicy(Qt::NoFocus);
   connect(submitButton, SIGNAL(clicked()), this, SLOT(submitClicked()));
 
   feedbackLayout->addWidget(title);

@@ -47,17 +47,30 @@ void CourseView::setupTabBar() {
   tabBar->addTab(ASSIGNMENTS_TAB_TEXT);
   tabBar->addTab(FILES_TAB_TEXT);
   tabBar->addTab(PEOPLE_TAB_TEXT);
-  tabBar->setStyleSheet("QTabBar::tab {"
+  tabBar->setStyleSheet("QTabBar {"
+                            "background: #ffeeee;"
+                        "}"
+                        "QTabBar::tab {"
                             "color: #F5F5F5;"
                             "background: rgb(40,39,45);"
                             "padding: 3px;"
                         "}"
-                        "QTabBar::tab::selected {"
+                        /* To have a border radius on the left and right.
+                        "QTabBar::tab:first {"
+                            "border-bottom-left-radius: 3px;"
                             "border-top-left-radius: 3px;"
+                        "}"
+                        "QTabBar::tab:last {"
+                            "border-bottom-right-radius: 3px;"
                             "border-top-right-radius: 3px;"
+                        "}"
+                        */
+                        "QTabBar::tab::selected {"
+                            "border-radius: 3px;"
                             "color: #323034;"
-                            "background-color: #F5F5F5;"
+                            "background: #F5F5F5;"
                         "}");
+  tabBar->setFocusPolicy(Qt::NoFocus);
 }
 
 void CourseView::setupAssignmentView() {
