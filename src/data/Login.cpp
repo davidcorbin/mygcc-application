@@ -59,6 +59,22 @@ void Login::login(std::string *username,
             }
             qDebug("Valid credentials");
             emit authSuccessful();
+
+            auto response = reply->readAll();
+            QJsonDocument loadDoc(QJsonDocument::fromJson(response));
+
+            // If invalid json object, reset file
+            if (!loadDoc.isObject()) {
+              qDebug("Invalid json response");
+            }
+
+            auto tokenStr = loadDoc.object()
+                .value("token")
+                .toString()
+                .toStdString();
+
+            // Save token
+            saveToken(&tokenStr);
           });
 
   QNetworkReply *reply = nam->post(request, QJsonDocument(json).toJson());
@@ -69,7 +85,7 @@ void Login::login(std::string *username,
 }
 
 std::string* Login::login(std::string *token) {
-  qDebug("Login called with token", token->c_str());
+  qDebug() << "Login called with token" << QString::fromStdString(*token);
 }
 
 void Login::queueLogin() {
@@ -141,7 +157,7 @@ bool Login::loadUserData() {
       auto apiTokenStr = jsonObject.value(API_TOKEN_KEY)
           .toString()
           .toStdString();
-      apiToken = &apiTokenStr;
+      apiToken = new std::string(apiTokenStr);
       queueLogin();
       userData.close();
       return true;
@@ -201,7 +217,7 @@ void Login::saveToken(std::string *token) {
   saveFile.open(QIODevice::ReadWrite | QIODevice::Truncate);
 
   auto jsonObject = loadDoc.object();
-  jsonObject.insert(API_TOKEN_KEY, token->c_str());
+  jsonObject[API_TOKEN_KEY] = QString::fromStdString(*token);
   QJsonDocument saveDoc(jsonObject);
   saveFile.write(saveDoc.toJson());
   saveFile.close();
