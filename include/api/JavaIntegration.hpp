@@ -23,8 +23,8 @@ class JavaIntegration {
   FileManager *fm;
   QProcess javaProcess;
 
-  char* getInitVect();
-  char* getEncKey();
+  std::string* getInitVect();
+  std::string* getEncKey();
   void genRandomString(char *s, int size = 16);
 };
 

@@ -7,6 +7,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QByteArray>
+#include <QDebug>
 #include <string>
 #include <algorithm>
 #include <random>
@@ -20,10 +21,12 @@ JavaIntegration::JavaIntegration() {
 }
 
 void JavaIntegration::startAPIThread() {
-  char *initvect = getInitVect();
-  char *enckey = getEncKey();
-  qputenv("initvect", initvect);
-  qputenv("enckey", enckey);
+  auto *initvect = getInitVect();
+  auto *enckey = getEncKey();
+  qDebug() << "Initialization vector: " << QString::fromStdString(*initvect);
+  qDebug() << "Encryption key: " << QString::fromStdString(*enckey);
+  qputenv("initvect", initvect->c_str());
+  qputenv("enckey", enckey->c_str());
   startAPIServerCmd();
 }
 
@@ -98,15 +101,16 @@ bool JavaIntegration::checkJavaVersion(std::string *javaPath) {
   return std::regex_search(line, re);
 }
 
-char* JavaIntegration::getInitVect() {
+std::string* JavaIntegration::getInitVect() {
   try {
     QString ivpath = QString::fromStdString(fm->getDataPath("initvect"));
+    qDebug() << "Initialization vector path: " << ivpath;
     QFile file(ivpath);
     if (file.open(QIODevice::ReadOnly)) {
       QTextStream in(&file);
-      QString line = in.readLine();
+      std::string line = in.readLine().toStdString();
       file.close();
-      return line.toLatin1().data();
+      return new std::string(line.c_str());
     }
   } catch (FileNotFound &e) {
     // Generate init vect
@@ -120,20 +124,22 @@ char* JavaIntegration::getInitVect() {
       QTextStream stream(&file);
       stream << initvect << endl;
     }
-    return initvect;
+    std::string stdinitvect(initvect);
+    return new std::string(stdinitvect.c_str());
   }
   return nullptr;
 }
 
-char* JavaIntegration::getEncKey() {
+std::string* JavaIntegration::getEncKey() {
   try {
     QString ivpath = QString::fromStdString(fm->getDataPath("enckey"));
+    qDebug() << "Encryption key path: " << ivpath;
     QFile file(ivpath);
     if (file.open(QIODevice::ReadOnly)) {
       QTextStream in(&file);
-      QString line = in.readLine();
+      auto line = in.readLine().toStdString();
       file.close();
-      return line.toLatin1().data();
+      return new std::string(line.c_str());
     }
   } catch (FileNotFound &e) {
     // Generate encryption key
@@ -147,7 +153,8 @@ char* JavaIntegration::getEncKey() {
       QTextStream stream(&file);
       stream << initvect << endl;
     }
-    return initvect;
+    std::string stdenckey(initvect);
+    return new std::string(stdenckey.c_str());
   }
   return nullptr;
 }
