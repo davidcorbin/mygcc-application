@@ -21,8 +21,10 @@
 #define BODY_WIDTH        500
 #define MIN_WIDTH         (SIDEBAR_WIDTH + BODY_WIDTH)
 
-MainWindow::MainWindow(JavaIntegration *ji) : QMainWindow(nullptr),
-                                              javaIntegration(ji) {
+MainWindow::MainWindow(JavaIntegration *ji,
+                       Login *login) : QMainWindow(nullptr),
+                                       javaIntegration(ji),
+                                       login(login) {
   setLocale(QLocale(QLocale::English, QLocale::UnitedStates));
   setWindowTitle(WINDOW_TITLE);
 
@@ -191,7 +193,7 @@ MainWindow::MainWindow(JavaIntegration *ji) : QMainWindow(nullptr),
   centralWidget->setStyleSheet("background-color: rgb(46, 46, 50)");
 
   // Show login panel
-  loginPanel = new LoginPanel(MIN_WIDTH, MIN_HEIGHT);
+  loginPanel = new LoginPanel(MIN_WIDTH, MIN_HEIGHT, login);
   loginPanel->setup();
   setCentralWidget(loginPanel);
 }

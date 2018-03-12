@@ -6,6 +6,7 @@
 #define INCLUDE_UI_LOGINPANEL_HPP_
 
 #include <include/ui/LoginButton.hpp>
+#include <include/data/Login.hpp>
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QLabel>
@@ -19,7 +20,7 @@ class LoginPanel : public QWidget {
   Q_PROPERTY(QColor color READ color WRITE setBackgroundColor)
 
  public:
-  LoginPanel(int min_width, int min_height);
+  LoginPanel(int min_width, int min_height, Login *loginObj);
   void setup();
   LoginButton *loginButton;
 
@@ -37,8 +38,8 @@ class LoginPanel : public QWidget {
   const QColor bgPrimary, bgSuccess, bgFailure;
   enum BGSTATE {PRIMARY, SUCCESS, FAILURE};
   BGSTATE bgState;
+  Login *loginObj;
 
-  bool login();
   void paintEvent(QPaintEvent *) override;
   void setBackgroundColor(QColor color);
   QColor color();
@@ -50,7 +51,9 @@ class LoginPanel : public QWidget {
   void setupPasswordTextInput();
 
  private slots:  // NOLINT(whitespace/indent)
-  void loginProcedure();
+  void authSuccessful();
+  void authFailure();
+  bool login();
 };
 
 #endif  // INCLUDE_UI_LOGINPANEL_HPP_

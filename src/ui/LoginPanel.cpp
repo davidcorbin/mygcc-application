@@ -5,14 +5,14 @@
 #include <include/ui/LoginPanel.hpp>
 #include <include/ui/Font.hpp>
 #include <include/ui/Color.hpp>
+#include <include/ui/MainWindow.hpp>
 #include <QStyleOption>
 #include <QPainter>
 #include <QTime>
 #include <QCoreApplication>
-#include <include/ui/MainWindow.hpp>
 
-LoginPanel::LoginPanel(int min_width, int min_height) :
-    min_width(min_width), min_height(min_height),
+LoginPanel::LoginPanel(int min_width, int min_height, Login *loginObj) :
+    min_width(min_width), min_height(min_height), loginObj(loginObj),
     bgPrimary(Color::login_bg_primary().color(QPalette::Background)),
     bgSuccess(Color::login_bg_success().color(QPalette::Background)),
     bgFailure(Color::login_bg_failure().color(QPalette::Background)) {
@@ -34,10 +34,10 @@ void LoginPanel::setup() {
   loginButton->setup();
 
   // Submit when login button pressed
-  connect(loginButton, SIGNAL(released()), this, SLOT(loginProcedure()));
+  connect(loginButton, SIGNAL(released()), this, SLOT(login()));
 
   // Submit when return clicked in password input
-  connect(passwordText, SIGNAL(returnPressed()), this, SLOT(loginProcedure()));
+  connect(passwordText, SIGNAL(returnPressed()), this, SLOT(login()));
 
   startupLayout->addWidget(titleLabel);
   startupLayout->setAlignment(titleLabel, Qt::AlignCenter);
@@ -102,40 +102,41 @@ void LoginPanel::setupPasswordTextInput() {
 }
 
 bool LoginPanel::login() {
-  QString username = usernameText->text();
-  QString password = passwordText->text();
-  return username == "a" && password == "a";
+  auto username = usernameText->text().toStdString();
+  auto password = passwordText->text().toStdString();
+  connect(loginObj, SIGNAL(authSuccessful()), this, SLOT(authSuccessful()));
+  connect(loginObj, SIGNAL(authInvalidCred()), this, SLOT(authFailure()));
+  loginObj->login(&username, &password, true);
+  return false;
 }
 
-void LoginPanel::loginProcedure() {
-  bool loginStatus = login();
-  if (loginStatus) {
-    auto *backgroundAnimation = successAnimation(this);
-    auto *buttonAnimation = successAnimation(loginButton);
-    backgroundAnimation->start();
-    buttonAnimation->start();
-    bgState = SUCCESS;
-    usernameText->hide();
-    passwordText->hide();
-    loginButton->hide();
-    subtitleLabel->setText("Loading...");
+void LoginPanel::authSuccessful() {
+  auto *backgroundAnimation = successAnimation(this);
+  auto *buttonAnimation = successAnimation(loginButton);
+  backgroundAnimation->start();
+  buttonAnimation->start();
+  bgState = SUCCESS;
+  usernameText->hide();
+  passwordText->hide();
+  loginButton->hide();
+  subtitleLabel->setText("Loading...");
 
-    // Delay For demo purposes
-    QTime dieTime = QTime::currentTime().addSecs(2);
-    while (QTime::currentTime() < dieTime)
-      QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+  // Delay For demo purposes
+  QTime dieTime = QTime::currentTime().addSecs(2);
+  while (QTime::currentTime() < dieTime)
+    QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 
-    // Switch central widget to logged in widget
-    auto *mw = reinterpret_cast<MainWindow*>(parent());
-    mw->setCentralWidget(mw->centralWidget);
+  // Switch central widget to logged in widget
+  auto *mw = reinterpret_cast<MainWindow*>(parent());
+  mw->setCentralWidget(mw->centralWidget);
+}
 
-  } else {
-    auto *backgroundAnimation = errorAnimation(this);
-    auto *buttonAnimation = errorAnimation(loginButton);
-    backgroundAnimation->start();
-    buttonAnimation->start();
-    bgState = FAILURE;
-  }
+void LoginPanel::authFailure() {
+  auto *backgroundAnimation = errorAnimation(this);
+  auto *buttonAnimation = errorAnimation(loginButton);
+  backgroundAnimation->start();
+  buttonAnimation->start();
+  bgState = FAILURE;
 }
 
 QGraphicsDropShadowEffect* LoginPanel::shadowEffect(QObject *parent,

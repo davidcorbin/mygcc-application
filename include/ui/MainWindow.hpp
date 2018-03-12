@@ -19,8 +19,9 @@
 
 class MainWindow : public QMainWindow {
   Q_OBJECT
+
  public:
-  explicit MainWindow(JavaIntegration *ji);
+  explicit MainWindow(JavaIntegration *ji, Login *login);
   QWidget *centralWidget;
   LoginPanel *loginPanel;
   void viewFeedbackPanel();
@@ -41,6 +42,9 @@ class MainWindow : public QMainWindow {
 
   // Java process
   JavaIntegration *javaIntegration;
+
+  // Login object
+  Login *login;
 };
 
 #endif  // INCLUDE_UI_MAINWINDOW_HPP_

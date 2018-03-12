@@ -3,7 +3,6 @@
  */
 
 #include <include/ui/MainWindow.hpp>
-#include <include/api/JavaIntegration.hpp>
 #include <QApplication>
 #include <QtGlobal>
 
@@ -26,7 +25,10 @@ int main(int argc, char *argv[]) {
   auto *ji = new JavaIntegration;
   ji->startAPIThread();
 
-  MainWindow w(ji);
+  auto login = new Login();
+  login->testAPIConnection();
+
+  MainWindow w(ji, login);
   w.show();
 
   return app.exec();
