@@ -18,7 +18,9 @@ void SidebarPanel::setup() {
 
   // Home item
   auto home = new SidebarListItem(new Course(new std::string("Home"),
-                                             new std::string("Home")));
+                                             new std::string("Home"),
+                                             nullptr,
+                                             0));
   home->setup();
   sidebarItemLayout->addWidget(home);
   listItems->push_back(home);

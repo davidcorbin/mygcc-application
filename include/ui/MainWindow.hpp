@@ -11,6 +11,7 @@
 #include <include/ui/InfoGrid.hpp>
 #include <include/ui/FeedbackPanel.hpp>
 #include <include/types/Course.hpp>
+#include <include/data/Schedule.hpp>
 #include <QMainWindow>
 #include <QLabel>
 #include <QHBoxLayout>
@@ -21,7 +22,7 @@ class MainWindow : public QMainWindow {
   Q_OBJECT
 
  public:
-  explicit MainWindow(JavaIntegration *ji, Login *login);
+  explicit MainWindow(JavaIntegration *ji, Login *login, Schedule *schedule);
   QWidget *centralWidget;
   LoginPanel *loginPanel;
   void viewFeedbackPanel();
@@ -37,7 +38,6 @@ class MainWindow : public QMainWindow {
   InfoGrid *infogrid;
   FeedbackPanel *feedbackPanel;
   QWidget *currentBodyWidget;
-  std::vector<Course *> classes;
   std::vector<CourseView *> courseViews;
 
   // Java process
@@ -45,6 +45,12 @@ class MainWindow : public QMainWindow {
 
   // Login object
   Login *login;
+
+  // Schedule object
+  Schedule *schedule;
+
+ private slots:  // NOLINT
+  void scheduleLoaded();
 };
 
 #endif  // INCLUDE_UI_MAINWINDOW_HPP_

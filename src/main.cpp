@@ -3,6 +3,7 @@
  */
 
 #include <include/ui/MainWindow.hpp>
+#include <include/data/Schedule.hpp>
 #include <QApplication>
 #include <QtGlobal>
 
@@ -25,10 +26,12 @@ int main(int argc, char *argv[]) {
   auto *ji = new JavaIntegration;
   ji->startAPIThread();
 
-  auto login = new Login();
+  auto *login = new Login();
   login->testAPIConnection();
 
-  MainWindow w(ji, login);
+  auto *schedule = new Schedule(login);
+
+  MainWindow w(ji, login, schedule);
   w.show();
 
   return app.exec();

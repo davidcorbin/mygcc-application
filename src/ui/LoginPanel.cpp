@@ -5,7 +5,6 @@
 #include <include/ui/LoginPanel.hpp>
 #include <include/ui/Font.hpp>
 #include <include/ui/Color.hpp>
-#include <include/ui/MainWindow.hpp>
 #include <QStyleOption>
 #include <QPainter>
 #include <QTime>
@@ -24,6 +23,10 @@ LoginPanel::LoginPanel(int min_width, int min_height, Login *loginObj) :
   loginButton = new LoginButton(new QString("Login"));
   setBackgroundColor(bgPrimary);
   bgState = PRIMARY;
+
+  // Activate animations when Login signals success or failure
+  connect(loginObj, SIGNAL(authSuccessful()), this, SLOT(authSuccessful()));
+  connect(loginObj, SIGNAL(authInvalidCred()), this, SLOT(authFailure()));
 }
 
 void LoginPanel::setup() {
@@ -104,8 +107,6 @@ void LoginPanel::setupPasswordTextInput() {
 bool LoginPanel::login() {
   auto username = usernameText->text().toStdString();
   auto password = passwordText->text().toStdString();
-  connect(loginObj, SIGNAL(authSuccessful()), this, SLOT(authSuccessful()));
-  connect(loginObj, SIGNAL(authInvalidCred()), this, SLOT(authFailure()));
   loginObj->login(&username, &password, true);
   return false;
 }
@@ -120,15 +121,6 @@ void LoginPanel::authSuccessful() {
   passwordText->hide();
   loginButton->hide();
   subtitleLabel->setText("Loading...");
-
-  // Delay For demo purposes
-  QTime dieTime = QTime::currentTime().addSecs(2);
-  while (QTime::currentTime() < dieTime)
-    QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
-
-  // Switch central widget to logged in widget
-  auto *mw = reinterpret_cast<MainWindow*>(parent());
-  mw->setCentralWidget(mw->centralWidget);
 }
 
 void LoginPanel::authFailure() {

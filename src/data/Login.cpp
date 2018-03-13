@@ -58,7 +58,6 @@ void Login::login(std::string *username,
               qDebug() << "Unexpected error: " << reply->errorString();
             }
             qDebug("Valid credentials");
-            emit authSuccessful();
 
             auto response = reply->readAll();
             QJsonDocument loadDoc(QJsonDocument::fromJson(response));
@@ -73,6 +72,9 @@ void Login::login(std::string *username,
                 .toString()
                 .toStdString();
 
+            apiToken = new std::string(tokenStr);
+            emit authSuccessful();
+
             // Save token
             saveToken(&tokenStr);
           });
@@ -86,6 +88,7 @@ void Login::login(std::string *username,
 
 std::string* Login::login(std::string *token) {
   qDebug() << "Login called with token" << QString::fromStdString(*token);
+  emit authSuccessful();
 }
 
 void Login::queueLogin() {
@@ -147,7 +150,7 @@ bool Login::loadUserData() {
 
     // If invalid json object, reset file
     if (!loadDoc.isObject()) {
-      qDebug("Invalid user data file");
+      qDebug("Invalid user data file: expected json object");
       userData.close();
       createUserDataFile(datapath);
     }
@@ -208,7 +211,7 @@ void Login::saveToken(std::string *token) {
 
   // If invalid json object, reset file
   if (!loadDoc.isObject()) {
-    qWarning("User data file invalid");
+    qWarning("User data file invalid: expected json object");
     saveFile.close();
     createUserDataFile(datapath);
   }
@@ -223,4 +226,8 @@ void Login::saveToken(std::string *token) {
   saveFile.close();
 
   qDebug("Saved token");
+}
+
+std::string *Login::getApiToken() const {
+  return apiToken;
 }
