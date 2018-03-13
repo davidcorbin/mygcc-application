@@ -41,7 +41,7 @@ void Schedule::getSchedule(std::string *token) {
                        qDebug("Invalid json response: expected json array");
                        return;
                      }
-                     qDebug("Retreived schedule");
+                     qDebug("Retrieved schedule");
                      parseScheduleJson(loadDoc.array());
                    });
 
