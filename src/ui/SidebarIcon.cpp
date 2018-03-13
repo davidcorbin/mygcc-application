@@ -97,7 +97,6 @@ void SidebarIcon::setIcon(Course *course) {
     qFatal("Could not open icons.json");
   }
 
-
   QTextStream file_text(&file_obj);
   QString json_string;
   json_string = file_text.readAll();
@@ -126,9 +125,12 @@ void SidebarIcon::setIcon(Course *course) {
   std::remove_if(code->begin(), code->end(), &isdigit),
   code->end());
 
+  // Remove the section of the class
+  std::string deptStr = code->substr(0, code->find(" "));
+
   // If class code does not exist, use default icon.
-  if (json_map.contains(code->c_str())) {
-    std::string str = json_map[code->c_str()].toString().toStdString();
+  if (json_map.contains(deptStr.c_str())) {
+    std::string str = json_map[deptStr.c_str()].toString().toStdString();
     svgFilename = new std::string(str);
   } else {
     svgFilename = new std::string("home");
