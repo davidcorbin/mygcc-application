@@ -8,11 +8,11 @@
 Profile::Profile(int id,
                  std::string *degree,
                  std::string *email,
-                 std::string *major,
+                 std::string *smajor,
                  std::string *name) : id(id),
                                       degree(degree),
                                       email(email),
-                                      major(major),
+                                      smajor(smajor),
                                       name(name) {
 }
 
@@ -20,7 +20,7 @@ Profile::Profile(QJsonObject jsonObject) {
   id = jsonObject["ID"].toString().toInt();
   degree = new std::string(jsonObject["degree"].toString().toStdString());
   email = new std::string(jsonObject["email"].toString().toStdString());
-  major = new std::string(jsonObject["major"].toString().toStdString());
+  smajor = new std::string(jsonObject["major"].toString().toStdString());
   name = new std::string(jsonObject["name"].toString().toStdString());
 }
 
@@ -49,11 +49,11 @@ void Profile::setEmail(std::string *email) {
 }
 
 std::string *Profile::getMajor() const {
-  return major;
+  return smajor;
 }
 
-void Profile::setMajor(std::string *major) {
-  Profile::major = major;
+void Profile::setMajor(std::string *smajor) {
+  Profile::smajor = smajor;
 }
 
 std::string *Profile::getName() const {

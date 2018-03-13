@@ -13,7 +13,7 @@ class Profile {
   Profile(int id,
           std::string *degree,
           std::string *email,
-          std::string *major,
+          std::string *smajor,
           std::string *name);
   explicit Profile(QJsonObject jsonObject);
   int getId() const;
@@ -23,7 +23,7 @@ class Profile {
   std::string *getEmail() const;
   void setEmail(std::string *email);
   std::string *getMajor() const;
-  void setMajor(std::string *major);
+  void setMajor(std::string *smajor);
   std::string *getName() const;
   void setName(std::string *name);
   std::string *getImage_url() const;
@@ -33,7 +33,7 @@ class Profile {
   int id;
   std::string *degree;
   std::string *email;
-  std::string *major;
+  std::string *smajor;
   std::string *name;
   std::string *image_url;
 };
