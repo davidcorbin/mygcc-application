@@ -12,7 +12,7 @@
 class ProfileImage : public Image {
  public:
   explicit ProfileImage(std::string *profileImage) : Image(profileImage, new
-      std::string("default_profile.jpg")) {}
+      std::string("default_user.jpg")) {}
   QPixmap setup() override;
 
  private:
