@@ -18,7 +18,8 @@ Schedule::Schedule(Login *login) : login(login) {
 void Schedule::getSchedule(std::string *token) {
   QNetworkRequest request(QUrl(SCHEDULE_URL));
   request.setHeader(QNetworkRequest::ContentTypeHeader, HTTP_CONTENT_TYPE);
-  request.setRawHeader("Authorization", QByteArray::fromStdString(*token));
+  request.setRawHeader("Authorization",
+                       (QString::fromStdString(*token)).toUtf8());
 
   auto *nam = new QNetworkAccessManager;
   QObject::connect(nam, &QNetworkAccessManager::finished,
