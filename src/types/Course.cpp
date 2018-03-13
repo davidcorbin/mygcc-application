@@ -39,29 +39,26 @@ Course::Course(QJsonObject jsonObject) {
   // Parse location from json object
   if (jsonObject["location"].isArray()) {
     auto locationObj = jsonObject["location"].toArray();
-    QJsonArray::iterator it;
-    for (it = locationObj.begin(); it != locationObj.end(); it++) {
-      auto locationStr = it->toString();
-      location->push_back(new std::string(locationStr.toStdString()));
+    foreach(const QJsonValue & value, locationObj) {
+      std::string locationStr = value.toString().toStdString();
+      location->push_back(new std::string(locationStr));
     }
   }
 
   // Parse professor from json object
   if (jsonObject["professor"].isArray()) {
     auto obj = jsonObject["professor"].toArray();
-    QJsonArray::iterator it;
-    for (it = obj.begin(); it != obj.end(); it++) {
-      auto profStr = it->toString();
-      professor->push_back(new std::string(profStr.toStdString()));
+    foreach(const QJsonValue & value, obj) {
+      std::string profStr = value.toString().toStdString();
+      professor->push_back(new std::string(profStr));
     }
   }
 
   // Parse class times from json object
   if (jsonObject["times"].isArray()) {
     auto obj = jsonObject["times"].toArray();
-    QJsonArray::iterator it;
-    for (it = obj.begin(); it != obj.end(); it++) {
-      auto timeObj = it->toObject();
+    foreach(const QJsonValue & value, obj) {
+      auto timeObj = value.toObject();
       auto *dow = new std::string(timeObj["day"].toString().toStdString());
       auto *start = new std::string(timeObj["start"].toString().toStdString());
       auto *end = new std::string(timeObj["end"].toString().toStdString());
