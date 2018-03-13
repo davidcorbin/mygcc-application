@@ -11,6 +11,7 @@
 
 Schedule::Schedule(Login *login) : login(login) {
   courses = new std::vector<Course *>();
+  scheduleRetrieved = false;
 
   connect(login, SIGNAL(authSuccessful()), this, SLOT(queueGetSchedule()));
 }
@@ -54,13 +55,13 @@ void Schedule::queueGetSchedule() {
 }
 
 void Schedule::parseScheduleJson(QJsonArray array) {
-  QJsonArray::iterator courseIt;
   // For each course
   foreach(const QJsonValue & value, array) {
     QJsonObject course = value.toObject();
     Course *courseObj = new Course(course);
     courses->push_back(courseObj);
   }
+  scheduleRetrieved = true;
   emit coursesLoaded();
 }
 
@@ -70,4 +71,12 @@ std::vector<Course *> *Schedule::getCourses() const {
 
 void Schedule::setCourses(std::vector<Course *> *courses) {
   Schedule::courses = courses;
+}
+
+bool Schedule::isScheduleRetrieved() const {
+  return scheduleRetrieved;
+}
+
+void Schedule::setScheduleRetrieved(bool scheduleRetrieved) {
+  Schedule::scheduleRetrieved = scheduleRetrieved;
 }

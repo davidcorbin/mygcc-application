@@ -4,6 +4,7 @@
 
 #include <include/ui/MainWindow.hpp>
 #include <include/data/Schedule.hpp>
+#include <include/data/User.hpp>
 #include <QApplication>
 #include <QtGlobal>
 
@@ -30,8 +31,9 @@ int main(int argc, char *argv[]) {
   login->testAPIConnection();
 
   auto *schedule = new Schedule(login);
+  auto *user = new User(login);
 
-  MainWindow w(ji, login, schedule);
+  MainWindow w(ji, login, schedule, user);
   w.show();
 
   return app.exec();

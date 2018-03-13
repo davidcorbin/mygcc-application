@@ -6,7 +6,7 @@
 #define INCLUDE_UI_PROFILEPANEL_HPP_
 
 #include <include/ui/ProfileImage.hpp>
-
+#include <include/data/User.hpp>
 #include <QWidget>
 #include <QGridLayout>
 #include <QLabel>
@@ -17,6 +17,7 @@ class ProfilePanel : public QWidget {
   ProfilePanel(std::string *nameStr,
                std::string *majorStr,
                std::string *filename = nullptr);
+  explicit ProfilePanel(User *user);
   void setName(std::string *nameStr);
   void setMajor(std::string *majorStr);
   void setProfileImage(std::string *filename);
@@ -33,6 +34,7 @@ class ProfilePanel : public QWidget {
   QLabel *nameLabel;
   QLabel *profImg;
   ProfileImage *profileImage;
+  User *user;
 };
 
 

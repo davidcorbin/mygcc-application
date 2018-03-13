@@ -18,10 +18,13 @@ class Schedule : public QObject {
   void getSchedule(std::string *token);
   std::vector<Course *> *getCourses() const;
   void setCourses(std::vector<Course *> *courses);
+  bool isScheduleRetrieved() const;
+  void setScheduleRetrieved(bool scheduleRetrieved);
 
  private:
   Login *login;
   std::vector<Course *> *courses;
+  bool scheduleRetrieved;
 
   void parseScheduleJson(QJsonArray array);
 

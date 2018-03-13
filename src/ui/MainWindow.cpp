@@ -23,15 +23,19 @@
 
 MainWindow::MainWindow(JavaIntegration *ji,
                        Login *login,
-                       Schedule *schedule) : QMainWindow(nullptr),
-                                             javaIntegration(ji),
-                                             login(login),
-                                             schedule(schedule) {
+                       Schedule *schedule,
+                       User *user) : QMainWindow(nullptr),
+                                     javaIntegration(ji),
+                                     login(login),
+                                     schedule(schedule),
+                                     user(user) {
   setLocale(QLocale(QLocale::English, QLocale::UnitedStates));
   setWindowTitle(WINDOW_TITLE);
 
-  QObject::connect(schedule, SIGNAL(coursesLoaded()),
-                   this, SLOT(scheduleLoaded()));
+  connect(schedule, SIGNAL(coursesLoaded()),
+          this, SLOT(startupCallbackHandler()));
+  connect(user, SIGNAL(userLoaded()),
+          this, SLOT(startupCallbackHandler()));
 
   centralWidget = new QWidget;
   centralWidget->setStyleSheet("background-color: rgb(46, 46, 50)");
@@ -64,7 +68,7 @@ void MainWindow::viewCourse(Course *course) {
   }
 }
 
-void MainWindow::scheduleLoaded() {
+void MainWindow::showHomeWidget() {
   auto classes = *schedule->getCourses();
 
   for (Course *cour : classes) {
@@ -74,9 +78,7 @@ void MainWindow::scheduleLoaded() {
     courseViews.push_back(cv);
   }
 
-  auto *profPanel = new ProfilePanel(new std::string("John Smith"),
-                                     new std::string("Computer Science"),
-                                     new std::string("GCCshield.jpg"));
+  auto *profPanel = new ProfilePanel(user);
   profPanel->setup();
 
   auto *sidebarPanel = new SidebarPanel(&classes);
@@ -165,4 +167,13 @@ void MainWindow::showEvent(QShowEvent *event) {
 
 void MainWindow::closeEvent(QCloseEvent *event) {
   javaIntegration->stopAPIServerCmd();
+}
+
+//
+// Ensure that all UI elements are loaded before showing home screen.
+//
+void MainWindow::startupCallbackHandler() {
+  if (user->isUserRetrieved() && schedule->isScheduleRetrieved()) {
+    showHomeWidget();
+  }
 }

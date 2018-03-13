@@ -23,6 +23,20 @@ ProfilePanel::ProfilePanel(std::string *nameStr,
   profileLayout = new QGridLayout;
 }
 
+ProfilePanel::ProfilePanel(User *user) : user(user) {
+  profImg = new QLabel;
+  nameLabel = new QLabel(QString::fromStdString(
+      *user->getProfile()->getName()));
+  majorLabel = new QLabel(QString::fromStdString(
+      *user->getProfile()->getMajor()));
+  profTextLayout = new QVBoxLayout;
+  profTextWidget = new QWidget;
+  profileLayout = new QGridLayout;
+  name = user->getProfile()->getName();
+  givenmajor = user->getProfile()->getMajor();
+  imageFile = new std::string("");
+}
+
 void ProfilePanel::setup() {
   setFixedHeight(65);
   setStyleSheet("border-bottom:1px solid rgb(40, 40, 45);");

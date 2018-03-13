@@ -12,6 +12,7 @@
 #include <include/ui/FeedbackPanel.hpp>
 #include <include/types/Course.hpp>
 #include <include/data/Schedule.hpp>
+#include <include/data/User.hpp>
 #include <QMainWindow>
 #include <QLabel>
 #include <QHBoxLayout>
@@ -22,7 +23,10 @@ class MainWindow : public QMainWindow {
   Q_OBJECT
 
  public:
-  explicit MainWindow(JavaIntegration *ji, Login *login, Schedule *schedule);
+  explicit MainWindow(JavaIntegration *ji,
+                      Login *login,
+                      Schedule *schedule,
+                      User *user);
   QWidget *centralWidget;
   LoginPanel *loginPanel;
   void viewFeedbackPanel();
@@ -49,8 +53,13 @@ class MainWindow : public QMainWindow {
   // Schedule object
   Schedule *schedule;
 
+  // User object
+  User *user;
+
+  void showHomeWidget();
+
  private slots:  // NOLINT
-  void scheduleLoaded();
+  void startupCallbackHandler();
 };
 
 #endif  // INCLUDE_UI_MAINWINDOW_HPP_
