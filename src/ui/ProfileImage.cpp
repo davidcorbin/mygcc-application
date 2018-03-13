@@ -6,7 +6,6 @@
 
 #include <QBitmap>
 #include <QPainter>
-#include <iostream>
 
 #define PROFILE_IMG_DIAMETER  40
 
