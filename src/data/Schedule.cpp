@@ -56,8 +56,8 @@ void Schedule::queueGetSchedule() {
 void Schedule::parseScheduleJson(QJsonArray array) {
   QJsonArray::iterator courseIt;
   // For each course
-  for (courseIt = array.begin(); courseIt != array.end(); courseIt++) {
-    QJsonObject course = courseIt->toObject();
+  foreach(const QJsonValue & value, array) {
+    QJsonObject course = value.toObject();
     Course *courseObj = new Course(course);
     courses->push_back(courseObj);
   }
