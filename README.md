@@ -39,6 +39,7 @@ cmake --build .
     - `mkdir build`
     - `cd build`
     - `cmake ..`
-    - `cmake --build .`
+    - `cmake --build .` (or `msbuild /m facade-application.sln` in VS developer command prompt for multicore building)
 4. Copy all resources from the folder and subfolders of `C:\mygcc-application\res\` to `C:\mygcc-application\build\Debug`
-5. Copy needed DLLs from `C:\Qt\5.10.1\msvc2015\bin` to `C:\mygcc-application\build\Debug`
+5. Include `mygcc-api-with-dependencies.jar` from [mygcc-api](https://github.com/davidcorbin/mygcc-api).
+6. Copy needed DLLs from `C:\Qt\5.10.1\msvc2015\bin` to `C:\mygcc-application\build\Debug`
