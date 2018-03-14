@@ -14,7 +14,7 @@ class Login : public QObject {
  public:
   Login();
   void login(std::string *username, std::string *password, bool waitForServer);
-  std::string* login(std::string *token);
+  void login(std::string *token);
   void testAPIConnection();
   bool isApiConnectionEstablished() const;
   void queueLogin();

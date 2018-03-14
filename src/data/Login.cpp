@@ -86,7 +86,7 @@ void Login::login(std::string *username,
   reply->deleteLater();
 }
 
-std::string* Login::login(std::string *token) {
+void Login::login(std::string *token) {
   qDebug() << "Login called with token" << QString::fromStdString(*token);
   emit authSuccessful();
 }
