@@ -21,7 +21,7 @@ Profile::Profile(QJsonObject jsonObject) {
   degree = new std::string(jsonObject["degree"].toString().toStdString());
   email = new std::string(jsonObject["email"].toString().toStdString());
   smajor = new std::string(jsonObject["major"].toString().toStdString());
-  name = new std::string(jsonObject["name"].toString().toStdString());
+  name = new std::string(jsonObject["name_short"].toString().toStdString());
 }
 
 int Profile::getId() const {
