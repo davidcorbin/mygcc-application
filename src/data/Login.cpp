@@ -43,8 +43,7 @@ void Login::login(std::string *username,
         [=](QNetworkReply *reply) -> void {
           if (reply->error()) {
             // If credentials invalid
-            if (reply->error() == QNetworkReply::AuthenticationRequiredError
-                || reply->error() == QNetworkReply::InternalServerError) {
+            if (reply->error() == QNetworkReply::AuthenticationRequiredError) {
               qDebug("Invalid credentials");
               emit authInvalidCred();
               return;
@@ -257,15 +256,10 @@ void Login::verifyAPIToken(std::string *token) {
   QObject::connect(nam, &QNetworkAccessManager::finished,
            [=](QNetworkReply *reply) -> void {
              if (reply->error()) {
-               // If credentials invalid
-               if (reply->error() == QNetworkReply::AuthenticationRequiredError
-                   || reply->error() == QNetworkReply::InternalServerError) {
-                 qDebug() << "Network Error: " << reply->errorString();
-                 return;
-               }
-               qDebug() << "Unexpected error: " << reply->errorString();
+               qDebug() << "Invalid token: " << reply->errorString();
+               return;
              }
-             qDebug("Valid credentials");
+             qDebug("Valid token");
              emit authSuccessful();
            });
 
