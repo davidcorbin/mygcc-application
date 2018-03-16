@@ -13,6 +13,7 @@
 #include <include/types/Course.hpp>
 #include <include/data/Schedule.hpp>
 #include <include/data/User.hpp>
+#include <include/data/Chapel.hpp>
 #include <QMainWindow>
 #include <QLabel>
 #include <QHBoxLayout>
@@ -33,6 +34,9 @@ class MainWindow : public QMainWindow {
   void viewGridPanel();
   void viewCourse(Course *course);
   void closeEvent(QCloseEvent *event) override;
+
+  // Chapel object
+  Chapel *chapel;
 
  protected:
   void showEvent(QShowEvent* event) override;
@@ -61,6 +65,7 @@ class MainWindow : public QMainWindow {
  private slots:  // NOLINT
   void startupCallbackHandler();
   void logout();
+  void addChapelGridItems();
 };
 
 #endif  // INCLUDE_UI_MAINWINDOW_HPP_

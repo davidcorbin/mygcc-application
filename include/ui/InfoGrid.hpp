@@ -23,6 +23,10 @@ class InfoGrid : public QWidget {
   std::vector<GridItem*> *items;
   QGridLayout *grid;
   int count;
+  QLabel *emptyLabel;
+
+  void setupEmptyLabel();
+  void setupGridParams();
 };
 
 #endif  // INCLUDE_UI_INFOGRID_HPP_

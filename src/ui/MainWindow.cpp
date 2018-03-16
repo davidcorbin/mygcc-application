@@ -45,6 +45,13 @@ MainWindow::MainWindow(JavaIntegration *ji,
   loginPanel = new LoginPanel(MIN_WIDTH, MIN_HEIGHT, login);
   loginPanel->setup();
   setCentralWidget(loginPanel);
+
+  chapel = new Chapel(login);
+
+  infogrid = new InfoGrid();
+  infogrid->setup();
+
+  connect(chapel, SIGNAL(chapelsReceived()), this, SLOT(addChapelGridItems()));
 }
 
 void MainWindow::viewFeedbackPanel() {
@@ -111,26 +118,7 @@ void MainWindow::showHomeWidget() {
   // Sidebar height constraints
   sidebar->setMinimumHeight(450);
 
-  auto *items = new std::vector<GridItem *>();
-  items->push_back(new GridItem(new QString("13"),
-                                new QString("chapels left"),
-                                Color::grid_blue()));
-  items->push_back(new GridItem(new QString("7"),
-                                new QString("assignments"),
-                                Color::grid_green()));
-  items->push_back(new GridItem(new QString("15"),
-                                new QString("chapels received"),
-                                Color::grid_purple()));
-  items->push_back(new GridItem(new QString("2/7"),
-                                new QString("assignments received"),
-                                Color::grid_red()));
-  items->push_back(new GridItem(new QString("PDF"),
-                                new QString("Programming Project 2 PDF"),
-                                Color::grid_yellow()));
-
   // Setup the Home view
-  infogrid = new InfoGrid(items);
-  infogrid->setup();
   infogrid->show();
 
   // Setup class view
@@ -182,4 +170,26 @@ void MainWindow::startupCallbackHandler() {
 void MainWindow::logout() {
   loginPanel->show();
   loginPanel->authFailure();
+}
+
+void MainWindow::addChapelGridItems() {
+  int remaining = chapel->getRemaining();
+  int required = chapel->getRequired();
+  int attended = chapel->getAttended();
+  QString header = QString("%1/%2").arg(QString::number(remaining),
+                                        QString::number(required));
+  infogrid->addGridItem(new GridItem(&header,
+                                     new QString("Chapels remaining"),
+                                     Color::grid_blue()));
+
+
+  int pc = 100 - static_cast<int>((remaining/static_cast<float>required) * 100);
+  QString percentHeader = QString("%1%").arg(QString::number(pc));
+  infogrid->addGridItem(new GridItem(&percentHeader,
+                                     new QString("Chapels left"),
+                                     Color::grid_blue()));
+  QString attendedHeader = QString("%1").arg(QString::number(attended));
+  infogrid->addGridItem(new GridItem(&attendedHeader,
+                                     new QString("Chapels attended"),
+                                     Color::grid_blue()));
 }
