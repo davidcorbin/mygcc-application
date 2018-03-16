@@ -33,7 +33,7 @@ void Schedule::getSchedule(std::string *token) {
          auto response = reply->readAll();
          QJsonDocument loadDoc(QJsonDocument::fromJson(response));
 
-         // If invalid json object, reset file
+         // If invalid json array, return
          if (!loadDoc.isArray()) {
            qDebug("Invalid json response: expected json array");
            return;
