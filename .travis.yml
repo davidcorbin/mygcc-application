@@ -5,8 +5,8 @@ compiler:
 
 before_install:
  - cd scripts
- - ./install-qt 5.9.4
- - echo $CMAKE_PREFIX_PATH
+ - ./install-qt 5.7.0
+ - export CMAKE_PREFIX_PATH=/home/travis/build/davidcorbin/mygcc-application/scripts/Qt/5.7/gcc_64/bin
  - cd ..
 
 script: 
