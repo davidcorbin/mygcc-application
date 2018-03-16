@@ -34,6 +34,7 @@ MainWindow::MainWindow(JavaIntegration *ji,
 
   connect(schedule, SIGNAL(coursesLoaded()),
           this, SLOT(startupCallbackHandler()));
+  connect(schedule, SIGNAL(internalServerError()), this, SLOT(logout()));
   connect(user, SIGNAL(userLoaded()),
           this, SLOT(startupCallbackHandler()));
 
@@ -176,4 +177,9 @@ void MainWindow::startupCallbackHandler() {
   if (user->isUserRetrieved() && schedule->isScheduleRetrieved()) {
     showHomeWidget();
   }
+}
+
+void MainWindow::logout() {
+  loginPanel->show();
+  loginPanel->authFailure();
 }

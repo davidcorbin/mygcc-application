@@ -50,7 +50,7 @@ class LoginPanel : public QWidget {
   void setupUsernameTextInput();
   void setupPasswordTextInput();
 
- private slots:  // NOLINT(whitespace/indent)
+ public slots:  // NOLINT(whitespace/indent)
   void authSuccessful();
   void authFailure();
   bool login();

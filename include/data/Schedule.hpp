@@ -33,6 +33,7 @@ class Schedule : public QObject {
 
  signals:  // NOLINT
   void scheduleReceived();
+  void internalServerError();
 
   // Sent after courses have been parsed into Course object
   void coursesLoaded();

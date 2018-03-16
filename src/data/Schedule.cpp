@@ -24,27 +24,28 @@ void Schedule::getSchedule(std::string *token) {
 
   auto *nam = new QNetworkAccessManager;
   QObject::connect(nam, &QNetworkAccessManager::finished,
-                   [=](QNetworkReply *reply) -> void {
-                     if (reply->error()) {
-                       // If credentials invalid
-                       if (reply->error() ==
-                           QNetworkReply::AuthenticationRequiredError) {
-                         qDebug("Invalid credentials");
-                         return;
-                       }
-                       qDebug() << "Unexpected error: " << reply->errorString();
-                     }
-                     auto response = reply->readAll();
-                     QJsonDocument loadDoc(QJsonDocument::fromJson(response));
+       [=](QNetworkReply *reply) -> void {
+         if (reply->error()) {
+           // If credentials invalid
+           if (reply->error() == QNetworkReply::AuthenticationRequiredError
+               || reply->error() == QNetworkReply::InternalServerError) {
+             qDebug("Invalid credentials");
+             emit internalServerError();
+             return;
+           }
+           qDebug() << "Unexpected error: " << reply->errorString();
+         }
+         auto response = reply->readAll();
+         QJsonDocument loadDoc(QJsonDocument::fromJson(response));
 
-                     // If invalid json object, reset file
-                     if (!loadDoc.isArray()) {
-                       qDebug("Invalid json response: expected json array");
-                       return;
-                     }
-                     qDebug("Retrieved schedule");
-                     parseScheduleJson(loadDoc.array());
-                   });
+         // If invalid json object, reset file
+         if (!loadDoc.isArray()) {
+           qDebug("Invalid json response: expected json array");
+           return;
+         }
+         qDebug("Retrieved schedule");
+         parseScheduleJson(loadDoc.array());
+       });
 
   nam->get(request);
 }

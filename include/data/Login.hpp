@@ -25,9 +25,11 @@ class Login : public QObject {
   std::string *apiToken;
   bool apiConnectionEstablished;
   int connectionAttempts;
+  std::string datapath;
+
   bool loadUserData();
   void createUserDataFile(std::string datapath);
-  std::string datapath;
+  void verifyAPIToken(std::string *token);
 
  private slots:  // NOLINT
   void loginWithToken();
