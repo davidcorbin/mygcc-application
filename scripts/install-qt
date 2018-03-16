@@ -9,7 +9,7 @@ ENVFILE=qt-${QT_VERSION}.env
 echo Installing Qt
 
 
-extract-qt-installer $PWD/$INSTALLER $PWD/Qt
+./extract-qt-installer $PWD/$INSTALLER $PWD/Qt
 
 echo Create $ENVFILE
 cat << EOF > $ENVFILE

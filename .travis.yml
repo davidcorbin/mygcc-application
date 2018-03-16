@@ -6,7 +6,7 @@ compiler:
 before_install:
  - cd scripts
  - ./install-qt 5.9.4
- - echo CMAKE_PREFIX_PATH
+ - echo $CMAKE_PREFIX_PATH
  - cd ..
 
 script: 
