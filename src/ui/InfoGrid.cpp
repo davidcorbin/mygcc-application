@@ -18,6 +18,10 @@ InfoGrid::InfoGrid(std::vector<GridItem*> *items) : items(items) {
   count = 0;
 }
 
+InfoGrid::InfoGrid() {
+  items = new std::vector<GridItem *>();
+}
+
 void InfoGrid::setup() {
   //  If there aren't any GridItems to show
   if (items->empty()) {
