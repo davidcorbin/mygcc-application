@@ -26,14 +26,9 @@ void Schedule::getSchedule(std::string *token) {
   QObject::connect(nam, &QNetworkAccessManager::finished,
        [=](QNetworkReply *reply) -> void {
          if (reply->error()) {
-           // If credentials invalid
-           if (reply->error() == QNetworkReply::AuthenticationRequiredError
-               || reply->error() == QNetworkReply::InternalServerError) {
-             qDebug("Invalid credentials");
-             emit internalServerError();
-             return;
-           }
-           qDebug() << "Unexpected error: " << reply->errorString();
+           qDebug() << "Error: " << reply->errorString();
+           emit internalServerError();
+           return;
          }
          auto response = reply->readAll();
          QJsonDocument loadDoc(QJsonDocument::fromJson(response));
