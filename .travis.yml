@@ -1,8 +1,18 @@
 language: c++
 sudo: required
+compiler:
+ - gcc
+
+before_install:
+ - ./scripts/install-qt 5.9.4
+
 script: 
  - python scripts/cpplint.py --headers=hpp src/*.cpp src/*/*.cpp include/*.hpp include/*/*.hpp
- - ./scripts/build_ubuntu.sh
+ - git submodule update --init --recursive
+ - mkdir build
+ - cd build
+ - cmake ..
+ - make
 
 notifications:
   slack: grovecitycollege:Tg5JFkWtWXdNqGEDZQnxfv9S
