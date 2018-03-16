@@ -183,7 +183,8 @@ void MainWindow::addChapelGridItems() {
                                      Color::grid_blue()));
 
 
-  int pc = 100 - static_cast<int>((remaining/static_cast<float>required) * 100);
+  int pc = 100 - static_cast<int>((remaining/
+      static_cast<float>(required)) * 100);
   QString percentHeader = QString("%1%").arg(QString::number(pc));
   infogrid->addGridItem(new GridItem(&percentHeader,
                                      new QString("Chapels left"),
