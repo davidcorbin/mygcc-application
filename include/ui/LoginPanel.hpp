@@ -35,10 +35,10 @@ class LoginPanel : public QWidget {
   QLineEdit *passwordText;
   QVBoxLayout *startupLayout;
   const int min_width, min_height;
+  Login *loginObj;
   const QColor bgPrimary, bgSuccess, bgFailure;
   enum BGSTATE {PRIMARY, SUCCESS, FAILURE};
   BGSTATE bgState;
-  Login *loginObj;
 
   void paintEvent(QPaintEvent *) override;
   void setBackgroundColor(QColor color);

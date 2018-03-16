@@ -60,6 +60,7 @@ class MainWindow : public QMainWindow {
 
  private slots:  // NOLINT
   void startupCallbackHandler();
+  void logout();
 };
 
 #endif  // INCLUDE_UI_MAINWINDOW_HPP_
