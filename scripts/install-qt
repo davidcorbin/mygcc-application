@@ -14,4 +14,5 @@ extract-qt-installer $PWD/$INSTALLER $PWD/Qt
 echo Create $ENVFILE
 cat << EOF > $ENVFILE
 export PATH=$PWD/Qt/${QT_VERSION}/gcc_64/bin:$PATH
+export CMAKE_PREFIX_PATH=$PWD/Qt/${QT_VERSION}/gcc_64/bin
 EOF
