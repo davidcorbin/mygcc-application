@@ -4,7 +4,9 @@ compiler:
  - gcc
 
 before_install:
- - ./scripts/install-qt 5.9.4
+ - cd scripts
+ - ./install-qt 5.9.4
+ - cd ..
 
 script: 
  - python scripts/cpplint.py --headers=hpp src/*.cpp src/*/*.cpp include/*.hpp include/*/*.hpp
