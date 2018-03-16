@@ -7,8 +7,6 @@
 #include <include/ui/Color.hpp>
 #include <QStyleOption>
 #include <QPainter>
-#include <QTime>
-#include <QCoreApplication>
 
 LoginPanel::LoginPanel(int min_width, int min_height, Login *loginObj) :
     min_width(min_width), min_height(min_height), loginObj(loginObj),
