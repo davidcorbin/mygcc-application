@@ -6,7 +6,6 @@
 #include <include/ui/Color.hpp>
 #include <include/ui/Font.hpp>
 #include <QHBoxLayout>
-#include <cmath>
 #include <string>
 
 CourseAssignmentItem::CourseAssignmentItem(Assignment *assignment) :
@@ -67,9 +66,7 @@ QLabel* CourseAssignmentItem::setupLetterLabel(QString *letterStr) {
     gradeLabel->setPalette(Color::assignment_green());
   }
   gradeLabel->setFont(font);
-  // Set font width to text size + margin
-  QFontMetrics fm(font);
-  gradeLabel->setMaximumWidth(fm.width(letterStr->toLatin1()) + 10);
+  gradeLabel->setMaximumWidth(50);
   return gradeLabel;
 }
 
@@ -78,9 +75,7 @@ QLabel* CourseAssignmentItem::setupGradeLabel(QString *gradeStr) {
   auto *gradeLabel = new QLabel(gradeStr->toLatin1());
   gradeLabel->setPalette(Color::text_assignment_closed());
   gradeLabel->setFont(font);
-  // Set font width to text size + margin
-  QFontMetrics fm(font);
-  gradeLabel->setMaximumWidth(fm.width(gradeStr->toLatin1()) + 10);
+  gradeLabel->setMaximumWidth(95);
   return gradeLabel;
 }
 
