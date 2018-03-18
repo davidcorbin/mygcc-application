@@ -106,10 +106,11 @@ void Homework::parseHomeworkJson(QJsonObject object) {
           qWarning() << "Could not convert " << val.c_str() << " to double";
         }
       }
-      auto *assignment = new Assignment(&a_url, &c_url,
-                                        &a_title,
-                                        &a_duedate,
-                                        &a_desc,
+      auto *assignment = new Assignment(new std::string(a_url.c_str()),
+                                        new std::string(c_url.c_str()),
+                                        new std::string(a_title.c_str()),
+                                        new std::string(a_duedate.c_str()),
+                                        new std::string(a_desc.c_str()),
                                         a_open,
                                         a_letter,
                                         a_received,
