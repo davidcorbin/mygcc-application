@@ -3,8 +3,6 @@
  */
 
 #include <include/types/Course.hpp>
-#include <QDebug>
-#include <QJsonArray>
 #include <string>
 #include <vector>
 
@@ -12,19 +10,18 @@ Course::Course(std::string *name,
                std::string *code,
                std::string *title,
                float credits) : name(name),
-                                code(code),
+                                courseCode(code),
                                 title(title),
                                 credits(credits) {
-  homework = new std::vector<Assignment *>();
   students = new std::vector<Student *>();
   location = new std::vector<std::string *>();
   professor = new std::vector<std::string *>();
   times = new std::vector<ClassTime>();
+  homeworkObj = new Homework();
 }
 
 Course::Course(QJsonObject jsonObject) {
   // Initialize empty objects
-  homework = new std::vector<Assignment *>();
   students = new std::vector<Student *>();
   location = new std::vector<std::string *>();
   professor = new std::vector<std::string *>();
@@ -32,7 +29,9 @@ Course::Course(QJsonObject jsonObject) {
 
   // Get data from json object
   name = new std::string(jsonObject["name"].toString().toStdString());
-  code = new std::string(jsonObject["course"].toString().toStdString());
+  courseCode = new std::string(jsonObject["code"].toString().toStdString());
+  courseCodeWithSpaces = new std::string(jsonObject["course"]
+                                             .toString().toStdString());
   title = new std::string(jsonObject["title"].toString().toStdString());
   credits = jsonObject["credits"].toDouble();
 
@@ -66,22 +65,16 @@ Course::Course(QJsonObject jsonObject) {
       times->push_back(*classTime);
     }
   }
+
+  homeworkObj = new Homework();
 }
 
 std::string* Course::getName() {
   return name;
 }
 
-std::string* Course::getCode() {
-  return code;
-}
-
-void Course::addAssignment(Assignment *assignment) {
-  homework->push_back(assignment);
-}
-
-std::vector<Assignment *>* Course::getAssignments() {
-  return homework;
+std::string* Course::getCourseCode() {
+  return courseCode;
 }
 
 void Course::addStudent(Student *student) {
@@ -138,4 +131,25 @@ std::vector<ClassTime> *Course::getTimes() const {
 
 void Course::setTimes(std::vector<ClassTime> *times) {
   Course::times = times;
+}
+
+void Course::loadHomework(Login *login) {
+  homeworkObj->setLogin(login);
+  homeworkObj->getHomework(login->getApiToken(), courseCode);
+}
+
+Homework *Course::getHomeworkObj() const {
+  return homeworkObj;
+}
+
+void Course::setHomeworkObj(Homework *homeworkObj) {
+  Course::homeworkObj = homeworkObj;
+}
+
+std::string *Course::getCourseCodeWithSpaces() const {
+  return courseCodeWithSpaces;
+}
+
+void Course::setCourseCodeWithSpaces(std::string *courseCodeWithSpaces) {
+  Course::courseCodeWithSpaces = courseCodeWithSpaces;
 }

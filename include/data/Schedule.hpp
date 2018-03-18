@@ -16,17 +16,18 @@ class Schedule : public QObject {
  public:
   explicit Schedule(Login *login);
   void getSchedule(std::string *token);
-  std::vector<Course *> *getCourses() const;
+  std::vector<Course *> *getCourses();
   void setCourses(std::vector<Course *> *courses);
   bool isScheduleRetrieved() const;
   void setScheduleRetrieved(bool scheduleRetrieved);
 
  private:
   Login *login;
-  std::vector<Course *> *courses;
+  std::vector<Course *> *coursesS;
   bool scheduleRetrieved;
 
   void parseScheduleJson(QJsonArray array);
+  void getHomework();
 
  private slots:  // NOLINT
   void queueGetSchedule();

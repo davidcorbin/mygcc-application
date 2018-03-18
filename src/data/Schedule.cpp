@@ -10,7 +10,7 @@
 #define HTTP_CONTENT_TYPE           "application/json"
 
 Schedule::Schedule(Login *login) : login(login) {
-  courses = new std::vector<Course *>();
+  coursesS = new std::vector<Course *>();
   scheduleRetrieved = false;
 
   connect(login, SIGNAL(authSuccessful()), this, SLOT(queueGetSchedule()));
@@ -55,18 +55,19 @@ void Schedule::parseScheduleJson(QJsonArray array) {
   foreach(const QJsonValue & value, array) {
     QJsonObject course = value.toObject();
     Course *courseObj = new Course(course);
-    courses->push_back(courseObj);
+    coursesS->push_back(courseObj);
   }
   scheduleRetrieved = true;
   emit coursesLoaded();
+  getHomework();
 }
 
-std::vector<Course *> *Schedule::getCourses() const {
-  return courses;
+std::vector<Course *> *Schedule::getCourses() {
+  return coursesS;
 }
 
 void Schedule::setCourses(std::vector<Course *> *courses) {
-  Schedule::courses = courses;
+  Schedule::coursesS = courses;
 }
 
 bool Schedule::isScheduleRetrieved() const {
@@ -75,4 +76,10 @@ bool Schedule::isScheduleRetrieved() const {
 
 void Schedule::setScheduleRetrieved(bool scheduleRetrieved) {
   Schedule::scheduleRetrieved = scheduleRetrieved;
+}
+
+void Schedule::getHomework() {
+  for (auto cour : *coursesS) {
+    cour->loadHomework(login);
+  }
 }

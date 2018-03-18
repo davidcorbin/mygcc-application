@@ -84,8 +84,7 @@ QPixmap SidebarIcon::FromSvgToPixmap(const QSize &ImageSize,
 // Sets icon file name based on course code. Assumes that the icon exists
 // without checking. There should be a different relevant icon for each major.
 void SidebarIcon::setIcon(Course *course) {
-  std::string *code = course->getCode();
-
+  auto *code = new std::string(course->getCourseCodeWithSpaces()->c_str());
   // Get location of file.
   auto *fm = new FileManager();
   std::string path;

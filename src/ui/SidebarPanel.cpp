@@ -17,11 +17,14 @@ void SidebarPanel::setup() {
   sidebarItemLayout = new QVBoxLayout;
 
   // Home item
-  auto home = new SidebarListItem(new Course(new std::string("Home"),
-                                             new std::string("Home"),
-                                             nullptr,
-                                             0));
+  auto *homePlaceholder = new Course(new std::string("Home"),
+                                     new std::string("Home"),
+                                     nullptr,
+                                     0);
+  homePlaceholder->setCourseCodeWithSpaces(new std::string("Home"));
+  auto home = new SidebarListItem(homePlaceholder);
   home->setup();
+
   sidebarItemLayout->addWidget(home);
   listItems->push_back(home);
   home->setSelected();
@@ -52,7 +55,7 @@ void SidebarPanel::setSelected(Course *course) {
 
   auto *mainWindow = qobject_cast<MainWindow *>(
       parentWidget()->parentWidget()->parentWidget());
-  if (*(course->getCode()) == "Home") {
+  if (*(course->getCourseCode()) == "Home") {
     mainWindow->viewGridPanel();
   } else {
     mainWindow->viewCourse(course);

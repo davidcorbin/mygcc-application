@@ -9,6 +9,7 @@
 #include <include/types/Student.hpp>
 #include <include/types/NetworkFile.hpp>
 #include <include/types/ClassTime.hpp>
+#include <include/data/Homework.hpp>
 #include <QJsonObject>
 #include <string>
 #include <vector>
@@ -21,9 +22,7 @@ class Course {
          float credits);
   explicit Course(QJsonObject jsonObject);
   std::string* getName();
-  std::string* getCode();
-  void addAssignment(Assignment *assignment);
-  std::vector<Assignment *>* getAssignments();
+  std::string* getCourseCode();
   void addStudent(Student *student);
   std::vector<Student *>* getStudents();
   std::vector<NetworkFile *> *getFiles() const;
@@ -38,18 +37,25 @@ class Course {
   void setProfessor(std::vector<std::string *> *professor);
   std::vector<ClassTime> *getTimes() const;
   void setTimes(std::vector<ClassTime> *times);
+  Homework *getHomeworkObj() const;
+  void setHomeworkObj(Homework *homeworkObj);
+  std::string *getCourseCodeWithSpaces() const;
+  void setCourseCodeWithSpaces(std::string *courseCodeWithSpaces);
+
+  void loadHomework(Login *login);
 
  private:
   std::string *name;
-  std::string *code;
+  std::string *courseCode;
+  std::string *courseCodeWithSpaces;
   std::string *title;
   double credits;
   std::vector<std::string *> *location;
   std::vector<std::string *> *professor;
   std::vector<ClassTime> *times;
-  std::vector<Assignment *> *homework;
   std::vector<Student *> *students;
   std::vector<NetworkFile *> *files;
+  Homework *homeworkObj;
 };
 
 #endif  // INCLUDE_TYPES_COURSE_HPP_

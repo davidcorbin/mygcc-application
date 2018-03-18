@@ -31,12 +31,12 @@ class CourseView : public QWidget {
   ClassroomView *classroomView;
 
   void setupTabBar();
-  void setupAssignmentView();
   void setupFileView();
   void setupClassroomView();
 
  private slots:  // NOLINT
   void tabBarClicked();
+  void setupAssignmentView();
 };
 
 #endif  // INCLUDE_UI_COURSEVIEW_HPP_

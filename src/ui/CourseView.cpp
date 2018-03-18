@@ -21,11 +21,19 @@ CourseView::CourseView(Course *course, int min_width) : course(course) {
   fileViewArea = new QScrollArea;
   classroomViewArea = new QScrollArea;
   classroomView = new ClassroomView(course);
+
+  connect(course->getHomeworkObj(),
+          SIGNAL(homeworkReceived()),
+          this,
+          SLOT(setupAssignmentView()));
 }
 
 void CourseView::setup() {
   setupTabBar();
-  setupAssignmentView();
+  // If there are assignments already, add them to the UI
+  if (course->getHomeworkObj()->getAssignments()->size() > 0) {
+    setupAssignmentView();
+  }
   setupFileView();
   setupClassroomView();
 
@@ -80,7 +88,7 @@ void CourseView::setupAssignmentView() {
   assignmentLayout->setContentsMargins(0, 0, 0, 0);
   assignmentLayout->setAlignment(Qt::AlignTop);
 
-  auto *assignments = course->getAssignments();
+  auto *assignments = course->getHomeworkObj()->getAssignments();
   for (auto *assignment : *assignments) {
     auto *assignmentItem = new CourseAssignmentItem(assignment);
     assignmentItem->setup();
@@ -88,7 +96,7 @@ void CourseView::setupAssignmentView() {
   }
 
   // If no assignments show a label that tells the user there are no assignments
-  if (course->getAssignments()->empty()) {
+  if (course->getHomeworkObj()->getAssignments()->empty()) {
     auto *emptyLabel = new QLabel("No assignments yet");
     emptyLabel->setFont(Font::assignmentName());
     emptyLabel->setPalette(Color::text_primary());

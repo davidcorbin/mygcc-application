@@ -34,7 +34,7 @@ void Chapel::getChapel(std::string *token) {
 
                      // If invalid json object, return
                      if (!loadDoc.isObject()) {
-                       qDebug("Invalid json response: expected json array");
+                       qDebug("Invalid json response: expected json object");
                        return;
                      }
                      qDebug("Retrieved chapel");
