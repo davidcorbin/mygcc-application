@@ -10,7 +10,8 @@
 #define HTTP_CONTENT_TYPE           "application/json"
 
 Homework::Homework(Login *login) : login(login) {
-  Homework();
+  homeworkRec = false;
+  assignments = new std::vector<Assignment *>();
 }
 
 Homework::Homework() {
@@ -75,20 +76,35 @@ void Homework::parseHomeworkJson(QJsonObject object) {
       }
       auto grades = assignmentObj["grade"].toObject();
       auto a_letter = new std::string("");
-      auto a_received = 0;
-      auto a_percent = 0;
-      auto a_points = 0;
+      auto a_received = 0.0;
+      auto a_percent = 0.0;
+      auto a_points = 0.0;
       if (grades.contains("letter")) {
         a_letter = new std::string(grades["letter"].toString().toStdString());
       }
       if (grades.contains("received")) {
-        a_received = grades["received"].toInt();
+        auto val = grades["received"].toString().toStdString();
+        try {
+          a_received = std::stod(val);
+        } catch (const std::invalid_argument& ia) {
+          qWarning() << "Could not convert " << val.c_str() << " to double";
+        }
       }
       if (grades.contains("percent")) {
-        a_percent = grades["percent"].toInt();
+        auto val = grades["percent"].toString().toStdString();
+        try {
+          a_percent = std::stod(val);
+        } catch (const std::invalid_argument& ia) {
+          qWarning() << "Could not convert " << val.c_str() << " to double";
+        }
       }
       if (grades.contains("points")) {
-        a_points = grades["points"].toInt();
+        auto val = grades["points"].toString().toStdString();
+        try {
+          a_points = std::stod(val);
+        } catch (const std::invalid_argument& ia) {
+          qWarning() << "Could not convert " << val.c_str() << " to double";
+        }
       }
       auto *assignment = new Assignment(&a_url, &c_url,
                                         &a_title,
