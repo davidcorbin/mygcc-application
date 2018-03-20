@@ -5,6 +5,7 @@
 #include <include/data/Homework.hpp>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 #define HOMEWORK_URL                "http://localhost:8080/1/class/"
 #define HTTP_CONTENT_TYPE           "application/json"
@@ -120,7 +121,16 @@ void Homework::parseHomeworkJson(QJsonObject object) {
     }
   }
 
+  sortAssignments();
+
   emit homeworkReceived();
+}
+
+void Homework::sortAssignments() {
+  std::sort(assignments->begin(), assignments->end(),
+            [] (Assignment const *a, Assignment const *b) {
+              return a->isOpen() > b->isOpen();
+            });
 }
 
 Login *Homework::getLogin() const {
@@ -133,8 +143,4 @@ void Homework::setLogin(Login *login) {
 
 std::vector<Assignment *> *Homework::getAssignments() const {
   return assignments;
-}
-
-void Homework::setAssignments(std::vector<Assignment *> *assignments) {
-  Homework::assignments = assignments;
 }

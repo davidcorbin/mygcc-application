@@ -14,6 +14,9 @@ CourseAssignmentItem::CourseAssignmentItem(Assignment *assignment) :
 
 void CourseAssignmentItem::setup() {
   auto *gradeString = new QString(assignment->getGrade().letter_grade->data());
+  if (*gradeString == "awaiting") {
+    *gradeString = "--";
+  }
   auto *gradeLabel = setupLetterLabel(gradeString);
 
   auto *pointsString = new QString(getPointsString().c_str());
@@ -23,7 +26,16 @@ void CourseAssignmentItem::setup() {
   auto *assignmentNameLabel = setupNameLabel(nameString);
 
   auto *dueDateString = new QString(assignment->getDuedate()->c_str());
-  auto *dueDateLabel = setupDueDateLabel(dueDateString);
+  auto dateTemp = QDateTime::fromString(*dueDateString, Qt::ISODate);
+
+  // Check if the date is invalid
+  if (!dueDateString->isEmpty() && !dateTemp.isValid()) {
+    qDebug() << "Invalid: " << dueDateString->toUtf8() << dueDateString->size();
+  }
+  auto dateLong = dateTemp.date().toString("dddd, MMMM d");
+  auto timeLong = dateTemp.toString("h:mm a");
+  auto dateObject = dateLong + " at " + timeLong;
+  auto *dueDateLabel = setupDueDateLabel(&dateObject);
 
   auto *textDivider = new QVBoxLayout;
   textDivider->addWidget(assignmentNameLabel);
