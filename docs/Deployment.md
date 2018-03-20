@@ -19,7 +19,7 @@ cmake --build .
 #### Create installer
 1. Copy the release build of the application (`facade.app`) from the `Release/` directory to `package/packages/com.corbinharvey.facade/data`
 1. `cd packages`
-1. `binarycreator -c config/config.xml -p packages FacadeInstaller-<version>`
+1. `binarycreator -c config/config.xml -p packages FacadeInstaller-<version>` (use `-n` to create a smaller, online only installer.)
 
 ## Windows
 

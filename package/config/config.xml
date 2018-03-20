@@ -17,4 +17,10 @@
     <AllowSpaceInPath>true</AllowSpaceInPath>
     <ControlScript>installcontroller.qs</ControlScript>
     <SupportsModify>false</SupportsModify>
+
+    <RemoteRepositories>
+    	<Repository>
+             <Url>https://facade-logs.appspot.com/repo</Url>
+    	</Repository>
+	</RemoteRepositories>
 </Installer>
