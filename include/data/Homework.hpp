@@ -55,6 +55,7 @@ class Homework : public QObject {
   std::vector<Assignment *> *assignments;
   Login *login;
   std::string *courseCode;
+  QNetworkAccessManager *nam;
 
   void parseHomeworkJson(QJsonObject object);
   void sortAssignments();

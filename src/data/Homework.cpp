@@ -13,11 +13,13 @@
 Homework::Homework(Login *login) : login(login) {
   homeworkRec = false;
   assignments = new std::vector<Assignment *>();
+  nam = new QNetworkAccessManager;
 }
 
 Homework::Homework() {
   homeworkRec = false;
   assignments = new std::vector<Assignment *>();
+  nam = new QNetworkAccessManager;
 }
 
 void Homework::getHomework(std::string *token, std::string *courseCode) {
@@ -29,7 +31,6 @@ void Homework::getHomework(std::string *token, std::string *courseCode) {
   request.setRawHeader("Authorization",
                        (QString::fromStdString(*token)).toUtf8());
 
-  auto *nam = new QNetworkAccessManager;
   QObject::connect(nam, &QNetworkAccessManager::finished,
                    [=](QNetworkReply *reply) -> void {
                      if (reply->error()) {
@@ -50,7 +51,6 @@ void Homework::getHomework(std::string *token, std::string *courseCode) {
                                                            courseCode->c_str();
                      parseHomeworkJson(loadDoc.object());
                    });
-
   nam->get(request);
 }
 

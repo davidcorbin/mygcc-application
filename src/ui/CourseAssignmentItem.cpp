@@ -75,7 +75,7 @@ QLabel* CourseAssignmentItem::setupLetterLabel(QString *letterStr) {
   if (assignment->isOpen()) {
     gradeLabel->setPalette(Color::text_assignment_open());
   } else {
-    gradeLabel->setPalette(Color::assignment_green());
+    gradeLabel->setPalette(letterColor(letterStr));
   }
   gradeLabel->setFont(font);
   gradeLabel->setMaximumWidth(50);
@@ -140,5 +140,19 @@ std::string CourseAssignmentItem::getReadablePoints(double points) {
     std::string pointsString = std::to_string(points);
     return pointsString.erase(pointsString.find_last_not_of('0') + 1,
                               std::string::npos);
+  }
+}
+
+QPalette CourseAssignmentItem::letterColor(QString *letterStr) {
+  if (letterStr->contains("A")) {
+    return Color::grid_green();
+  } else if (letterStr->contains("B")) {
+    return Color::grid_blue();
+  } else if (letterStr->contains("C")) {
+    return Color::grid_yellow();
+  } else if (letterStr->contains("D") || letterStr->contains("F")) {
+    return Color::grid_red();
+  } else {
+    return Color::text_assignment_open();
   }
 }

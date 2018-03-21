@@ -22,6 +22,7 @@ class CourseAssignmentItem : public QWidget {
   QLabel* setupDueDateLabel(QString *dueDateStr);
   std::string getPointsString();
   std::string getReadablePoints(double points);
+  QPalette letterColor(QString *letterStr);
   Assignment *assignment;
 };
 

@@ -28,11 +28,6 @@ class Color {
   static QPalette grid_yellow();
   static QPalette grid_purple();
 
-  // Assignment grade colors
-  static QPalette assignment_green();
-  static QPalette assignment_yellow();
-  static QPalette assignment_red();
-
   // Assignment text colors.
   static QPalette text_assignment_open();
   static QPalette text_assignment_closed();

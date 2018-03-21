@@ -49,48 +49,35 @@ QPalette Color::login_bg_success() {
 QPalette Color::grid_red() {
   QPalette pal;
   pal.setColor(QPalette::Background, QColor(222, 43, 43));
+  pal.setColor(QPalette::WindowText, QColor(222, 43, 43));
   return pal;
 }
 
 QPalette Color::grid_blue() {
   QPalette pal;
   pal.setColor(QPalette::Background, QColor(53, 177, 241));
+  pal.setColor(QPalette::WindowText, QColor(53, 177, 241));
   return pal;
 }
 
 QPalette Color::grid_green() {
   QPalette pal;
   pal.setColor(QPalette::Background, QColor(0, 219, 65));
+  pal.setColor(QPalette::WindowText, QColor(0, 219, 65));
   return pal;
 }
 
 QPalette Color::grid_yellow() {
   QPalette pal;
   pal.setColor(QPalette::Background, QColor(241, 158, 46));
+  pal.setColor(QPalette::WindowText, QColor(241, 158, 46));
   return pal;
 }
 
 QPalette Color::grid_purple() {
   QPalette pal;
   pal.setColor(QPalette::Background, QColor(208, 51, 237));
-  return pal;
-}
-
-QPalette Color::assignment_green() {
-  QPalette pal;
-  pal.setColor(QPalette::WindowText, QColor(46, 204, 113));
-  return pal;
-}
-
-QPalette Color::assignment_yellow() {
-  QPalette pal;
-  pal.setColor(QPalette::WindowText, QColor(241, 196, 15));
-  return pal;
-}
-
-QPalette Color::assignment_red() {
-  QPalette pal;
-  pal.setColor(QPalette::WindowText, QColor(231, 76, 60));
+  pal.setColor(QPalette::WindowText, QColor(208, 51, 237));
   return pal;
 }
 
