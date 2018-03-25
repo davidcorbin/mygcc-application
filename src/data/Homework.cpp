@@ -129,7 +129,33 @@ void Homework::parseHomeworkJson(QJsonObject object) {
 void Homework::sortAssignments() {
   std::sort(assignments->begin(), assignments->end(),
             [] (Assignment const *a, Assignment const *b) {
-              return a->isOpen() > b->isOpen();
+              auto *aa = new QString(a->getDuedate()->c_str());
+              auto aTemp = QDateTime::fromString(*aa, Qt::ISODate);
+
+              auto *bb = new QString(b->getDuedate()->c_str());
+              auto bTemp = QDateTime::fromString(*bb, Qt::ISODate);
+
+              // If both assignments are open
+              if (a->isOpen() && b->isOpen()) {
+                if (!aTemp.isValid() || !bTemp.isValid()) {
+                  return false;
+                }
+                if (aTemp > bTemp) {
+                  return true;
+                } else {
+                  return false;
+                }
+              } else if (!a->isOpen() && !b->isOpen()) {  // Both closed
+                if (!aTemp.isValid() || !bTemp.isValid()) {
+                  return false;
+                }
+                return true;
+              } else if (a->isOpen() && !b->isOpen()) {  // A open, B closed
+                return true;
+              } else if (!a->isOpen() && b->isOpen()) {  // A closed, B open
+                return false;
+              }
+              return false;
             });
 }
 
