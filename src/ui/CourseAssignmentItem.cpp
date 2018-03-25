@@ -102,8 +102,8 @@ QLabel* CourseAssignmentItem::setupNameLabel(QString *nameStr) {
   }
   gradeLabel->setFont(font);
   // Set font width to text size + margin
-  QFontMetrics fm(font);
-  gradeLabel->setMaximumWidth(fm.width(nameStr->toLatin1()) + 10);
+  // QFontMetrics fm(font);
+  // gradeLabel->setMaximumWidth(fm.width(nameStr->toLatin1()) + 10);
   return gradeLabel;
 }
 
@@ -113,8 +113,8 @@ QLabel* CourseAssignmentItem::setupDueDateLabel(QString *dueDateStr) {
   gradeLabel->setPalette(Color::text_secondary());
   gradeLabel->setFont(font);
   // Set font width to text size + margin
-  QFontMetrics fm(font);
-  gradeLabel->setMaximumWidth(fm.width(dueDateStr->toLatin1()) + 10);
+  // QFontMetrics fm(font);
+  // gradeLabel->setMaximumWidth(fm.width(dueDateStr->toLatin1()) + 10);
   return gradeLabel;
 }
 
