@@ -20,11 +20,15 @@ void Logging::customLogger(QtMsgType type,
       writeLog(context, localMsg, "Debug");
       break;
     }
+
+    #if QT_VERSION > QT_VERSION_CHECK(5, 5, 0)
     case QtInfoMsg:
       fprintf(stderr, "Info: %s (%s:%u, %s)\n", localMsg.constData(),
               context.file, context.line, context.function);
       writeLog(context, localMsg, "Info");
       break;
+    #endif
+
     case QtWarningMsg:
       fprintf(stderr, "Warning: %s (%s:%u, %s)\n", localMsg.constData(),
               context.file, context.line, context.function);
