@@ -82,7 +82,7 @@ void LoginPanel::setupUsernameTextInput() {
                                   "padding: 10px; "
                                   "color: #000;");
   usernameText->setFont(Font::startupInput());
-  usernameText->setPlaceholderText("Student ID");
+  usernameText->setPlaceholderText("Student ID #");
   usernameText->setGraphicsEffect(shadowEffect(usernameText, 20, "#777"));
   usernameText->setContentsMargins(0, 0, 0, 5);
   usernameText->setAttribute(Qt::WA_MacShowFocusRect, false);  // macOS
