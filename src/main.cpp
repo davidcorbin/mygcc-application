@@ -5,7 +5,6 @@
 #include <include/ui/MainWindow.hpp>
 #include <include/Logging.hpp>
 #include <QApplication>
-#include <QtGlobal>
 
 /**
  * Starts the server and application.
