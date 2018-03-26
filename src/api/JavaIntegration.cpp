@@ -37,8 +37,8 @@ void JavaIntegration::startAPIServerCmd() {
   if (!javaPath->empty()) {
     if (checkJavaVersion(javaPath)) {
       qDebug("%s", "Valid Java version found");
-      std::string fullStr = javaPath->append(" -cp ")
-                            + jarPath + " com.mygcc.api.Main";
+      std::string fullStr = javaPath->append(" -cp \"")
+                            + jarPath + "\" com.mygcc.api.Main";
       javaProcess.start(fullStr.c_str());
     } else {
       qDebug("%s", "Invalid java version");
