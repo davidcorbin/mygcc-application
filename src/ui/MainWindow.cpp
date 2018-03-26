@@ -176,20 +176,21 @@ void MainWindow::addChapelGridItems() {
   int remaining = chapel->getRemaining();
   int required = chapel->getRequired();
   int attended = chapel->getAttended();
+  int makeups = chapel->getMakeups();
 
   // Chapels remaining
   QString header = QString("%1/%2").arg(QString::number(remaining),
-                                        QString::number(required));
+                                        QString::number(required + makeups));
   infogrid->addGridItem(new GridItem(&header,
                                      new QString("Chapels remaining"),
                                      Color::grid_blue()));
 
-  // Percent of chapels left
-  int pc = 100 - static_cast<int>((remaining/
-      static_cast<float>(required)) * 100);
+  // Percent of chapels completed
+  int pc = static_cast<int>((remaining/
+      static_cast<float>(required + makeups)) * 100);
   QString percentHeader = QString("%1%").arg(QString::number(pc));
   infogrid->addGridItem(new GridItem(&percentHeader,
-                                     new QString("Chapels left"),
+                                     new QString("Chapels completed"),
                                      Color::grid_blue()));
 
   // Chapels attended

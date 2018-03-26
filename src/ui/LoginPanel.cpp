@@ -82,7 +82,7 @@ void LoginPanel::setupUsernameTextInput() {
                                   "padding: 10px; "
                                   "color: #000;");
   usernameText->setFont(Font::startupInput());
-  usernameText->setPlaceholderText("myGCC Username");
+  usernameText->setPlaceholderText("Student ID");
   usernameText->setGraphicsEffect(shadowEffect(usernameText, 20, "#777"));
   usernameText->setContentsMargins(0, 0, 0, 5);
   usernameText->setAttribute(Qt::WA_MacShowFocusRect, false);  // macOS
@@ -95,7 +95,7 @@ void LoginPanel::setupPasswordTextInput() {
                                   "padding: 10px; "
                                   "color: #000;");
   passwordText->setFont(Font::startupInput());
-  passwordText->setPlaceholderText("myGCC Password");
+  passwordText->setPlaceholderText("Password");
   passwordText->setGraphicsEffect(shadowEffect(passwordText, 20, "#777"));
   passwordText->setEchoMode(QLineEdit::Password);
   passwordText->setContentsMargins(0, 0, 0, 25);
