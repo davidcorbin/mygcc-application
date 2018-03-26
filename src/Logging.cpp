@@ -3,9 +3,11 @@
  */
 
 #include <include/Logging.hpp>
+#include <include/FileManager.hpp>
 #include <QApplication>
 #include <QTextStream>
 #include <QDateTime>
+#include <QDebug>
 
 #define LOG_FILE            "facade_logs.log"
 
@@ -50,7 +52,9 @@ void Logging::customLogger(QtMsgType type,
 void Logging::writeLog(const QMessageLogContext &context,
                        QByteArray localMsg,
                        const char* type) {
-  QFile *outFile = new QFile(LOG_FILE);
+  auto *fm = new FileManager;
+  std::string dataDir = fm->getDataDir() + "/" + LOG_FILE;
+  QFile *outFile = new QFile(dataDir.c_str());
 
   // Truncate if more than 100kb
   if (outFile->size() > 100000) {
@@ -62,4 +66,5 @@ void Logging::writeLog(const QMessageLogContext &context,
   stream << type << " (" << QDateTime::currentDateTime().toString() << ")"
          << ": " << localMsg.constData() << " (" << context.file << ": "
          << context.line << ") " << context.function << endl;
+  outFile->close();
 }

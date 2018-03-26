@@ -19,13 +19,13 @@ int main(int argc, char *argv[]) {
   qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", "1");
   #endif
 
-  // Start logging
-  qInstallMessageHandler(Logging::customLogger);
-
   QApplication app(argc, argv);
   QCoreApplication::setOrganizationName("facade");
   QCoreApplication::setApplicationName("Facade");
   QCoreApplication::setApplicationVersion(QT_VERSION_STR);
+
+  // Start logging
+  qInstallMessageHandler(Logging::customLogger);
 
   //  High DPI support
   #if QT_VERSION > QT_VERSION_CHECK(5, 6, 0)
