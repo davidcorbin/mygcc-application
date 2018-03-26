@@ -28,14 +28,18 @@ void CourseAssignmentItem::setup() {
   auto *dueDateString = new QString(assignment->getDuedate()->c_str());
   auto dateTemp = QDateTime::fromString(*dueDateString, Qt::ISODate);
 
+  auto *dueDateLabel = new QLabel;
+
   // Check if the date is invalid
   if (!dueDateString->isEmpty() && !dateTemp.isValid()) {
     qDebug() << "Invalid: " << dueDateString->toUtf8() << dueDateString->size();
+    dueDateLabel = new QLabel("");
+  } else {
+    auto dateLong = dateTemp.date().toString("dddd, MMMM d");
+    auto timeLong = dateTemp.toString("h:mm a");
+    auto dateObject = dateLong + " at " + timeLong;
+    dueDateLabel = setupDueDateLabel(&dateObject);
   }
-  auto dateLong = dateTemp.date().toString("dddd, MMMM d");
-  auto timeLong = dateTemp.toString("h:mm a");
-  auto dateObject = dateLong + " at " + timeLong;
-  auto *dueDateLabel = setupDueDateLabel(&dateObject);
 
   auto *textDivider = new QVBoxLayout;
   textDivider->addWidget(assignmentNameLabel);
