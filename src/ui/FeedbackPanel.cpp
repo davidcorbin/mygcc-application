@@ -5,8 +5,9 @@
 #include <include/ui/FeedbackPanel.hpp>
 #include <include/ui/Color.hpp>
 #include <include/ui/Font.hpp>
-#include <QPainter>
 #include <include/SlackFeedback.hpp>
+#include <QPainter>
+#include <QMessageBox>
 #include <string>
 
 #define FEEDBACK_TITLE      "Feedback"
@@ -110,4 +111,9 @@ void FeedbackPanel::submitClicked() {
 
   // Remove text from text box
   textbox->clear();
+
+  // Show alert box
+  QMessageBox::information(this,
+                           tr("Facade"),
+                           tr("Feedback was submitted. Thank you!"));
 }
