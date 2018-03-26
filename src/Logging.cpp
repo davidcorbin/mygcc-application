@@ -8,6 +8,7 @@
 #include <QTextStream>
 #include <QDateTime>
 #include <QDebug>
+#include <string>
 
 #define LOG_FILE            "facade_logs.log"
 
