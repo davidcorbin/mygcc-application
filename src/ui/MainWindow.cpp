@@ -103,10 +103,10 @@ void MainWindow::showHomeWidget() {
   sidebarLayout->setSpacing(0);
 
   auto *shadow = new QGraphicsDropShadowEffect;
-  shadow->setBlurRadius(6);
-  shadow->setXOffset(4);
+  shadow->setBlurRadius(1);
+  shadow->setXOffset(1);
   shadow->setYOffset(0);
-  shadow->setColor(QColor(48, 46, 50));
+  shadow->setColor(QColor(40, 40, 45));
 
   auto *sidebar = new QWidget;
   // Sidebar width constraints
