@@ -100,15 +100,21 @@ void Updater::remoteVersion() {
             }
 
             remoteApplicationVersion = new std::string(version);
+            #if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
             qInfo() << "Remote components version:" <<
                     remoteApplicationVersion->c_str();
+            #endif
 
             if (installedApplicationVersion != remoteApplicationVersion) {
+              #if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
               qInfo("Installed application version is NOT equal to remote" \
               " application version");
+              #endif
               installUpdates();
             } else {
+              #if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
               qInfo("Application up to date");
+              #endif
             }
           });
 
