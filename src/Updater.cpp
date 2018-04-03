@@ -41,7 +41,10 @@ void Updater::checkForUpdates() {
       qWarning("Installed components version NOT FOUND");
       return;
     }
+
+    #if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
     qInfo() << "Installed components version:" << installedVer->c_str();
+    #endif
 
     installedApplicationVersion = installedVer;
 
