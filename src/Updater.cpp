@@ -16,9 +16,11 @@
 "MacOS/FacadeMaintenance"
 #define MAINT_EXE_MAC_UPD      "/../../../FacadeMaintenance.app/Contents/" \
 "MacOS/FacadeMaintenance  --silentUpdate"
+#define MAINTEN_EXE_WIN        "/FacadeMaintenance.exe"
+#define MAINT_EXE_WIN_UPD      "/FacadeMaintenance.exe --silentUpdate"
 #define MAC_COMPON_REL_PATH    "/../../../Components.xml"
-#define WIN_COMPON_REL_PATH    "Components.xml"
-#define UBU_COMPON_REL_PATH    "Components.xml"
+#define WIN_COMPON_REL_PATH    "/components.xml"
+#define UBU_COMPON_REL_PATH    "/components.xml"
 
 #define REM_MAC_UPD_XML_URL     "http://facade-logs.appspot.com/repo/mac/" \
 "Updates.xml"
@@ -108,7 +110,7 @@ void Updater::remoteVersion() {
                     remoteApplicationVersion->c_str();
             #endif
 
-            if (installedApplicationVersion != remoteApplicationVersion) {
+            if (*installedApplicationVersion != *remoteApplicationVersion) {
               #if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
               qInfo("Installed application version is NOT equal to remote" \
               " application version");
@@ -196,9 +198,10 @@ bool Updater::maintenanceToolExists() {
     check_file = QFileInfo(QCoreApplication::applicationDirPath() +
                            MAINTEN_EXE_MAC);
   } else if (osname == "Windows 32-bit" || osname == "Windows 64-bit") {
-    check_file = QFileInfo(QCoreApplication::applicationDirPath() + "");
+    check_file = QFileInfo(QCoreApplication::applicationDirPath() +
+                           MAINTEN_EXE_WIN);
   } else if (osname == "Linux") {
-    check_file = QFileInfo(QCoreApplication::applicationDirPath() + "");
+    check_file = QFileInfo(QCoreApplication::applicationDirPath() + "/DNE");
   }
 
   if (check_file.exists()) {
