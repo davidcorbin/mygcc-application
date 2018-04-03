@@ -4,6 +4,7 @@
 
 #include <include/ui/MainWindow.hpp>
 #include <include/Logging.hpp>
+#include <include/Updater.hpp>
 #include <QApplication>
 
 /**
@@ -42,6 +43,9 @@ int main(int argc, char *argv[]) {
 
   MainWindow w(ji, login, schedule, user);
   w.show();
+
+  auto *updater = new Updater();
+  updater->checkForUpdates();
 
   return app.exec();
 }
