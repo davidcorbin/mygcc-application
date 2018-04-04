@@ -180,7 +180,10 @@ void MainWindow::logout() {
 }
 
 void MainWindow::logoutRestart() {
+  // Delete user data file
   login->deleteUserData();
+
+  // Quit application and restart
   qApp->quit();
   QProcess::startDetached(qApp->arguments()[0], qApp->arguments());
 }
