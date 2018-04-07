@@ -15,7 +15,7 @@
 #include <vector>
 #include <string>
 
-#define WINDOW_TITLE            "Facade [SNAPSHOT]"
+#define WINDOW_TITLE            "Facade v0.4.1"
 
 #define MIN_HEIGHT        450
 #define SIDEBAR_WIDTH     240
