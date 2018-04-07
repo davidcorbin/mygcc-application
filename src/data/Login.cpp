@@ -183,6 +183,16 @@ bool Login::loadUserData() {
 }
 
 //
+// Deletes the userdata file, logging user out.
+//
+void Login::deleteUserData() {
+  if (!datapath.empty()) {
+    QFile file(datapath.c_str());
+    file.remove();
+  }
+}
+
+//
 // Create user data json file.
 //
 void Login::createUserDataFile(std::string datapath) {
