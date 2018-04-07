@@ -19,6 +19,7 @@ class Login : public QObject {
   bool isApiConnectionEstablished() const;
   void queueLogin();
   void saveToken(std::string *token);
+  void deleteUserData();
   std::string *getApiToken() const;
 
  private:

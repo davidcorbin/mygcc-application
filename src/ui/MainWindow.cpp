@@ -11,10 +11,11 @@
 #include <QPainter>
 #include <QCloseEvent>
 #include <QCoreApplication>
+#include <QtWidgets>
 #include <vector>
 #include <string>
 
-#define WINDOW_TITLE            "Facade [SNAPSHOT]"
+#define WINDOW_TITLE            "Facade v0.4.1"
 
 #define MIN_HEIGHT        450
 #define SIDEBAR_WIDTH     240
@@ -52,6 +53,12 @@ MainWindow::MainWindow(JavaIntegration *ji,
   infogrid->setup();
 
   connect(chapel, SIGNAL(chapelsReceived()), this, SLOT(addChapelGridItems()));
+
+  auto *logoutAction = new QAction(tr("&Log Out"), this);
+  connect(logoutAction, SIGNAL(triggered()), this, SLOT(logoutRestart()));
+
+  fileMenu = menuBar()->addMenu(tr("&File"));
+  fileMenu->addAction(logoutAction);
 }
 
 void MainWindow::viewFeedbackPanel() {
@@ -172,6 +179,15 @@ void MainWindow::logout() {
   loginPanel->authFailure();
 }
 
+void MainWindow::logoutRestart() {
+  // Delete user data file
+  login->deleteUserData();
+
+  // Quit application and restart
+  qApp->quit();
+  QProcess::startDetached(qApp->arguments()[0], qApp->arguments());
+}
+
 void MainWindow::addChapelGridItems() {
   int remaining = chapel->getRemaining();
   int required = chapel->getRequired();
@@ -186,7 +202,7 @@ void MainWindow::addChapelGridItems() {
                                      Color::grid_blue()));
 
   // Percent of chapels completed
-  int pc = static_cast<int>(((attended/
+  auto pc = static_cast<int>(((attended/
       static_cast<float>(required + makeups))) * 100 + 0.5);
   QString percentHeader = QString("%1%").arg(QString::number(pc));
   infogrid->addGridItem(new GridItem(&percentHeader,

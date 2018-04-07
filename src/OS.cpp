@@ -5,7 +5,7 @@
 #include <include/OS.hpp>
 #include <string>
 
-#define APPLICATION_VERSION_STRING             "v0.3"
+#define APPLICATION_VERSION_STRING             "v0.4.1"
 
 std::string OS::getOSName() {
   #ifdef _WIN32

@@ -62,9 +62,13 @@ class MainWindow : public QMainWindow {
 
   void showHomeWidget();
 
+  QMenu *fileMenu;
+  QAction *logoutAction;
+
  private slots:  // NOLINT
   void startupCallbackHandler();
   void logout();
+  void logoutRestart();
   void addChapelGridItems();
 };
 
