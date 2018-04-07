@@ -2,8 +2,8 @@
 <Package>
     <DisplayName>Facade</DisplayName>
     <Description>Facade Desktop Application</Description>
-    <Version>0.3</Version>
-    <ReleaseDate>2018-02-12</ReleaseDate>
+    <Version>0.4.1</Version>
+    <ReleaseDate>2018-04-06</ReleaseDate>
     <Default>true</Default>
     <Script>installscript.qs</Script>
     <ForcedInstallation>true</ForcedInstallation>
