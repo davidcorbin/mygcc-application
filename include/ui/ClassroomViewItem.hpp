@@ -16,7 +16,6 @@ class ClassroomViewItem : public QWidget {
   void setup();
 
  private:
-  Student *student;
   QVBoxLayout *verticalLayout;
   QPixmap defImage;
   QLabel *imageLabel;

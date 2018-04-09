@@ -11,7 +11,7 @@
 
 #define DEFAULT_PROFILE_IMAGE            "default_user.jpg"
 
-ClassroomViewItem::ClassroomViewItem(Student *student) : student(student) {
+ClassroomViewItem::ClassroomViewItem(Student *student) {
   verticalLayout = new QVBoxLayout;
   verticalLayout->setContentsMargins(0, 0, 0, 0);
   imageLabel = new QLabel;
