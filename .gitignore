@@ -60,5 +60,4 @@ facade-application.build/
 
 build/
 Release/
-package/packages/com.corbinharvey.facade/data/
 package/*.exe
