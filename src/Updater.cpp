@@ -127,69 +127,7 @@ void Updater::remoteVersion() {
 }
 
 std::string* Updater::installedVersion() {
-  if (componentsXmlExists()) {
-    std::string version;
-
-    QFile *xmlFile = nullptr;
-    if (osname == "macOSX") {
-      xmlFile = new QFile(QCoreApplication::applicationDirPath() +
-                          MAC_COMPON_REL_PATH);
-    } else if (osname == "Windows 32-bit" || osname == "Windows 64-bit") {
-      xmlFile = new QFile(QCoreApplication::applicationDirPath() +
-                          WIN_COMPON_REL_PATH);
-    } else if (osname == "Linux") {
-      xmlFile = new QFile(QCoreApplication::applicationDirPath() +
-                          UBU_COMPON_REL_PATH);
-    }
-
-    if (xmlFile && !xmlFile->open(QIODevice::ReadOnly | QIODevice::Text)) {
-      return new std::string("");
-    }
-    auto *xmlReader = new QXmlStreamReader(xmlFile);
-
-    while (!xmlReader->atEnd() && !xmlReader->hasError()) {
-      QXmlStreamReader::TokenType token = xmlReader->readNext();
-      if (token == QXmlStreamReader::StartDocument) {
-        continue;
-      }
-      if (token == QXmlStreamReader::StartElement) {
-        if (xmlReader->name() == "Version") {
-          version = xmlReader->readElementText().toStdString();
-        }
-      }
-    }
-
-    if (xmlReader->hasError()) {
-      return new std::string("");
-    }
-    xmlReader->clear();
-    xmlFile->close();
-
-    return new std::string(version);
-  } else {
-    qWarning("Components.xml NOT FOUND");
-    return new std::string("");
-  }
-}
-
-bool Updater::componentsXmlExists() {
-  QFileInfo check_file;
-  if (osname == "macOSX") {
-    check_file = QFileInfo(QCoreApplication::applicationDirPath() +
-                           MAC_COMPON_REL_PATH);
-  } else if (osname == "Windows 32-bit" || osname == "Windows 64-bit") {
-    check_file = QFileInfo(QCoreApplication::applicationDirPath() +
-                           WIN_COMPON_REL_PATH);
-  } else if (osname == "Linux") {
-    check_file = QFileInfo(QCoreApplication::applicationDirPath() +
-                           UBU_COMPON_REL_PATH);
-  }
-
-  if (check_file.exists()) {
-    return true;
-  } else {
-    return false;
-  }
+  return new std::string(OS::appVersion()->substr(1));
 }
 
 bool Updater::maintenanceToolExists() {

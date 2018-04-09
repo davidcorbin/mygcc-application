@@ -19,7 +19,6 @@ class Updater : public QObject {
  private:
   bool maintenanceToolExists();
   std::string* installedVersion();
-  bool componentsXmlExists();
   void remoteVersion();
 
   std::string osname;
