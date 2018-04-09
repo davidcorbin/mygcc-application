@@ -12,8 +12,12 @@ To create the release version of Facade, run CMake with the build type Release.
 ```sh
 mkdir Release
 cd Release
-cmake -DCMAKE_BUILD_TYPE=Release ..
-cmake --build .
+cmake -G Xcode ..
+open facade-application.xcodeproj
+(Set macOS Deployment Target to an older version)
+xcodebuild -target ALL_BUILD -configuration Release
+macdeployqt Release/facade.app
+(Copy mygcc-api-jar-with-dependencies.jar to the Resources directory of the bundle)
 ```
 
 #### Create installer
