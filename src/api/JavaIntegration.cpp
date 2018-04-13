@@ -29,8 +29,6 @@ JavaIntegration::JavaIntegration() {
 void JavaIntegration::startAPIThread() {
   auto *initvect = getInitVect();
   auto *enckey = getEncKey();
-  qDebug() << "Initialization vector: " << QString::fromStdString(*initvect);
-  qDebug() << "Encryption key: " << QString::fromStdString(*enckey);
   qputenv("initvect", initvect->c_str());
   qputenv("enckey", enckey->c_str());
   startAPIServerCmd();
@@ -45,6 +43,7 @@ void JavaIntegration::startAPIServerCmd() {
       qDebug() << "Valid Java version found at" << javaPath->c_str();
       std::string fullStr = "\"" + *javaPath + "\" -cp \""
                             + jarPath + "\" com.mygcc.api.Main";
+      qDebug() << "Starting API with command:" << fullStr.c_str();
       javaProcess.start(fullStr.c_str());
     } else {
       qDebug() << "Invalid java version";
