@@ -1,0 +1,15 @@
+<Packages>
+    <ApplicationName>Facade</ApplicationName>
+    <ApplicationVersion>0.4.1</ApplicationVersion>
+    <Package>
+        <Name>com.corbinharvey.facade</Name>
+        <Pixmap></Pixmap>
+        <Title>Facade Application</Title>
+        <Description>Meta package needed to install the SDK</Description>
+        <Version>0.4.1</Version>
+        <LastUpdateDate></LastUpdateDate>
+        <InstallDate>2012-01-09</InstallDate>
+        <Size>546</Size>
+        <Dependencies></Dependencies>
+    </Package>
+</Packages>
