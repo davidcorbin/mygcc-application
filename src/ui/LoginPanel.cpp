@@ -8,6 +8,9 @@
 #include <QStyleOption>
 #include <QPainter>
 
+#define TITLE_STR   "Facade"
+#define SUBTIT_STR  "A desktop client for myGCC"
+
 LoginPanel::LoginPanel(int min_width, int min_height, Login *loginObj) :
     min_width(min_width), min_height(min_height), loginObj(loginObj),
     bgPrimary(Color::login_bg_primary().color(QPalette::Background)),
@@ -16,8 +19,8 @@ LoginPanel::LoginPanel(int min_width, int min_height, Login *loginObj) :
   startupLayout = new QVBoxLayout;
   usernameText = new QLineEdit;
   passwordText = new QLineEdit;
-  subtitleLabel = new QLabel("putting a bag over myGCC's ugly head");
-  titleLabel = new QLabel("Facade");
+  subtitleLabel = new QLabel(SUBTIT_STR);
+  titleLabel = new QLabel(TITLE_STR);
   loginButton = new LoginButton(new QString("Login"));
   setBackgroundColor(bgPrimary);
   bgState = PRIMARY;
