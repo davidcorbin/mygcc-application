@@ -50,12 +50,14 @@ void JavaIntegration::startAPIServerCmd() {
 
       // Open site to show user how to install java
       QDesktopServices::openUrl(QUrl(INSTALL_JAVA_SITE));
+      qApp->exit(1);
     }
   } else {
     qDebug("%s", "Could not start java server");
 
     // Open site to show user how to install java
     QDesktopServices::openUrl(QUrl(INSTALL_JAVA_SITE));
+    qApp->exit(1);
   }
 }
 
