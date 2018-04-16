@@ -6,6 +6,7 @@
 #include <include/FileManager.hpp>
 #include <include/FileNotFound.hpp>
 #include <QObject>
+#include <QMessageBox>
 #include <string>
 
 #define API_URL_BASE             "http://localhost:8080/"
@@ -17,9 +18,13 @@
 #define API_TOKEN_KEY            "api_token"
 
 Login::Login() {
+  nam = new QNetworkAccessManager(this);
   apiConnectionEstablished = false;
   connectionAttempts = 0;
   loadUserData();
+
+  connect(nam, SIGNAL(finished(QNetworkReply*)), this,
+          SLOT(loginRequestHandler(QNetworkReply*)));
 }
 
 void Login::login(std::string *username,
@@ -30,6 +35,10 @@ void Login::login(std::string *username,
     emit apiNotRunning();
   }
 
+  this->username = username;
+  this->password = password;
+  this->waitForServer = waitForServer;
+
   std::string temp = "{\"username\": \"" + *username + "\", \"password\": \""
                      + *password + "\"}";
   auto json = QJsonDocument::fromJson(temp.c_str());
@@ -37,53 +46,8 @@ void Login::login(std::string *username,
   QNetworkRequest request(QUrl(AUTH_URL));
   request.setHeader(QNetworkRequest::ContentTypeHeader, HTTP_CONTENT_TYPE);
 
-  auto *nam = new QNetworkAccessManager;
-
-  QObject::connect(nam, &QNetworkAccessManager::finished,
-        [=](QNetworkReply *reply) -> void {
-          if (reply->error()) {
-            // If credentials invalid
-            if (reply->error() == QNetworkReply::AuthenticationRequiredError) {
-              qDebug("Invalid credentials");
-              emit authInvalidCred();
-              return;
-            }
-
-            // If waiting for server to start
-            if (waitForServer) {
-              qDebug() << "Network error: " << reply->errorString();
-              return login(username, password, waitForServer);
-            }
-
-            qDebug() << "Unexpected error: " << reply->errorString();
-          }
-          qDebug("Valid credentials");
-
-          auto response = reply->readAll();
-          QJsonDocument loadDoc(QJsonDocument::fromJson(response));
-
-          // If invalid json object, reset file
-          if (!loadDoc.isObject()) {
-            qDebug("Invalid json response");
-          }
-
-          auto tokenStr = loadDoc.object()
-              .value("token")
-              .toString()
-              .toStdString();
-
-          apiToken = new std::string(tokenStr);
-          emit authSuccessful();
-
-          // Save token
-          saveToken(&tokenStr);
-        });
-
   QNetworkReply *reply = nam->post(request, QJsonDocument(json).toJson());
-  while (!reply->isFinished()) {
-    qApp->processEvents();
-  }
-  reply->deleteLater();
+  reply->setProperty("login", QVariant("authReply"));
 }
 
 //
@@ -92,6 +56,21 @@ void Login::login(std::string *username,
 void Login::login(std::string *token) {
   qDebug() << "Login called with token" << QString::fromStdString(*token);
   verifyAPIToken(token);
+}
+
+//
+// Handle network responses for network access manager.
+//
+void Login::loginRequestHandler(QNetworkReply *reply) {
+  QString property = reply->property("login").toString();
+
+  if (property == "testAPIConnReply") {
+    testConnectionResponse(reply);
+  } else if (property == "authReply") {
+    authReplyResponse(reply);
+  } else if (property == "verifyTokenReply") {
+    verifyTokenResponse(reply);
+  }
 }
 
 //
@@ -110,25 +89,91 @@ void Login::loginWithToken() {
 // Sends GET requests to the API until it gets a response.
 //
 void Login::testAPIConnection() {
-  auto *networkAccessManager = new QNetworkAccessManager;
-  QObject::connect(networkAccessManager,
-                   &QNetworkAccessManager::finished,
-                   [=](QNetworkReply *reply) {
-                     if (reply->error()) {
-                       apiConnectionEstablished = false;
-                       // Limit connection attempts
-                       if (connectionAttempts < MAX_CONN_ATTEMPTS) {
-                         connectionAttempts += 1;
-                         testAPIConnection();
-                       }
-                       return;
-                     }
-                     qDebug("API connection established");
-                     apiConnectionEstablished = true;
-                     emit apiRunning();
-                   });
   QNetworkRequest networkRequest(QUrl(API_URL_BASE));
-  networkAccessManager->get(networkRequest);
+  QNetworkReply *reply = nam->get(networkRequest);
+  reply->setProperty("login", QVariant("testAPIConnReply"));
+}
+
+void Login::testConnectionResponse(QNetworkReply *reply) {
+  if (reply->error()) {
+    apiConnectionEstablished = false;
+    // Limit connection attempts
+    if (connectionAttempts < MAX_CONN_ATTEMPTS) {
+      connectionAttempts += 1;
+      QThread::msleep(500);  // Sleep for half a second between requests
+      testAPIConnection();
+    }
+    reply->deleteLater();
+    return;
+  }
+  qDebug("API connection established");
+  apiConnectionEstablished = true;
+  emit apiRunning();
+  reply->deleteLater();
+}
+
+void Login::authReplyResponse(QNetworkReply *reply) {
+  if (reply->error()) {
+    // If credentials invalid
+    if (reply->error() == QNetworkReply::AuthenticationRequiredError) {
+      qDebug("Invalid credentials");
+      emit authInvalidCred();
+      return;
+    }
+
+    // If waiting for server to start
+    if (waitForServer && QNetworkReply::ConnectionRefusedError) {
+      qDebug() << "Network error:" << reply->errorString();
+
+      if (apiConnectionEstablished) {
+        qWarning("API conn. was established but connection refused. Exiting");
+        QMessageBox::critical(nullptr, tr("Error"), tr("Issue connecting to " \
+        "API server. Please restart the application."));
+        qApp->exit(1);
+      }
+
+      reply->deleteLater();
+
+      QThread::msleep(500);
+
+      login(username, password, waitForServer);
+      return;
+    }
+
+    qDebug() << "Unexpected error:" << reply->errorString();
+  } else {
+    qDebug("Valid credentials");
+
+    auto response = reply->readAll();
+    QJsonDocument loadDoc(QJsonDocument::fromJson(response));
+
+    // If invalid json object, reset file
+    if (!loadDoc.isObject()) {
+      qDebug("Invalid json response");
+    }
+
+    auto tokenStr = loadDoc.object()
+        .value("token")
+        .toString()
+        .toStdString();
+
+    apiToken = new std::string(tokenStr);
+    emit authSuccessful();
+
+    // Save token
+    saveToken(&tokenStr);
+  }
+}
+
+void Login::verifyTokenResponse(QNetworkReply *reply) {
+  if (reply->error()) {
+    qDebug() << "Invalid token:" << reply->errorString();
+    reply->deleteLater();
+    return;
+  }
+  reply->deleteLater();
+  qDebug("Valid token");
+  emit authSuccessful();
 }
 
 bool Login::isApiConnectionEstablished() const {
@@ -261,17 +306,6 @@ void Login::verifyAPIToken(std::string *token) {
   request.setRawHeader("Authorization",
                        (QString::fromStdString(*token)).toUtf8());
 
-  auto *nam = new QNetworkAccessManager;
-
-  QObject::connect(nam, &QNetworkAccessManager::finished,
-           [=](QNetworkReply *reply) -> void {
-             if (reply->error()) {
-               qDebug() << "Invalid token: " << reply->errorString();
-               return;
-             }
-             qDebug("Valid token");
-             emit authSuccessful();
-           });
-
-  nam->get(request);
+  QNetworkReply *reply = nam->get(request);
+  reply->setProperty("login", QVariant("verifyTokenReply"));
 }

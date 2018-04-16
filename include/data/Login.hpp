@@ -24,16 +24,24 @@ class Login : public QObject {
 
  private:
   std::string *apiToken;
+  std::string *username;
+  std::string *password;
+  bool waitForServer;
   bool apiConnectionEstablished;
   int connectionAttempts;
   std::string datapath;
+  QNetworkAccessManager* nam;
 
   bool loadUserData();
   void createUserDataFile(std::string datapath);
   void verifyAPIToken(std::string *token);
+  void testConnectionResponse(QNetworkReply *reply);
+  void authReplyResponse(QNetworkReply *reply);
+  void verifyTokenResponse(QNetworkReply *reply);
 
  private slots:  // NOLINT
   void loginWithToken();
+  void loginRequestHandler(QNetworkReply *reply);
 
  signals:
   void apiRunning();
