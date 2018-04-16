@@ -36,6 +36,8 @@ class LoginPanel : public QWidget {
   QVBoxLayout *startupLayout;
   const int min_width, min_height;
   Login *loginObj;
+  bool isloggingIn;
+
   const QColor bgPrimary, bgSuccess, bgFailure;
   enum BGSTATE {PRIMARY, SUCCESS, FAILURE};
   BGSTATE bgState;

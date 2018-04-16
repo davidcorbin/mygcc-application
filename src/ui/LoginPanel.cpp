@@ -24,6 +24,7 @@ LoginPanel::LoginPanel(int min_width, int min_height, Login *loginObj) :
   loginButton = new LoginButton(new QString("Login"));
   setBackgroundColor(bgPrimary);
   bgState = PRIMARY;
+  isloggingIn = false;
 
   // Activate animations when Login signals success or failure
   connect(loginObj, SIGNAL(authSuccessful()), this, SLOT(authSuccessful()));
@@ -106,9 +107,14 @@ void LoginPanel::setupPasswordTextInput() {
 }
 
 bool LoginPanel::login() {
+  if (isloggingIn) {
+    return false;
+  }
   auto username = usernameText->text().toStdString();
   auto password = passwordText->text().toStdString();
   loginObj->login(&username, &password, true);
+  loginButton->setText("Logging in...");
+  isloggingIn = true;
   return false;
 }
 
@@ -120,16 +126,20 @@ void LoginPanel::authSuccessful() {
   bgState = SUCCESS;
   usernameText->hide();
   passwordText->hide();
+  loginButton->setText("Login");
   loginButton->hide();
   subtitleLabel->setText("Loading...");
+  isloggingIn = false;
 }
 
 void LoginPanel::authFailure() {
+  loginButton->setText("Login");
   auto *backgroundAnimation = errorAnimation(this);
   auto *buttonAnimation = errorAnimation(loginButton);
   backgroundAnimation->start();
   buttonAnimation->start();
   bgState = FAILURE;
+  isloggingIn = false;
 }
 
 QGraphicsDropShadowEffect* LoginPanel::shadowEffect(QObject *parent,
