@@ -3,7 +3,7 @@
 
 The desktop interface to myGCC.
 
-![Preview of Facade](../blob/master/docs/assets/login-mac.png?raw=true)
+![Preview of Facade](../master/docs/assets/login-mac.png?raw=true)
 
 ## Supported systems
 - Windows 10
