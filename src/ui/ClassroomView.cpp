@@ -5,6 +5,7 @@
 #include <include/ui/ClassroomView.hpp>
 #include <include/ui/Color.hpp>
 #include <include/ui/Font.hpp>
+#include <string>
 #include <vector>
 
 ClassroomView::ClassroomView(Course *course) : course(course) {
@@ -14,7 +15,10 @@ ClassroomView::ClassroomView(Course *course) : course(course) {
 }
 
 void ClassroomView::setup() {
-  auto *students = course->getStudents();
+  auto *students = course->getClassMateObj()->getClassmates();
+
+  connect(course->getClassMateObj(), SIGNAL(imageDownloaded(std::string*)),
+          this, SLOT(updatePhoto(std::string*)));
 
   // If no students
   if (students->empty()) {
@@ -35,4 +39,13 @@ void ClassroomView::setup() {
     classroomViewItems->push_back(classroomViewItem);
   }
   setLayout(grid);
+}
+
+void ClassroomView::updatePhoto(std::string *filename) {
+  for (ClassroomViewItem *item : *classroomViewItems) {
+    auto idStr = std::to_string(item->student->getId());
+    if (filename->find(idStr) != std::string::npos) {
+      item->updateImage();
+    }
+  }
 }

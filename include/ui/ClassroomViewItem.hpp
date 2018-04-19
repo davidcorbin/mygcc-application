@@ -12,8 +12,11 @@
 
 class ClassroomViewItem : public QWidget {
  public:
+  Student *student;
+
   explicit ClassroomViewItem(Student *student);
   void setup();
+  void updateImage();
 
  private:
   QVBoxLayout *verticalLayout;

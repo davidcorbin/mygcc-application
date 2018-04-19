@@ -9,9 +9,12 @@
 #include <include/ui/ClassroomViewItem.hpp>
 #include <QWidget>
 #include <QGridLayout>
+#include <string>
 #include <vector>
 
 class ClassroomView : public QWidget {
+  Q_OBJECT
+
  public:
   explicit ClassroomView(Course *course);
   void setup();
@@ -20,6 +23,9 @@ class ClassroomView : public QWidget {
   Course *course;
   QGridLayout *grid;
   std::vector<ClassroomViewItem*> *classroomViewItems;
+
+ private slots:  // NOLINT
+  void updatePhoto(std::string *filename);
 };
 
 #endif  // INCLUDE_UI_CLASSROOMVIEW_HPP_

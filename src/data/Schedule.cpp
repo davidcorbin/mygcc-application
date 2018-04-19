@@ -81,5 +81,6 @@ void Schedule::setScheduleRetrieved(bool scheduleRetrieved) {
 void Schedule::getHomework() {
   for (auto cour : *coursesS) {
     cour->loadHomework(login);
+    cour->loadStudents(login);
   }
 }

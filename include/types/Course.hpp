@@ -10,6 +10,7 @@
 #include <include/types/NetworkFile.hpp>
 #include <include/types/ClassTime.hpp>
 #include <include/data/Homework.hpp>
+#include <include/data/Classmate.hpp>
 #include <QJsonObject>
 #include <string>
 #include <vector>
@@ -39,10 +40,13 @@ class Course {
   void setTimes(std::vector<ClassTime> *times);
   Homework *getHomeworkObj() const;
   void setHomeworkObj(Homework *homeworkObj);
+  Classmate *getClassMateObj() const;
+  void setClassmateObj(Classmate *classmateObj);
   std::string *getCourseCodeWithSpaces() const;
   void setCourseCodeWithSpaces(std::string *courseCodeWithSpaces);
 
   void loadHomework(Login *login);
+  void loadStudents(Login *login);
 
  private:
   std::string *name;
@@ -56,6 +60,7 @@ class Course {
   std::vector<Student *> *students;
   std::vector<NetworkFile *> *files;
   Homework *homeworkObj;
+  Classmate *classmateObj;
 };
 
 #endif  // INCLUDE_TYPES_COURSE_HPP_

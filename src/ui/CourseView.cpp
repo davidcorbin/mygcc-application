@@ -26,6 +26,10 @@ CourseView::CourseView(Course *course, int min_width) : course(course) {
           SIGNAL(homeworkReceived()),
           this,
           SLOT(setupAssignmentView()));
+  connect(course->getClassMateObj(),
+          SIGNAL(classmatesReceived()),
+          this,
+          SLOT(setupClassroomView()));
 }
 
 void CourseView::setup() {
@@ -35,7 +39,9 @@ void CourseView::setup() {
     setupAssignmentView();
   }
   setupFileView();
-  setupClassroomView();
+  if (course->getClassMateObj()->getClassmates()->size() > 0) {
+    setupClassroomView();
+  }
 
   tabBodyLayout->addWidget(tabBar);
   tabBodyLayout->addWidget(assignmentScrollArea);

@@ -9,9 +9,7 @@
 #include <include/ui/Color.hpp>
 #include <string>
 
-#define DEFAULT_PROFILE_IMAGE            "default_user.jpg"
-
-ClassroomViewItem::ClassroomViewItem(Student *student) {
+ClassroomViewItem::ClassroomViewItem(Student *student) : student(student) {
   verticalLayout = new QVBoxLayout;
   verticalLayout->setContentsMargins(0, 0, 0, 0);
   imageLabel = new QLabel;
@@ -19,12 +17,8 @@ ClassroomViewItem::ClassroomViewItem(Student *student) {
 }
 
 void ClassroomViewItem::setup() {
-  auto *fm = new FileManager();
-  std::string defImagePath = fm->getResourcePath(DEFAULT_PROFILE_IMAGE);
-  auto *studentImage = new StudentImage(new std::string("profile_user.jpg"));
-  defImage = studentImage->setup();
+  updateImage();
 
-  imageLabel->setPixmap(defImage);
   imageLabel->setFixedWidth(409/3);
   imageLabel->setFixedHeight(543/3);
   imageLabel->setScaledContents(true);
@@ -38,4 +32,12 @@ void ClassroomViewItem::setup() {
   verticalLayout->addWidget(nameLabel, Qt::AlignCenter);
 
   setLayout(verticalLayout);
+}
+
+void ClassroomViewItem::updateImage() {
+  auto relImgPath = new std::string(std::string("imgcache/") +
+                                    std::to_string(student->getId()) + ".jpg");
+  auto *studentImage = new StudentImage(relImgPath);
+  defImage = studentImage->setup();
+  imageLabel->setPixmap(defImage);
 }

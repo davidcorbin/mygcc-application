@@ -18,6 +18,7 @@ Course::Course(std::string *name,
   professor = new std::vector<std::string *>();
   times = new std::vector<ClassTime>();
   homeworkObj = new Homework();
+  classmateObj = new Classmate();
 }
 
 Course::Course(QJsonObject jsonObject) {
@@ -67,6 +68,7 @@ Course::Course(QJsonObject jsonObject) {
   }
 
   homeworkObj = new Homework();
+  classmateObj = new Classmate();
 }
 
 std::string* Course::getName() {
@@ -75,6 +77,11 @@ std::string* Course::getName() {
 
 std::string* Course::getCourseCode() {
   return courseCode;
+}
+
+void Course::loadStudents(Login *login) {
+  classmateObj->setLogin(login);
+  classmateObj->loadClassmates(login->getApiToken(), courseCode);
 }
 
 void Course::addStudent(Student *student) {
@@ -144,6 +151,14 @@ Homework *Course::getHomeworkObj() const {
 
 void Course::setHomeworkObj(Homework *homeworkObj) {
   Course::homeworkObj = homeworkObj;
+}
+
+Classmate *Course::getClassMateObj() const {
+  return classmateObj;
+}
+
+void Course::setClassmateObj(Classmate *classmateObj) {
+  Course::classmateObj = classmateObj;
 }
 
 std::string *Course::getCourseCodeWithSpaces() const {
