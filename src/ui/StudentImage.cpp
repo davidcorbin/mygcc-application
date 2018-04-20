@@ -14,9 +14,13 @@ StudentImage::StudentImage(const std::string *data_filename) {
   loadImage(data_filename, new std::string(DEFAULT_USER_IMG));
 }
 
-QImageReader* StudentImage::setup() {
+QImage StudentImage::setup() {
   imageReader->setScaledSize(QSize(409, 543));
-  return imageReader;
+  auto image = imageReader->read();
+  if (image.isNull()) {
+    qFatal("Image is null");
+  }
+  return image;
 }
 
 void StudentImage::loadImage(const std::string *data_filename,

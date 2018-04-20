@@ -12,7 +12,7 @@
 class StudentImage {
  public:
   explicit StudentImage(const std::string *data_filename);
-  QImageReader* setup();
+  QImage setup();
 
  private:
   QImageReader *imageReader;

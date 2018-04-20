@@ -35,14 +35,9 @@ void ClassroomViewItem::setup() {
 }
 
 void ClassroomViewItem::updateImage() {
-  // Remove old image from memory
-  delete imageLabel;
-  imageLabel = new QLabel;
-
   auto relImgPath = new std::string(std::string("imgcache/") +
                                     std::to_string(student->getId()) + ".jpg");
   auto *studentImage = new StudentImage(relImgPath);
-  QImage defImage = studentImage->setup()->read();
-
+  QImage defImage = studentImage->setup();
   imageLabel->setPixmap(QPixmap::fromImage(defImage));
 }
