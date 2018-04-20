@@ -20,7 +20,6 @@ class ClassroomViewItem : public QWidget {
 
  private:
   QVBoxLayout *verticalLayout;
-  QPixmap defImage;
   QLabel *imageLabel;
   QLabel *nameLabel;
 };

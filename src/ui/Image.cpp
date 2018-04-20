@@ -30,7 +30,6 @@ void Image::loadImage(const std::string *data_filename,
     // Get path to data directory image
     path = fm->getDataPath(*data_filename);
   } catch (FileNotFound &exception) {
-    qDebug("User specified image not found; using default");
     // Get path to resource directory image
     path = fm->getResourcePath(*resource_filename);
   }

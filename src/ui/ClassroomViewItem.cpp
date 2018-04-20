@@ -42,6 +42,7 @@ void ClassroomViewItem::updateImage() {
   auto relImgPath = new std::string(std::string("imgcache/") +
                                     std::to_string(student->getId()) + ".jpg");
   auto *studentImage = new StudentImage(relImgPath);
-  defImage = studentImage->setup();
-  imageLabel->setPixmap(defImage);
+  QImage defImage = studentImage->setup()->read();
+
+  imageLabel->setPixmap(QPixmap::fromImage(defImage));
 }

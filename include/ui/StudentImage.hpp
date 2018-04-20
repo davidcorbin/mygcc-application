@@ -6,13 +6,19 @@
 #define INCLUDE_UI_STUDENTIMAGE_HPP_
 
 #include <include/ui/Image.hpp>
+#include <QImageReader>
 #include <string>
 
-class StudentImage : public Image {
+class StudentImage {
  public:
-  explicit StudentImage(std::string *profileImage) : Image(profileImage, new
-      std::string("default_user.jpg")) {}
-  QPixmap setup() override;
+  explicit StudentImage(const std::string *data_filename);
+  QImageReader* setup();
+
+ private:
+  QImageReader *imageReader;
+
+  void loadImage(const std::string *data_filename,
+                 const std::string *resource_filename);
 };
 
 #endif  // INCLUDE_UI_STUDENTIMAGE_HPP_
