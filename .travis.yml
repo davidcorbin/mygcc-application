@@ -6,3 +6,6 @@ script:
 
 notifications:
   slack: grovecitycollege:Tg5JFkWtWXdNqGEDZQnxfv9S
+
+git:
+  submodules: false
