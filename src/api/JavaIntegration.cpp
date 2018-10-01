@@ -17,7 +17,7 @@
 #include <regex> // NOLINT
 
 #define MYGCC_API_FILENAME    "mygcc-api-jar-with-dependencies.jar"
-#define VALID_JAVA_VER_REG    "1.8"
+#define VALID_JAVA_VER_REG    "1.8|10"
 #define JAVA_PATH_MAC         "/Library/Internet Plug-Ins/JavaAppletPlugin." \
 "plugin/Contents/Home/bin/java"
 #define INSTALL_JAVA_SITE     "https://facadeapp.cc/installjava8"
