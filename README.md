@@ -1,7 +1,8 @@
 # Facade
 [![Build Status](https://travis-ci.com/davidcorbin/mygcc-application.svg?token=dxqddm4qxdWvzPBrhpv6&branch=master)](https://travis-ci.com/davidcorbin/mygcc-application)
 
-![Preview of Facade](../master/docs/assets/login-mac.png?raw=true)
+![Preview of Login in Facade](../master/docs/assets/login-mac.png?raw=true)
+![Preview of Grades in Facade](../master/docs/assets/grades.png?raw=true)
 
 ## Supported systems
 - Windows 10
